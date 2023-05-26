@@ -17,9 +17,6 @@ public class GearMovingChecker : MonoBehaviour
     {
         Instance = this;
     }
-
-
-
     //private void UpdateGearSpeed()
     //{
     //    chainOfGears.ForEach( gear =>

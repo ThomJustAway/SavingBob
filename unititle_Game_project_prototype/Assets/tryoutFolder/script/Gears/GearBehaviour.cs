@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GearBehaviour : MonoBehaviour, IRotate
+public class GearBehaviour : Gear, IRotate
 {
     //type of rotation
     //1.transform.rotate
@@ -27,7 +27,7 @@ public class GearBehaviour : MonoBehaviour, IRotate
         {
             currentSpeed = 0f;
         }
-        
+        Radius = 1.17f;
     }
 
     private void Update()

@@ -1,44 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class StartingGearBehaviour : MonoBehaviour, IRotate
+public class StartingGearBehaviour : Gear, IRotate 
 {
     // Start is called before the first frame update
     private float speed;
-    public float searchRadius;
+    public float radiusOfGear;
     [SerializeField] private Collider2D thisEntireGearArea;
     [SerializeField] private Collider2D thisInnerGearArea;
+    public LayerMask gearAreaLayer;
+    
 
-
-    void Start()
+    private void Start()
     {
-        thisEntireGearArea = GetComponent<Collider2D>();
+        //add the radius to the abstract gear
+        Radius = radiusOfGear;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        GetGearsAroundRadius(searchRadius);
-    }
+        
+        Gear[] gears=GetGearsAroundRadius(transform.position, gearAreaLayer,thisEntireGearArea);
 
-    private void GetGearsAroundRadius(float radius)
-    {
-        Collider2D[] surroundingGears = Physics2D.OverlapCircleAll(transform.position, radius,(int)Layers.EntireGearArea);
-        //get the entire gear area in the layer
-        Vector3 maximumXPosition = new Vector3(transform.position.x + radius, transform.position.y);
-        Vector3 maximumYPosition = new Vector3(transform.position.x, transform.position.y + radius);
-        Debug.DrawLine(transform.position, maximumXPosition, Color.red);
-        Debug.DrawLine(transform.position, maximumYPosition, Color.red);
-
-        for (int i = 0; i < surroundingGears.Length; i++)
+        foreach(Gear gear in gears)
         {
-            if (surroundingGears[i] != thisEntireGearArea)
+            if (gear != null)
             {
-                print(surroundingGears[i]);
+                print(gear.name);
             }
         }
     }
+
 
     public void RotateGear(float speed, Vector3 direction)
     {
