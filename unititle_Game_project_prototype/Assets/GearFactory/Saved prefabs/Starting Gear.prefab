@@ -318,9 +318,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790527b232de48c42948df2d7413c698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 1.19
+  radiusOfGear: 1.17
   thisEntireGearArea: {fileID: 2129299522509921523}
   thisInnerGearArea: {fileID: 4685615040777156431}
+  gearAreaLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  teeths: 12
 --- !u!1 &8260667733587611504
 GameObject:
   m_ObjectHideFlags: 0

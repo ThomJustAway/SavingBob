@@ -1,73 +1,52 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GearBehaviour : Gear, IRotate
+public class GearBehaviour : Gear
 {
-    //type of rotation
-    //1.transform.rotate
-    //
-
     [Range(-50f, 50f)]
-    [SerializeField] private float currentSpeed;
-    public float friction = 10f;
-    public bool isStartingGear = false;//refactor this later
-    public Vector3 currentDirection = Vector3.zero;
+    public float friction = 20f;
+    [SerializeField] private float gearRadius;
     [SerializeField] private int teeths;
+    [SerializeField] private Collider2D thisEntireGearArea;
+    [SerializeField] private Collider2D thisInnerGearArea;
 
-    public void Start()
+    private float speed =0;
+    private Vector3 direction;
+
+    private void Start()
     {
-        if(isStartingGear)
-        {
-            SetSpeed(50f);
-            friction = 0f;
-            currentDirection = Direction.Clockwise;
-        }
-        else
-        {
-            currentSpeed = 0f;
-        }
-        Radius = 1.17f;
+        Setter(gearRadius, teeths, thisInnerGearArea, thisEntireGearArea);
     }
 
     private void Update()
     {
-        RotateGear(currentSpeed, currentDirection);
-
-        if (!isStartingGear)
+        if (speed > 0)
         {
+            RotateGear();
             AddFriction();
-        }
-    }
-    [ContextMenu ("AddSpeed")]
-    private void SetSpeed(float speed)
-    {
-        currentSpeed = speed;
-    }
-
-
-    //This calculate and give speed to the another connected gear through the rotating gear
-    private float GiveSpeed(int gearsTeeth)
-    {//can also have torque to give speed of rotation
-        float gearRatio = teeths / gearsTeeth;
-        float targetGearSpeed = currentSpeed / gearRatio; 
-        return targetGearSpeed;
-    } 
-    private void AddFriction()
-    {
-        if(currentSpeed > 0)
-        {
-            currentSpeed -= friction*Time.deltaTime;
         }
         else
         {
-            currentSpeed = 0;
+            speed = 0;
         }
     }
 
-    public void RotateGear(float speed , Vector3 direction)
+    private void AddFriction()
     {
-        transform.Rotate(direction * speed * Time.deltaTime);
+        speed -= friction*Time.deltaTime;
+    }
+
+    private void RotateGear()
+    {
+        transform.Rotate(speed * direction * Time.deltaTime);
+    }
+
+    public override void AddSpeedAndRotation(float speed , Vector3 direction)
+    {
+        this.speed = speed;
+        this.direction = direction;
     }
 
 

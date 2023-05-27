@@ -366,11 +366,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a344fc0977bda24da741f3bdbe19f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpeed: 0
   friction: 10
-  isStartingGear: 0
-  currentDirection: {x: 0, y: 0, z: 0}
-  teeths: 0
+  gearRadius: 1.17
+  teeths: 12
+  thisEntireGearArea: {fileID: 2017939731767806787}
+  thisInnerGearArea: {fileID: 134693580693490428}
 --- !u!1 &8063703219970345224
 GameObject:
   m_ObjectHideFlags: 0

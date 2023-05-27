@@ -2,25 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.RuleTile.TilingRuleOutput;
-
-public interface IRotate 
-{
-    void RotateGear(float speed,Vector3 direction);
-}
-
-public class Direction
-{
-    public static Vector3 Clockwise = Vector3.forward;
-    public static Vector3 AntiClockwise = Vector3.back;
-}
 
 
+//what to do
+// make an customer editor for all the classes that inherit the gear class and make direct changes there
 public abstract class Gear: MonoBehaviour
 {
     private float radius;
-    public float Radius { get { return radius; } set { radius = value; } }
+    private int teeth;
+    private Collider2D entireGearArea;
+    private Collider2D innerGearArea;
+    public Collider2D EntireGearArea { get { return entireGearArea; } }
+    public int Teeths { get { return teeth; } }
+
+
+    protected void Setter(float radius,int teeths, Collider2D innerGearArea, Collider2D entireGearArea)
+    {
+        this.radius = radius;
+        this.teeth= teeths;
+        this.innerGearArea= innerGearArea;
+        this.entireGearArea= entireGearArea;
+    }
+
+
 
     public Gear[] GetGearsAroundRadius(Vector3 currentPosition,LayerMask layer,Collider2D thisEntireGearArea)
     {
@@ -48,5 +52,9 @@ public abstract class Gear: MonoBehaviour
     }
 
     //public abstract void RotateGear();
+    public abstract void AddSpeedAndRotation(float speed, Vector3 direction);
+    
+    
+
 
 }
