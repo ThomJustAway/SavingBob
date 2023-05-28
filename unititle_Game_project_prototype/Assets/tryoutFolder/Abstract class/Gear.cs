@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 
 //what to do
@@ -23,8 +25,6 @@ public abstract class Gear: MonoBehaviour
         this.innerGearArea= innerGearArea;
         this.entireGearArea= entireGearArea;
     }
-
-
 
     public Gear[] GetGearsAroundRadius(Vector3 currentPosition,LayerMask layer,Collider2D thisEntireGearArea)
     {
@@ -52,6 +52,30 @@ public abstract class Gear: MonoBehaviour
     }
 
     //public abstract void RotateGear();
+
+    public void MoveToValidPosition( LayerMask innerGearLayer)
+    {
+        Collider2D[] surroundingInnerGear = Physics2D.OverlapCircleAll(this.transform.position, radius, innerGearLayer)
+            .Where(collider => {
+                return collider != innerGearArea;
+            })
+            .ToArray();
+        if(surroundingInnerGear.Length != 0)
+        {
+            ColliderDistance2D distance;
+
+            foreach (var innerGear in surroundingInnerGear)
+            {
+                distance = innerGear.Distance(entireGearArea);
+                Vector2 resolveDistance = Math.Abs(distance.distance) * distance.normal;
+                
+                this.transform.Translate(resolveDistance);
+            }
+        }
+
+
+    }
+
     public abstract void AddSpeedAndRotation(float speed, Vector3 direction);
     
     

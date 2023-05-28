@@ -61,7 +61,8 @@ GameObject:
   - component: {fileID: 223431450440270513}
   - component: {fileID: 4168689670351499210}
   - component: {fileID: 1532970246987774067}
-  m_Layer: 0
+  - component: {fileID: 8731510365663366596}
+  m_Layer: 8
   m_Name: 12 tooth gear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,6 +372,22 @@ MonoBehaviour:
   teeths: 12
   thisEntireGearArea: {fileID: 2017939731767806787}
   thisInnerGearArea: {fileID: 134693580693490428}
+--- !u!58 &8731510365663366596
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6780680903311915335}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.1897339
 --- !u!1 &8063703219970345224
 GameObject:
   m_ObjectHideFlags: 0
