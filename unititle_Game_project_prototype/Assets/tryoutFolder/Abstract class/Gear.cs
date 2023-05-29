@@ -10,25 +10,17 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 // make an customer editor for all the classes that inherit the gear class and make direct changes there
 public abstract class Gear: MonoBehaviour
 {
-    private float radius;
-    private int teeth;
-    private Collider2D entireGearArea;
-    private Collider2D innerGearArea;
+    [SerializeField]private float gearRadius;
+    [SerializeField]private int gearTeeth;
+    [SerializeField]private Collider2D entireGearArea;
+    [SerializeField]private Collider2D innerGearArea;
     public Collider2D EntireGearArea { get { return entireGearArea; } }
-    public int Teeths { get { return teeth; } }
+    public int Teeths { get { return gearTeeth; } }
 
-
-    protected void Setter(float radius,int teeths, Collider2D innerGearArea, Collider2D entireGearArea)
-    {
-        this.radius = radius;
-        this.teeth= teeths;
-        this.innerGearArea= innerGearArea;
-        this.entireGearArea= entireGearArea;
-    }
 
     public Gear[] GetGearsAroundRadius(Vector3 currentPosition,LayerMask layer,Collider2D thisEntireGearArea)
     {
-        Collider2D[] surroundingGears = Physics2D.OverlapCircleAll(currentPosition, radius, layer)
+        Collider2D[] surroundingGears = Physics2D.OverlapCircleAll(currentPosition, gearRadius, layer)
             .Where(collider => {
                 return collider != thisEntireGearArea;
                 })
@@ -55,7 +47,7 @@ public abstract class Gear: MonoBehaviour
 
     public void MoveToValidPosition( LayerMask innerGearLayer)
     {
-        Collider2D[] surroundingInnerGear = Physics2D.OverlapCircleAll(this.transform.position, radius, innerGearLayer)
+        Collider2D[] surroundingInnerGear = Physics2D.OverlapCircleAll(this.transform.position, gearRadius, innerGearLayer)
             .Where(collider => {
                 return collider != innerGearArea;
             })

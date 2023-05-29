@@ -383,11 +383,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c1c6d0deb6547429017777b7eecb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  friction: 0
   gearRadius: 1.17
-  teeths: 12
-  thisEntireGearArea: {fileID: 253742436945544166}
-  thisInnerGearArea: {fileID: 2187296970056188505}
+  gearTeeth: 12
+  entireGearArea: {fileID: 253742436945544166}
+  innerGearArea: {fileID: 2187296970056188505}
+  friction: 14.6
 --- !u!1 &8100945772863783341
 GameObject:
   m_ObjectHideFlags: 0

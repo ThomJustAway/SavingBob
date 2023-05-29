@@ -11,19 +11,10 @@ public class EndingGearBehaviour :Gear , IIsActivated
 {
     [Range(-50f, 50f)]
     public float friction = 20f;
-    [SerializeField] private float gearRadius;
-    [SerializeField] private int teeths;
-    [SerializeField] private Collider2D thisEntireGearArea;
-    [SerializeField] private Collider2D thisInnerGearArea;
 
     private float speed = 0;
     private Vector3 direction;
     private bool activated = false;
-
-    private void Start()
-    {
-        Setter(gearRadius, teeths, thisInnerGearArea, thisEntireGearArea);
-    }
 
     private void Update()
     {

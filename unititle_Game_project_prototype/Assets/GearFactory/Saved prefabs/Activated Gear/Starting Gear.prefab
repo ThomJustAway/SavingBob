@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3392369408920956644}
   - component: {fileID: 223431450440270513}
   - component: {fileID: 4168689670351499210}
-  - component: {fileID: 1442829107977252999}
+  - component: {fileID: 1899395210684386665}
+  - component: {fileID: 892317360955091054}
   m_Layer: 0
   m_Name: Starting Gear
   m_TagString: Untagged
@@ -306,7 +307,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6780680903311915335}
   m_Mesh: {fileID: 4300000, guid: 5aedb57e5d5529949ad3bde50d656577, type: 2}
---- !u!114 &1442829107977252999
+--- !u!114 &1899395210684386665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,16 +316,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 6780680903311915335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 790527b232de48c42948df2d7413c698, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a344fc0977bda24da741f3bdbe19f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusOfGear: 1.17
-  thisEntireGearArea: {fileID: 2129299522509921523}
-  thisInnerGearArea: {fileID: 4685615040777156431}
-  gearAreaLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  teeths: 12
+  gearRadius: 1.17
+  gearTeeth: 12
+  entireGearArea: {fileID: 2129299522509921523}
+  innerGearArea: {fileID: 4685615040777156431}
+  friction: 0
+--- !u!114 &892317360955091054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6780680903311915335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bc126308f13c74c8698dea7a4e9b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 50
+  RotationDirection: 0
 --- !u!1 &8260667733587611504
 GameObject:
   m_ObjectHideFlags: 0

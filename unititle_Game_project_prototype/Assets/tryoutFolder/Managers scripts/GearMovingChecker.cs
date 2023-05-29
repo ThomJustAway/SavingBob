@@ -6,7 +6,7 @@ using UnityEngine;
 public class GearMovingChecker : MonoBehaviour
 {
 
-    [SerializeField] private StartingGearBehaviour startingGear;
+    [SerializeField] private StartingGearClass startingGear;
     [SerializeField] private LayerMask gearAreaMask;
     [SerializeField] private float speed;
     //do a recurrsive sequence;
@@ -14,11 +14,11 @@ public class GearMovingChecker : MonoBehaviour
     private void Update()
     {
         List<Gear> GearConnected = new List<Gear>();
-        GearConnected.Add(startingGear);
-        RotateConnectingGears(startingGear,Direction.clockWise,speed,GearConnected);
+        GearConnected.Add(startingGear.GearHost);
+        RotateConnectingGears(startingGear.GearHost,RotationDirection.clockWise,speed,GearConnected);
     }
 
-    private void RotateConnectingGears(Gear currentGear,Direction direction,float speed,List<Gear> GearsRotated)
+    private void RotateConnectingGears(Gear currentGear,RotationDirection direction,float speed,List<Gear> GearsRotated)
     {
         currentGear.AddSpeedAndRotation(speed,GetDirection(direction));
 
@@ -58,34 +58,34 @@ public class GearMovingChecker : MonoBehaviour
     }
 
 
-    private enum Direction
+    public enum RotationDirection
     {
         clockWise,
         antiClockWise
     }
 
-    private Vector3 GetDirection(Direction direction)
+    private Vector3 GetDirection(RotationDirection direction)
     {
         switch (direction)
         {
-            case Direction.clockWise:
+            case RotationDirection.clockWise:
                 return Vector3.forward;
-            case Direction.antiClockWise:
+            case RotationDirection.antiClockWise:
                 return Vector3.back;
             default: 
                 return Vector3.forward;
         }
     }
 
-    private Direction ChangeDirection(Direction direction)
+    private RotationDirection ChangeDirection(RotationDirection direction)
     {
-        if(direction == Direction.clockWise)
+        if(direction == RotationDirection.clockWise)
         {
-            return Direction.antiClockWise;
+            return RotationDirection.antiClockWise;
         }
         else
         {
-            return Direction.clockWise;   
+            return RotationDirection.clockWise;   
         }
     }
 }
