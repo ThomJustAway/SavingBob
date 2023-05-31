@@ -61,7 +61,8 @@ GameObject:
   - component: {fileID: 2061973117342485012}
   - component: {fileID: 2764780482621745007}
   - component: {fileID: 7397406973236315489}
-  - component: {fileID: 2029164028406755747}
+  - component: {fileID: 4917774515549153230}
+  - component: {fileID: 3592795035984083730}
   m_Layer: 0
   m_Name: 12 tooth gear (Inactivated)
   m_TagString: InactivedGear
@@ -371,7 +372,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.1897339
---- !u!114 &2029164028406755747
+--- !u!114 &4917774515549153230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -380,14 +381,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4728077309940101602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92c1c6d0deb6547429017777b7eecb69, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a344fc0977bda24da741f3bdbe19f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gearRadius: 1.17
   gearTeeth: 12
   entireGearArea: {fileID: 253742436945544166}
   innerGearArea: {fileID: 2187296970056188505}
-  friction: 14.6
+  friction: 10
+--- !u!114 &3592795035984083730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4728077309940101602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a780b32ea2e50b4fb6c3f338f4ddcf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8100945772863783341
 GameObject:
   m_ObjectHideFlags: 0

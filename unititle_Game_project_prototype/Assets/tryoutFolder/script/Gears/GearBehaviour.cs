@@ -8,11 +8,6 @@ public class GearBehaviour : Gear
     [Range(-50f, 50f)]
     public float friction = 20f;
 
-
-    private float speed =0;
-    private Vector3 direction;
-
-
     private void Update()
     {
         if (speed > 0)
@@ -40,6 +35,7 @@ public class GearBehaviour : Gear
     {
         this.speed = speed;
         this.direction = direction;
+        transform.Rotate(speed * direction * Time.deltaTime);
     }
 
 

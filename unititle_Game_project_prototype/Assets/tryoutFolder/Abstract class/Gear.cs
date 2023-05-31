@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using UnityEditor.Rendering;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -14,9 +16,14 @@ public abstract class Gear: MonoBehaviour
     [SerializeField]private int gearTeeth;
     [SerializeField]private Collider2D entireGearArea;
     [SerializeField]private Collider2D innerGearArea;
+
+    protected float speed ;
+    protected Vector3 direction;
+
+    public float Speed { get { return speed; } }
+    public Vector3 Direction { get { return direction; } }
     public Collider2D EntireGearArea { get { return entireGearArea; } }
     public int Teeths { get { return gearTeeth; } }
-
 
     public Gear[] GetGearsAroundRadius(Vector3 currentPosition,LayerMask layer,Collider2D thisEntireGearArea)
     {
@@ -42,8 +49,6 @@ public abstract class Gear: MonoBehaviour
 
         
     }
-
-    //public abstract void RotateGear();
 
     public void MoveToValidPosition( LayerMask innerGearLayer)
     {
