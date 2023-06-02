@@ -19,18 +19,14 @@ public class MouseBehaviour : MonoBehaviour
      3. checking if the gear is placeable or not
      4. buying gears
      */
-    public Grid grid;
-    public Transform selectedObject=null;
+    [HideInInspector]public Grid grid;
+    [HideInInspector]public Transform selectedObject=null;
 
     //States
-    public IMouseStates currentState;
-    public MouseDragGear mouseDragGear = new MouseDragGear();
-    public MouseIdle mouseIdle = new MouseIdle();
+    [HideInInspector] public IMouseStates currentState;
+    [HideInInspector] public MouseDragGear mouseDragGear = new MouseDragGear();
+    [HideInInspector] public MouseIdle mouseIdle = new MouseIdle();
 
-    //layer
-
-    public LayerMask moveableGearLayer;
-    public LayerMask InnerGearLayer;
 
     private void Start()
     {
@@ -43,3 +39,5 @@ public class MouseBehaviour : MonoBehaviour
         currentState = currentState.DoState(this);
     }
 }
+
+

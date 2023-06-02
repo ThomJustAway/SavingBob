@@ -25,13 +25,30 @@ public abstract class Gear: MonoBehaviour
     public Collider2D EntireGearArea { get { return entireGearArea; } }
     public int Teeths { get { return gearTeeth; } }
 
-    public Gear[] GetGearsAroundRadius(Vector3 currentPosition,LayerMask layer,Collider2D thisEntireGearArea)
+    private float MinDept { get {
+            return transform.position.z - 0.5f;
+        } }
+
+    private float MaxDept { get
+        {
+            return transform.position.z + 0.5f;
+        } }
+
+
+    public Collider2D[] GetColliderAroundRadiusBasedOnLayer(LayerMask layer)
     {
-        Collider2D[] surroundingGears = Physics2D.OverlapCircleAll(currentPosition, gearRadius, layer)
+        Collider2D selectedCollider = GetRespectiveColliderByLayer(layer);
+        Collider2D[] surroundingGears = Physics2D.OverlapCircleAll(transform.position, gearRadius, layer, MinDept, MaxDept)
             .Where(collider => {
-                return collider != thisEntireGearArea;
-                })
+                return collider != selectedCollider;
+            })
             .ToArray();
+        return surroundingGears;
+    }
+
+    public Gear[] GetGearsAroundRadiusBasedOnLayer(LayerMask layer) // will get gears base on the layer choosen
+    {
+        Collider2D[] surroundingGears = GetColliderAroundRadiusBasedOnLayer(layer);
         //get all the collider 2D from speicfic layer and remove the current gear layer
 
         Gear[] selectedGear = surroundingGears.Select(collider =>
@@ -40,37 +57,12 @@ public abstract class Gear: MonoBehaviour
         }).ToArray();
 
         return selectedGear;
-
-        //looking at distance debugger
-        //Vector3 maximumXPosition = new Vector3(transform.position.x + radius, transform.position.y);
-        //Vector3 maximumYPosition = new Vector3(transform.position.x, transform.position.y + radius);
-        //Debug.DrawLine(transform.position, maximumXPosition, Color.red);
-        //Debug.DrawLine(transform.position, maximumYPosition, Color.red);
-
-        
     }
-
-    public void MoveToValidPosition( LayerMask innerGearLayer)
+    
+    private Collider2D GetRespectiveColliderByLayer(LayerMask layer)
     {
-        Collider2D[] surroundingInnerGear = Physics2D.OverlapCircleAll(this.transform.position, gearRadius, innerGearLayer)
-            .Where(collider => {
-                return collider != innerGearArea;
-            })
-            .ToArray();
-        if(surroundingInnerGear.Length != 0)
-        {
-            ColliderDistance2D distance;
-
-            foreach (var innerGear in surroundingInnerGear)
-            {
-                distance = innerGear.Distance(entireGearArea);
-                Vector2 resolveDistance = Math.Abs(distance.distance) * distance.normal;
-                
-                this.transform.Translate(resolveDistance);
-            }
-        }
-
-
+        if (layer == LayerData.GearAreaLayer) return entireGearArea;
+        else return innerGearArea;
     }
 
     public abstract void AddSpeedAndRotation(float speed, Vector3 direction);

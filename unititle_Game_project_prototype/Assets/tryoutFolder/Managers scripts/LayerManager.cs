@@ -9,6 +9,7 @@ public class LayerManager : MonoBehaviour
 
     private int currentLayer = 1;
 
+
     private void Start()
     {
         int StartingPoint = -1;

@@ -7,10 +7,9 @@ public class GearMovingChecker : MonoBehaviour
 {
 
     [SerializeField] private StartingGearClass startingGear;
-    [SerializeField] private LayerMask gearAreaMask;
     [SerializeField] private float speed;
     //do a recurrsive sequence;
-
+    public LayerMask layer;
     private void Update()
     {
         List<Gear> GearConnected = new List<Gear>();
@@ -21,10 +20,8 @@ public class GearMovingChecker : MonoBehaviour
     private void RotateConnectingGears(Gear currentGear,RotationDirection direction,float speed,List<Gear> GearsRotated)
     {
         currentGear.AddSpeedAndRotation(speed,GetDirection(direction));
-
-        Gear[] gearsFound = currentGear.GetGearsAroundRadius(currentGear.gameObject.transform.position, 
-            gearAreaMask,
-            currentGear.EntireGearArea).Where(gear =>
+        Gear[] gearsFound = currentGear.GetGearsAroundRadiusBasedOnLayer(LayerData.GearAreaLayer)
+            .Where(gear =>
             {
                 if (!GearsRotated.Contains(gear))
                 {
