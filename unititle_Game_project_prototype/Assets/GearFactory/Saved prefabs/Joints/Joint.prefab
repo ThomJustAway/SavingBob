@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 267553910108840523}
   - component: {fileID: 3349525419462587601}
   - component: {fileID: 5078499827077187086}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: UpperConnectingJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 1707109189318618813}
   - component: {fileID: 1790566936006216442}
   - component: {fileID: 6666779471731449544}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LowerConnectingJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

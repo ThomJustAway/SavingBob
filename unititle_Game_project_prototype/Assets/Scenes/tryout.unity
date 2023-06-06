@@ -246,6 +246,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 12 tooth gear (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6780680903311915335, guid: 6b35b34122605e14882f4a903ec9d657, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b35b34122605e14882f4a903ec9d657, type: 3}
 --- !u!1 &198072679
@@ -1765,9 +1769,13 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1709325144562333668, guid: 1564c373c2efcb24f836a4b2ee2930f3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2801885591955099582, guid: 1564c373c2efcb24f836a4b2ee2930f3, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4214112329092587439, guid: 1564c373c2efcb24f836a4b2ee2930f3, type: 3}
       propertyPath: m_RootOrder
@@ -1815,7 +1823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5851266725733713152, guid: 1564c373c2efcb24f836a4b2ee2930f3, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1564c373c2efcb24f836a4b2ee2930f3, type: 3}

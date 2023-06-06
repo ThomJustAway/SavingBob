@@ -58,11 +58,25 @@ public abstract class Gear: MonoBehaviour
 
         return selectedGear;
     }
-    
+
     private Collider2D GetRespectiveColliderByLayer(LayerMask layer)
     {
         if (layer == LayerData.GearAreaLayer) return entireGearArea;
         else return innerGearArea;
+    }
+
+    public JointBehaviour[] GetJointsAroundGear()
+    {
+        Collider2D[] JointSelected = GetColliderAroundRadiusBasedOnLayer(LayerData.JointLayer);
+
+        if (JointSelected.Length == 0) return null;
+
+        JointBehaviour[] foundJoint = JointSelected.Select(collider =>
+        {
+            return collider.GetComponentInParent<JointBehaviour>();
+        }).ToArray();
+        return foundJoint;
+
     }
 
     public abstract void AddSpeedAndRotation(float speed, Vector3 direction);

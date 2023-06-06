@@ -11,18 +11,33 @@ public class JointBehaviour : MonoBehaviour
     private Gear connectedGearLower;
     private Gear connectedGearUpper;
     private float radius = 0.5f;
+    public bool isConnected;
 
     void Update()
     {
-        CheckJoint(lowerJoint, true);
-        CheckJoint(upperJoint, false);
-        print("lowerJoint is " + connectedGearLower.transform.name);
-        print("upperJoint is " + connectedGearUpper.transform.name);
+        CheckBothJoint();
     }
 
-
+    private void CheckBothJoint()
+    {
+        CheckJoint(lowerJoint, true);
+        CheckJoint(upperJoint, false);   
+        CheckIsConnected();
+    }
     
-    private void CheckJoint(Collider2D joint , bool isLower )
+    private void CheckIsConnected() // if there is no gear connected, set is connected to false
+    {
+        if(connectedGearLower == null && connectedGearUpper == null)
+        {
+            isConnected = false;
+        }
+        else
+        {
+            isConnected = true;
+        }
+    }
+
+    private void CheckJoint(Collider2D joint , bool isLowerJoint )
     {
         float minDept = joint.transform.position.z - 0.5f;
         float maxDept = joint.transform.position.z + 0.5f;
@@ -36,7 +51,7 @@ public class JointBehaviour : MonoBehaviour
             );
         if (gearSurroundingJoint != null)
         {
-            if (isLower)
+            if (isLowerJoint)
             {
                 connectedGearLower = gearSurroundingJoint.GetComponentInParent<Gear>();
             }
@@ -45,8 +60,25 @@ public class JointBehaviour : MonoBehaviour
                 connectedGearUpper = gearSurroundingJoint.GetComponentInParent<Gear>();
             }
         }
-
+        else
+        {
+            if (isLowerJoint)
+            {
+                connectedGearLower = null;
+            }
+            else
+            {
+                connectedGearUpper= null;
+            }
+        }
+        //change this if else statement
     }
+
+    public Gear GetRespondingGear(Gear calledGear) // give back a gear that is connected with the joint.
+    {
+        if (!isConnected) return null;
+        else if (calledGear == connectedGearLower) return connectedGearUpper;
+        else return connectedGearUpper;
+    }
+
 }
-
-
