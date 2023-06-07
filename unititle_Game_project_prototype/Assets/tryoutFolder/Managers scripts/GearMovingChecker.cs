@@ -10,9 +10,11 @@ public class GearMovingChecker : MonoBehaviour
     [SerializeField] private StartingGearClass startingGear;
     [SerializeField] private float speed;
     //do a recurrsive sequence;
-    private void Start()
+
+    private void Update()
     {
-        StartCoroutine(ImproveConnectingGear());
+        startingGear.GearHost.AddSpeedAndRotation(speed, GetVector3FromDirection(RotationDirection.clockWise));
+        Propogate(startingGear.GearHost);
     }
 
     private void RotateConnectingGears(Gear currentGear,RotationDirection direction,float speed,List<Gear> GearsRotated)
@@ -68,15 +70,38 @@ public class GearMovingChecker : MonoBehaviour
         3.rotate the gear.
         4.If there is no more, then stop coroutine
      */
+    private void Propogate(Gear currentGear, Gear previousGear=null, bool isJoint = false)
+    {
+        if(previousGear != null)
+        {
+            RotateGear(previousGear, currentGear,isJoint);
+        }
+        Gear[] gearSurrounding = currentGear.GetGearsAroundRadiusBasedOnLayer(LayerData.GearAreaLayer);
+        //JointBehaviour[] jointsSurrounding = currentGear.GetJointsAroundGear();
+        //if (jointsSurrounding.Length != 0)
+        //{
+        //    foreach (JointBehaviour joint in jointsSurrounding)
+        //    {
+        //        Gear jointedGear = joint.GetRespondingGear(currentGear);
+        //        if (jointedGear != previousGear)
+        //        {
+        //            Propogate(jointedGear, currentGear, true);
+        //        }
+        //    }
+        //}
 
-    //maybe use delegates for the rotation?
-    /*
-        1. gear will get the gears that are around
-        2. When gear is found, the gear will subscribe to the delegate that will rotate the gear
-        3. once the finding process is finish, call the delegate to invoke the rotate gear to rotate all the gear that are connected.
-        4. repeat process 
-     */
+        //this code need to change
 
+        foreach (Gear gear in gearSurrounding)
+        {
+            if (gear != previousGear)
+            {
+                Propogate(gear, currentGear);
+            }
+        }
+        
+
+    }
 
     //this code has a problem of taking a very long time. Please figure this out.
     private IEnumerator ImproveConnectingGear()
@@ -86,7 +111,7 @@ public class GearMovingChecker : MonoBehaviour
         startingGear.GearHost.AddSpeedAndRotation(speed, GetVector3FromDirection(RotationDirection.clockWise));
         RotationDirection direction = RotationDirection.antiClockWise;
 
-        List<Gear> gearRotated = new List<Gear>() { startingGear.GearHost };
+        //List<Gear> gearRotated = new List<Gear>() { startingGear.GearHost };
 
         while (previousGearList.Count != 0)
         {
@@ -111,19 +136,32 @@ public class GearMovingChecker : MonoBehaviour
 
                 foreach (Gear foundgear in gearsFound) //memory usage is high
                 {
-                    if (currentGear != foundgear)
+                    if (currentGear != foundgear) //this line of code
                     {
                         RotateGear(foundgear, currentGear, direction);
                         currentGearList.Add(foundgear);
                     }
                 }
+
+                yield return null;
             }
             previousGearList = currentGearList;
             direction = ChangeDirection(direction);
-        }
+            print("end of code");
+            print("-------------------");
+            foreach(Gear gear in currentGearList)
+            {
+                print("gear list in the code +"+ gear.gameObject.name);
+            }
+            print("-------------");
 
+        }
+        print("end coroutine");
         yield return StartCoroutine(ImproveConnectingGear());
     }
+
+    //time to add a new line off function
+
 
     private void RotateGear(Gear driverGear, Gear drivenGear, RotationDirection direction, bool isJoint =false)
     {
@@ -131,6 +169,26 @@ public class GearMovingChecker : MonoBehaviour
         if (!isJoint) newSpeed = GetCalculateSpeedDrivenGear(driverGear, drivenGear, driverGear.Speed);
         else newSpeed = driverGear.Speed; //same speed in same joint
         drivenGear.AddSpeedAndRotation(newSpeed, GetVector3FromDirection(direction));
+    }
+
+    private void RotateGear(Gear driverGear, Gear drivenGear,  bool isJoint = false)
+    {
+        float newSpeed;
+        Vector3 direction;
+        if (!isJoint)
+        {
+            newSpeed = GetCalculateSpeedDrivenGear(driverGear, drivenGear, driverGear.Speed);
+            direction = ChangeDirection(driverGear.Direction);
+        }
+        else
+        {
+            newSpeed = driverGear.Speed;
+            direction = drivenGear.Direction;
+        }//same speed in same joint
+        print("speed "+newSpeed);
+        print("direction " + direction);
+
+        drivenGear.AddSpeedAndRotation(newSpeed, direction);
     }
 
     //Objective: to rotate gears in using iteration
@@ -151,7 +209,6 @@ public class GearMovingChecker : MonoBehaviour
 
     }
 
-
     public enum RotationDirection
     {
         clockWise,
@@ -169,6 +226,12 @@ public class GearMovingChecker : MonoBehaviour
             default: 
                 return Vector3.forward;
         }
+    }
+
+    private Vector3 ChangeDirection(Vector3 direction)
+    {
+        if (direction == Vector3.forward) return Vector3.back;
+        else return Vector3.forward;
     }
 
     private RotationDirection ChangeDirection(RotationDirection direction)
