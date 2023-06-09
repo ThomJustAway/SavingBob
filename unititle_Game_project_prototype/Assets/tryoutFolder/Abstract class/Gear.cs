@@ -79,9 +79,39 @@ public abstract class Gear: MonoBehaviour
 
     }
 
-    public abstract void AddSpeedAndRotation(float speed, Vector3 direction);
-    
-    
+    public abstract void Propogate(Gear previousGear =null, bool isJoint = false);
 
+    public abstract void AddSpeedAndRotation(float speed, Vector3 direction);
+
+    protected void RotateDrivenGear(Gear driverGear, Gear drivenGear, bool isJoint = false)
+    {
+        float newSpeed;
+        Vector3 direction;
+        if (!isJoint)
+        {
+            newSpeed = GetCalculateSpeedDrivenGear(driverGear, drivenGear, driverGear.Speed);
+            direction = ChangeDirection(driverGear.Direction);
+        }
+        else
+        {
+            newSpeed = driverGear.Speed;
+            direction = drivenGear.Direction;
+        }//same speed in same joint
+        drivenGear.AddSpeedAndRotation(newSpeed, direction);
+    }
+
+    private Vector3 ChangeDirection(Vector3 direction)
+    {
+        if (direction == Vector3.forward) return Vector3.back;
+        else return Vector3.forward;
+    }
+
+    private float GetCalculateSpeedDrivenGear(Gear driverGear, Gear drivenGear, float speed)
+    {
+        float gearRatio = (float)drivenGear.Teeths / (float)driverGear.Teeths;
+        float calculatedSpeed = speed / gearRatio;
+        return calculatedSpeed;
+
+    }
 
 }

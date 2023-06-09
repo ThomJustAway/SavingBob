@@ -13,6 +13,7 @@ public class JointBehaviour : MonoBehaviour
     private float radius = 0.5f;
     public bool isConnected;
 
+
     void Update()
     {
         CheckBothJoint();
@@ -36,6 +37,9 @@ public class JointBehaviour : MonoBehaviour
             isConnected = true;
         }
     }
+
+    //joint needs to know the rotating gear and the non rotating gear
+    //needs to know if it is rotated or not
 
     private void CheckJoint(Collider2D joint , bool isLowerJoint )
     {
