@@ -7,6 +7,7 @@ public class LayerData
     private static LayerMask innerGearLayer = LayerMask.GetMask("InnerGearAreaLayer");
     private static LayerMask moveableGearLayer = LayerMask.GetMask("MoveableGearLayer");
     private static LayerMask jointLayer = LayerMask.GetMask("JointLayer");
+    private static LayerMask uiLayer = LayerMask.GetMask("UI");
 
     public static LayerMask MoveableGearLayer { get { return moveableGearLayer; } }
     public static LayerMask InnerGearLayer { get { return innerGearLayer; } }
@@ -14,4 +15,6 @@ public class LayerData
     public static LayerMask GearAreaLayer { get { return gearAreaLayer; } }
 
     public static LayerMask JointLayer { get { return jointLayer; } }
+
+    public static LayerMask UILayer { get { return uiLayer; } }
 }

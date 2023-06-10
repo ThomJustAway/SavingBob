@@ -42,8 +42,6 @@ public class MouseDragGear : IMouseStates
 
     } 
 
-
-
     private void DragGear(MouseBehaviour mouseBehaviour)
     {
         Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);

@@ -1,9 +1,11 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-
-public class MouseIdle : IMouseStates
+public class MouseIdle : IMouseStates , IPointerClickHandler
     {
     public IMouseStates DoState(MouseBehaviour mouseBehaviour)
     {
@@ -24,6 +26,8 @@ public class MouseIdle : IMouseStates
     {
         Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var collidedObject = Physics2D.Raycast(positionOfMouse, Vector2.zero,float.PositiveInfinity,LayerData.MoveableGearLayer);
+        RayCast();
+
         //getting the objects that are colliding with the raycast. this is from the moveable gear layer.
         //need to add code to get different things
         if (collidedObject.collider != null)
@@ -31,6 +35,18 @@ public class MouseIdle : IMouseStates
             GetType(collidedObject.collider);
             Transform hitGameObject = collidedObject.collider.transform;
             mouseBehaviour.selectedObject = hitGameObject;
+        }
+    }
+
+    private void RayCast()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> raysastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, raysastResults);
+        foreach(var raycastResult in raysastResults)
+        {
+            Debug.Log(raycastResult.gameObject.name);
         }
     }
 
@@ -47,5 +63,10 @@ public class MouseIdle : IMouseStates
             }
         }
         Debug.Log("no avaliable component detected");
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        
     }
 }

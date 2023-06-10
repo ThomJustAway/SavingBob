@@ -19,7 +19,7 @@ public class GearPoolingManager : MonoBehaviour
         } //stores the gameobject in a queue and put it in the parent to keep it more organise
     }
 
-    public GameObject MakeGear()
+    public GameObject GetGear()
     {
         if(pooledGear.Count > 0)
         {
