@@ -760,6 +760,7 @@ GameObject:
   - component: {fileID: 422602304}
   - component: {fileID: 422602303}
   - component: {fileID: 422602302}
+  - component: {fileID: 422602305}
   m_Layer: 5
   m_Name: gear button
   m_TagString: Untagged
@@ -853,6 +854,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422602300}
   m_CullTransparentMesh: 1
+--- !u!114 &422602305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422602300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d702d4ac2cb8cb4eb011b852dfe4263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeableGear: {fileID: 6780680903311915335, guid: 6b35b34122605e14882f4a903ec9d657, type: 3}
+  numberOfGear: 10
 --- !u!1001 &637595208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1107,7 +1122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1942554756}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: 
         m_Mode: 1
@@ -1536,7 +1551,7 @@ GameObject:
   - component: {fileID: 1458039753}
   - component: {fileID: 1458039752}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Main Gear Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1659,7 +1674,6 @@ Transform:
   - {fileID: 1019885705}
   - {fileID: 2081088999}
   - {fileID: 1959416900}
-  - {fileID: 1942554757}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2280,52 +2294,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22a010e9764ed80429489253bec0017d, type: 3}
---- !u!1 &1942554756
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1942554757}
-  - component: {fileID: 1942554758}
-  m_Layer: 0
-  m_Name: GearPoolManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1942554757
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942554756}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 874.0064, y: 534.45105, z: 3.1866486}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1566126764}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1942554758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942554756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d702d4ac2cb8cb4eb011b852dfe4263, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placeableGear: {fileID: 6780680903311915335, guid: 6b35b34122605e14882f4a903ec9d657, type: 3}
-  numberOfGear: 10
 --- !u!1 &1959416898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,7 +2374,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 759
 --- !u!114 &1993331746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2429,7 +2397,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1993331747
 Canvas:
   m_ObjectHideFlags: 0
@@ -2439,9 +2407,9 @@ Canvas:
   m_GameObject: {fileID: 1993331744}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 1731086873}
+  m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0

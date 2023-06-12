@@ -2,16 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using UnityEditor.Rendering;
+
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-
-//what to do
-// make an customer editor for all the classes that inherit the gear class and make direct changes there
 public abstract class Gear: MonoBehaviour
 {
+    //README
+    /*
+        Gear abstract class is a class which every gear that exist in the game will have.
+        They have the basic gear functionality to make a gear work
+        
+        Still a work in progress.
+
+        EntireGearArea: is the area in which the gear can be rotated (the edge of the gear). 
+        InnterGearArea: is the area in which the gear cant be rotated (the inner circle of the gear)
+        
+        How the gears are rotated:
+        1.Recursion. The gear will go through the surrounding gears and rotate them. (Problem: stack Overflow)
+        
+        The rest of the function in the class are very self explaintory.
+     */
     [SerializeField]private float gearRadius;
     [SerializeField]private int gearTeeth;
     [SerializeField]private Collider2D entireGearArea;

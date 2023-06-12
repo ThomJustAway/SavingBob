@@ -4,23 +4,49 @@ using UnityEngine;
 
 public class LayerManager : MonoBehaviour
 {
+    //README
+    /*
+        LayerManager: keeps track of the layer the current player is in
+        and move the camera and the background accordingly. 
+        
+        The layer is differentiated based on the Z-index
+
+                camera z position in every layer
+                layer 1 :-1
+                layer 2 : -4
+                layer 3 : -7
+
+                Gear z position in every layer
+                layer 1:0
+                layer 2:-3
+                layer 3:-6
+
+        The layerManager is in charge of any responsibility regarding the layer which include
+
+            1. making sure the camera and background are at the right layer
+            2. Changing the z index of camera and background
+            3. Giving out the current position of gears z index when needed.
+     */
+
+    public static LayerManager Current; //singleton because I want to have an object that stores the current layer of the game.
     private Camera mainCamera;
     public Transform background;
 
     private int currentLayer = 1;
-
 
     private void Start()
     {
         int StartingPoint = -1;
         mainCamera = Camera.main;
         mainCamera.transform.position = new Vector3(0, 0, StartingPoint);
-        background.position = new Vector3(0,0,StartingPoint+2);
+        background.position = new Vector3(0, 0, StartingPoint + 2);
+        Current = this;
     }
 
-    //layer 1 :-1
-    //layer 2 : -4
-    //layer 3 : -7
+    public int GetGearZIndexBasedOnCurrentLayer()
+    {
+        return -3*(currentLayer-1);
+    }
 
     public void ChangeLayer(int layer)
     {
