@@ -23,10 +23,10 @@ public abstract class Gear: MonoBehaviour
         
         The rest of the function in the class are very self explaintory.
      */
-    [SerializeField]private float gearRadius;
     [SerializeField]private int gearTeeth;
-    [SerializeField]private Collider2D entireGearArea;
+    [SerializeField]private CircleCollider2D entireGearArea;
     [SerializeField]private Collider2D innerGearArea;
+    private float gearRadius;
 
     protected float speed ;
     protected Vector3 direction;
@@ -45,6 +45,11 @@ public abstract class Gear: MonoBehaviour
             return transform.position.z + 0.5f;
         } }
 
+
+    private void Start()
+    {
+        gearRadius = entireGearArea.radius;
+    }
 
     public Collider2D[] GetColliderAroundRadiusBasedOnLayer(LayerMask layer)
     {

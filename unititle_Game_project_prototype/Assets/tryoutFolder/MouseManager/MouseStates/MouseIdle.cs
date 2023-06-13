@@ -58,7 +58,7 @@ public class MouseIdle : IMouseStates
         {
             //do code that make the gear follow.
             //if gear is not place in scene, hide the gear using Gearpool.
-            if (raycastResult.gameObject.TryGetComponent<GearPoolingManager>(out GearPoolingManager manager))
+            if (raycastResult.gameObject.TryGetComponent<GearButton>(out GearButton manager))
             {
                 GameObject gear = manager.GetGear(); //get gear from pool
                 mouseBehaviour.selectedObject = gear.transform; //make it the selected object

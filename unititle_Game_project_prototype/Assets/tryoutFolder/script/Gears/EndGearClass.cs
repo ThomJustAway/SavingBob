@@ -31,13 +31,13 @@ public class EndGearClass : MonoBehaviour
 
     public bool IfConditionMet(float speed, Vector3 direction)
     {
-        bool rotatationConditionMet = IfRotationConditionIsMet(direction);
-        bool speedConditionMet = IfSpeedConditionIsMet(speed);
+        bool rotatationConditionMet = GetRotationConditionIsMet(direction);
+        bool speedConditionMet = GetSpeedConditionIsMet(speed);
         bool conditionMet = rotatationConditionMet && speedConditionMet;
         return conditionMet;
     }
 
-    private bool IfRotationConditionIsMet(Vector3 direction)
+    private bool GetRotationConditionIsMet(Vector3 direction)
     {
         switch (rotatingCondition)
         {
@@ -59,7 +59,7 @@ public class EndGearClass : MonoBehaviour
     }
     // the naming conventiion here is confusing
 
-    private bool IfSpeedConditionIsMet(float speed)
+    private bool GetSpeedConditionIsMet(float speed)
     {
         if (speed > speedCondition)
         {

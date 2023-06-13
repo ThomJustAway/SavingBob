@@ -31,6 +31,7 @@ public class MouseDragGear : IMouseStates
         Collider2D[] surroundInnerGear = gearComponent.GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
         if(surroundInnerGear != null)
         {
+            //improve the finding of the valid position
             ColliderDistance2D distance;
 
             foreach (var innerGear in surroundInnerGear)
@@ -51,8 +52,8 @@ public class MouseDragGear : IMouseStates
 
         // make sure that the gear is place on top of the UI component
         newPosition.z = LayerManager.Current.GetGearZIndexBasedOnCurrentLayer() + offsetFromCamera; 
-        mouseBehaviour.selectedObject.position = newPosition;
         //make the gear follow the mouse while snaping to the grid
+        mouseBehaviour.selectedObject.position = newPosition;
     }
 }
 
