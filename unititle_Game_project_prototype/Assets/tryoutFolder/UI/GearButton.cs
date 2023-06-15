@@ -11,6 +11,8 @@ public class GearButton : MonoBehaviour
     [SerializeField]private int numberOfGear = 10;
     [SerializeField] private string nameOfButton;
     [SerializeField] private GameObject imageContainer;
+    [SerializeField] private TextMeshProUGUI moneyTextBox;
+    [SerializeField] private TextMeshProUGUI gearButtonNameDisplay;
 
     [Range(5,50)] // figure out how to make the gameobject change with the image?
     [SerializeField] private float scale = 37f;
@@ -26,7 +28,6 @@ public class GearButton : MonoBehaviour
 
     private void SettingUpButton()
     {
-        TextMeshProUGUI gearButtonNameDisplay = gameObject.GetComponentInChildren<TextMeshProUGUI>();
         gearButtonNameDisplay.text = nameOfButton; //setting the name
 
         Transform imageGearObject = Instantiate(placeableGear, imageContainer.transform).transform;
@@ -37,12 +38,18 @@ public class GearButton : MonoBehaviour
             Destroy(child.gameObject);
         }
         Gear gearComponent=imageGearObject.GetComponent<Gear>();
+
+        moneyTextBox.text = gearComponent.Cost.ToString() + " <sprite name=\"Money icon\">";
+
+
         Destroy(gearComponent); 
-        Collider2D colliderComponent = gameObject.GetComponent<Collider2D>();
+        Collider2D colliderComponent = imageGearObject.GetComponent<Collider2D>();
         Destroy(colliderComponent);
         RectTransform rectTransform=imageGearObject.AddComponent<RectTransform>();
         rectTransform.localScale = new Vector3(scale, scale, 0);
-    }
+
+
+    } //making the button to set up to be like the gear
 
     private void AddingGearToPool()
     {

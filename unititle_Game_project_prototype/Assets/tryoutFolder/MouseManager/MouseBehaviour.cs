@@ -20,11 +20,11 @@ public class MouseBehaviour : MonoBehaviour
      4. buying gears
      */
     [HideInInspector]public Grid grid;
-    [HideInInspector]public Transform selectedObject=null;
+    [HideInInspector]public IMoveable selectedObject=null;
 
     //States
     [HideInInspector] public IMouseStates currentState;
-    [HideInInspector] public MouseDragGear mouseDragGear = new MouseDragGear();
+    [HideInInspector] public MouseMoveSelectedObject mouseMoveSelectedObject = new MouseMoveSelectedObject();
     [HideInInspector] public MouseIdle mouseIdle = new MouseIdle();
 
 

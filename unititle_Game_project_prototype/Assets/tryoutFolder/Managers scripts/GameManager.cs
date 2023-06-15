@@ -12,16 +12,25 @@ public class GameManager : MonoBehaviour
     */
     private EndGearClass[] inactiavatedGears;
     private bool isSolve;
+    public static GameManager instance;
+    public GameDataScriptableObject currentGameData;
 
     void Start()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
         inactiavatedGears = GameObject.FindObjectsOfType(typeof(EndGearClass)) as EndGearClass[];
     }
 
     void Update()
     {
         CheckIfSolve();
-
         print("puzzle is solved: "+isSolve);
     }
 
@@ -43,4 +52,6 @@ public class GameManager : MonoBehaviour
         isSolve = solve;
 
     }
+
+
 }

@@ -393,6 +393,8 @@ MonoBehaviour:
   numberOfGear: 10
   nameOfButton: 12 tooth gear
   imageContainer: {fileID: 7455015361315188434}
+  moneyTextBox: {fileID: 3300069668695622851}
+  gearButtonNameDisplay: {fileID: 4941345050198077501}
   scale: 37
 --- !u!1 &7455015361315188434
 GameObject:

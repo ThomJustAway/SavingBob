@@ -16,7 +16,7 @@ public class MouseIdle : IMouseStates
             if (mouseBehaviour.selectedObject != null)
             {
                 //Debug.Log(mouseBehaviour.selectedObject);
-                return mouseBehaviour.mouseDragGear;
+                return mouseBehaviour.mouseMoveSelectedObject;
             }
             else return mouseBehaviour.mouseIdle;
         }
@@ -42,7 +42,7 @@ public class MouseIdle : IMouseStates
         {
             //GetType(collidedObject.collider);
             Transform hitGameObject = collidedObject.collider.transform;
-            mouseBehaviour.selectedObject = hitGameObject;
+            mouseBehaviour.selectedObject = hitGameObject.GetComponent<IMoveable>();
         }
     }
 
@@ -61,12 +61,12 @@ public class MouseIdle : IMouseStates
             if (raycastResult.gameObject.TryGetComponent<GearButton>(out GearButton manager))
             {
                 GameObject gear = manager.GetGear(); //get gear from pool
-                mouseBehaviour.selectedObject = gear.transform; //make it the selected object
+                mouseBehaviour.selectedObject = gear.GetComponent<IMoveable>(); //make it the selected object
 
                 Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int cellPosition = mouseBehaviour.grid.WorldToCell(positionOfMouse);
                 cellPosition.z = LayerManager.Current.GetGearZIndexBasedOnCurrentLayer();
-                mouseBehaviour.selectedObject.position = mouseBehaviour.grid.GetCellCenterLocal(cellPosition);
+                mouseBehaviour.selectedObject.Move(cellPosition);
             }
         }
     }

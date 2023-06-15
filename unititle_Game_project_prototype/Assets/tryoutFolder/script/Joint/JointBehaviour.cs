@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class JointBehaviour : MonoBehaviour
+public class JointBehaviour : MonoBehaviour ,IMoveable
 {
 
     [SerializeField] private Collider2D lowerJoint;
@@ -85,4 +85,31 @@ public class JointBehaviour : MonoBehaviour
         else return connectedGearUpper;
     }
 
+    public void CheckValidPosition()
+    {
+        if (isConnected)
+        {
+            if(connectedGearLower == null)
+            {
+                transform.position = connectedGearUpper.transform.position;
+            }
+            else if(connectedGearUpper == null)
+            {
+                transform.position = connectedGearLower.transform.position;
+            }
+            else
+            {
+                print("what should I do here?");
+            }
+        }
+        else
+        {
+            print("no valid position");
+        }
+    }
+
+    public void Move(Vector3 position)
+    {
+        transform.position = position;
+    }
 }

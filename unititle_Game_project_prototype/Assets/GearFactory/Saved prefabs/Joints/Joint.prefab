@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4214112329092587439}
   - component: {fileID: 370267994289097212}
-  m_Layer: 0
+  - component: {fileID: 3606466023598432367}
+  m_Layer: 8
   m_Name: Joint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +49,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lowerJoint: {fileID: 6666779471731449544}
   upperJoint: {fileID: 5078499827077187086}
+  isConnected: 0
+--- !u!58 &3606466023598432367
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709325144562333668}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &2801885591955099582
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +92,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2801885591955099582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

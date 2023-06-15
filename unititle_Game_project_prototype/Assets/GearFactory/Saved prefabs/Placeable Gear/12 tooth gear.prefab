@@ -367,10 +367,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a344fc0977bda24da741f3bdbe19f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gearRadius: 1.17
   gearTeeth: 12
   entireGearArea: {fileID: 2017939731767806787}
   innerGearArea: {fileID: 134693580693490428}
+  cost: 10
   friction: 10
 --- !u!58 &8731510365663366596
 CircleCollider2D:

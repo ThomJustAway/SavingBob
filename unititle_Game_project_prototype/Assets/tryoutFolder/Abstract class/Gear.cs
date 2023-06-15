@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-public abstract class Gear: MonoBehaviour
+public abstract class Gear: MonoBehaviour ,IMoveable
 {
     //README
     /*
@@ -26,25 +27,23 @@ public abstract class Gear: MonoBehaviour
     [SerializeField]private int gearTeeth;
     [SerializeField]private CircleCollider2D entireGearArea;
     [SerializeField]private Collider2D innerGearArea;
-    private float gearRadius;
-
+    [SerializeField] private int cost;
     protected float speed ;
     protected Vector3 direction;
+    private float gearRadius;
 
+    public int Cost { get { return cost; } }
     public float Speed { get { return speed; } }
     public Vector3 Direction { get { return direction; } }
     public Collider2D EntireGearArea { get { return entireGearArea; } }
     public int Teeths { get { return gearTeeth; } }
-
     private float MinDept { get {
             return transform.position.z - 0.5f;
         } }
-
     private float MaxDept { get
         {
             return transform.position.z + 0.5f;
         } }
-
 
     private void Start()
     {
@@ -94,10 +93,17 @@ public abstract class Gear: MonoBehaviour
         return foundJoint;
 
     }
+    public abstract void AddSpeedAndRotation(float speed, Vector3 direction);
+    private float GetCalculateSpeedDrivenGear(Gear driverGear, Gear drivenGear, float speed)
+    {
+        float gearRatio = (float)drivenGear.Teeths / (float)driverGear.Teeths;
+        float calculatedSpeed = speed / gearRatio;
+        return calculatedSpeed;
+
+    }
 
     public abstract void Propogate(Gear previousGear =null, bool isJoint = false);
 
-    public abstract void AddSpeedAndRotation(float speed, Vector3 direction);
 
     protected void RotateDrivenGear(Gear driverGear, Gear drivenGear, bool isJoint = false)
     {
@@ -122,12 +128,34 @@ public abstract class Gear: MonoBehaviour
         else return Vector3.forward;
     }
 
-    private float GetCalculateSpeedDrivenGear(Gear driverGear, Gear drivenGear, float speed)
+    public void CheckValidPosition()
     {
-        float gearRatio = (float)drivenGear.Teeths / (float)driverGear.Teeths;
-        float calculatedSpeed = speed / gearRatio;
-        return calculatedSpeed;
+        Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
+        if (surroundInnerGear != null)
+        {
+            //improve the finding of the valid position
+            ColliderDistance2D distance;
 
+            foreach (var innerGear in surroundInnerGear)
+            {
+                distance = innerGear.Distance(EntireGearArea);
+                Vector2 resolveDistance = Math.Abs(distance.distance) * distance.normal;
+
+                transform.Translate(resolveDistance);
+            }
+        }
     }
 
+    public void Move(Vector3 position)
+    {
+        transform.position = position;
+        //do some code to visually show that the gear can be place or not.
+    }
+}
+
+public interface IMoveable
+{
+    public void CheckValidPosition();
+
+    public void Move(Vector3 position);
 }

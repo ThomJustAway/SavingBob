@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//problem, there is no difference between the gear and moveable gear. 
+//since I have a starting gear script and end gear script that uses the Gear script to move. 
 public class GearBehaviour : Gear
 {
     [Range(-50f, 50f)]
     public float friction = 20f;
     private Gear[] surroundingGear;
+
 
     private void Update()
     {
@@ -59,6 +63,7 @@ public class GearBehaviour : Gear
         print("end of function");
 
     }
+
 }
 
 //use events : gear to subscribe to the event.
