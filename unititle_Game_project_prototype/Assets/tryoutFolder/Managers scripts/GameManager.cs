@@ -15,9 +15,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameDataScriptableObject currentGameData;
 
-    void Start()
+    private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -25,13 +25,17 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+
+    void Start()
+    {
+
         inactiavatedGears = GameObject.FindObjectsOfType(typeof(EndGearClass)) as EndGearClass[];
     }
 
     void Update()
     {
         CheckIfSolve();
-        print("puzzle is solved: "+isSolve);
     }
 
     private void CheckIfSolve()

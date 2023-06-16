@@ -599,6 +599,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2061973117342485012, guid: b025b42238a2c0b4fadf83ac864debcc, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2061973117342485012, guid: b025b42238a2c0b4fadf83ac864debcc, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4728077309940101602, guid: b025b42238a2c0b4fadf83ac864debcc, type: 3}
       propertyPath: m_Name
       value: 12 tooth gear (Inactivated) (1)
@@ -1164,7 +1172,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3392369408920956644, guid: 6b35b34122605e14882f4a903ec9d657, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6b35b34122605e14882f4a903ec9d657, type: 3}
 --- !u!1 &1396198118
 GameObject:
@@ -2446,7 +2455,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2081088999
 Transform:
   m_ObjectHideFlags: 0
@@ -2474,7 +2483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf3bf86f95cbac4a920295d45ce3642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGameData: {fileID: 0}
+  currentGameData: {fileID: 11400000, guid: 42fafdf3f6c2bff47a8a641f1cbc8596, type: 2}
 --- !u!224 &2104410733 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4264647129075172587, guid: bf25c02edc4989d4daacd0bca3799151, type: 3}
