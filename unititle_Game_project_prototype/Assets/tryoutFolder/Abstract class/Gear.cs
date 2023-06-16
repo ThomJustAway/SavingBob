@@ -143,7 +143,7 @@ public abstract class Gear: MonoBehaviour ,IMoveable
 
                 transform.Translate(resolveDistance);
             }
-        }
+        }        
     }
 
     public void Move(Vector3 position)
@@ -151,11 +151,16 @@ public abstract class Gear: MonoBehaviour ,IMoveable
         transform.position = position;
         //do some code to visually show that the gear can be place or not.
     }
+
+
 }
 
 public interface IMoveable
 {
+    public int Cost { get; }
+
     public void CheckValidPosition();
 
     public void Move(Vector3 position);
+
 }

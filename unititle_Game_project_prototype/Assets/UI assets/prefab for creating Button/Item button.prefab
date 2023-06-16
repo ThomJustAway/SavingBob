@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8318589742340883475}
   - component: {fileID: 4941345050198077501}
   m_Layer: 5
-  m_Name: Gear name text
+  m_Name: Item name text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -282,9 +282,9 @@ GameObject:
   - component: {fileID: 9159842378795012320}
   - component: {fileID: 8382740138688981254}
   - component: {fileID: 2235186091652978872}
-  - component: {fileID: 4078437671151416440}
+  - component: {fileID: 6346168824206814710}
   m_Layer: 5
-  m_Name: Gear button
+  m_Name: Item button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &4078437671151416440
+--- !u!114 &6346168824206814710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -386,15 +386,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5673723472028752552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d702d4ac2cb8cb4eb011b852dfe4263, type: 3}
+  m_Script: {fileID: 11500000, guid: 55984d9148788374b88a3607e1fdb28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placeableGear: {fileID: 6780680903311915335, guid: 6b35b34122605e14882f4a903ec9d657, type: 3}
-  numberOfGear: 10
-  nameOfButton: 12 tooth gear
+  itemPrefab: {fileID: 0}
+  numberOfItem: 10
+  nameOfItem: 12 tooth gears
   imageContainer: {fileID: 7455015361315188434}
   moneyTextBox: {fileID: 3300069668695622851}
-  gearButtonNameDisplay: {fileID: 4941345050198077501}
+  itemButtonNameDisplay: {fileID: 4941345050198077501}
   scale: 37
 --- !u!1 &7455015361315188434
 GameObject:
@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 8025713065847277699}
   - component: {fileID: 7455015361315188438}
   m_Layer: 5
-  m_Name: Gear image
+  m_Name: item image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

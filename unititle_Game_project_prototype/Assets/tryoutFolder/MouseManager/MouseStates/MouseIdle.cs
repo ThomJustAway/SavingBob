@@ -58,15 +58,19 @@ public class MouseIdle : IMouseStates
         {
             //do code that make the gear follow.
             //if gear is not place in scene, hide the gear using Gearpool.
-            if (raycastResult.gameObject.TryGetComponent<GearButton>(out GearButton manager))
+            if (raycastResult.gameObject.TryGetComponent<ItemButton>(out ItemButton manager))
             {
-                GameObject gear = manager.GetGear(); //get gear from pool
-                mouseBehaviour.selectedObject = gear.GetComponent<IMoveable>(); //make it the selected object
+                if (manager.CanBuyItem())
+                {
+                    GameObject gear = manager.GetItem(); //get Item from pool
+                    mouseBehaviour.selectedObject = gear.GetComponent<IMoveable>(); //make it the selected object               
+                
+                    Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    Vector3Int cellPosition = mouseBehaviour.grid.WorldToCell(positionOfMouse);
+                    cellPosition.z = LayerManager.Current.GetGearZIndexBasedOnCurrentLayer();
+                    mouseBehaviour.selectedObject.Move(cellPosition);
+                }
 
-                Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector3Int cellPosition = mouseBehaviour.grid.WorldToCell(positionOfMouse);
-                cellPosition.z = LayerManager.Current.GetGearZIndexBasedOnCurrentLayer();
-                mouseBehaviour.selectedObject.Move(cellPosition);
             }
         }
     }

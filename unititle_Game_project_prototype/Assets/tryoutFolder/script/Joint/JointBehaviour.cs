@@ -8,11 +8,14 @@ public class JointBehaviour : MonoBehaviour ,IMoveable
 
     [SerializeField] private Collider2D lowerJoint;
     [SerializeField] private Collider2D upperJoint;
+    [SerializeField] private int cost;
     private Gear connectedGearLower;
     private Gear connectedGearUpper;
     private float radius = 0.5f;
     public bool isConnected;
 
+
+    public int Cost { get { return cost; } }
 
     void Update()
     {
@@ -112,4 +115,6 @@ public class JointBehaviour : MonoBehaviour ,IMoveable
     {
         transform.position = position;
     }
+
+
 }
