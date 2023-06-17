@@ -100,4 +100,9 @@ public class ItemButton : MonoBehaviour
         pooledGear.Enqueue(selectedGear);
     }
 
+    public bool IsGearRelated(GameObject selectedGameobject)
+    {
+        if(selectedGameobject == itemPrefab) return true;
+        else return false;
+    }
 }

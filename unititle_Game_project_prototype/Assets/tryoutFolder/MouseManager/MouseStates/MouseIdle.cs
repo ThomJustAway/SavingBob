@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,6 +18,10 @@ public class MouseIdle : IMouseStates
             {
                 //Debug.Log(mouseBehaviour.selectedObject);
                 return mouseBehaviour.mouseMoveSelectedObject;
+            }
+            else if (mouseBehaviour.deleteActivated)
+            {
+                return mouseBehaviour.deleteItems;
             }
             else return mouseBehaviour.mouseIdle;
         }
@@ -53,8 +58,10 @@ public class MouseIdle : IMouseStates
         List<RaycastResult> raysastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, raysastResults);
 
+        string deletebuttonName = "DeleteBtn";
+
         //this code only works for making Gear
-        foreach(var raycastResult in raysastResults)
+        foreach (var raycastResult in raysastResults)
         {
             //do code that make the gear follow.
             //if gear is not place in scene, hide the gear using Gearpool.
@@ -70,8 +77,12 @@ public class MouseIdle : IMouseStates
                     cellPosition.z = LayerManager.Current.GetGearZIndexBasedOnCurrentLayer();
                     mouseBehaviour.selectedObject.Move(cellPosition);
                 }
-
             }
+            else if(raycastResult.gameObject.tag == deletebuttonName) 
+            {
+                mouseBehaviour.deleteActivated = true;
+            }
+
         }
     }
 
