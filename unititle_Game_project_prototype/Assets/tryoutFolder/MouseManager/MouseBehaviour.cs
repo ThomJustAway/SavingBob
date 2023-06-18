@@ -35,17 +35,12 @@ public class MouseBehaviour : MonoBehaviour
         grid = Grid.FindObjectOfType<Grid>();
         currentState = mouseIdle;
         itemButtons = ItemButton.FindObjectsOfType<ItemButton>();
-        foreach(ItemButton itemButton in itemButtons)
-        {
-            print(itemButton.gameObject.name);
-        }
+
     }
 
     public void ToggleDeletedActiavted()
     {
-        print("This is called once!");
         deleteActivated = !deleteActivated;
-        print("The value is " + deleteActivated);
     }
 
     private void Update()

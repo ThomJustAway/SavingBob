@@ -32,9 +32,9 @@ public class StartingGearClass : MonoBehaviour
         switch (direction)
         {
             case RotationDirection.clockWise:
-                return Vector3.forward;
-            case RotationDirection.antiClockWise:
                 return Vector3.back;
+            case RotationDirection.antiClockWise:
+                return Vector3.forward;
             default:
                 return Vector3.forward;
         }

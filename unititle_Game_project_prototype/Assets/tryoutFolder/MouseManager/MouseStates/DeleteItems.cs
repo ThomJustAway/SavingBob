@@ -11,7 +11,6 @@ public class DeleteItems : IMouseStates
     public IMouseStates DoState(MouseBehaviour mouseBehaviour)
     {
         ListenAndDeleteSelectedItem(mouseBehaviour);
-        Debug.Log("On Delete state!");
         if (mouseBehaviour.deleteActivated)
         {
             return mouseBehaviour.deleteItems;

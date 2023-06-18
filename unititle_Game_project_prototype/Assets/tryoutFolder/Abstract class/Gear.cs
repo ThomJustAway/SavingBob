@@ -50,6 +50,16 @@ public abstract class Gear: MonoBehaviour ,IMoveable
         gearRadius = entireGearArea.radius;
     }
 
+    private Gear[] surroundingGear;
+    private Gear DriverGear;
+
+    private void Update()
+    {
+        
+    }
+
+
+
     public Collider2D[] GetColliderAroundRadiusBasedOnLayer(LayerMask layer)
     {
         Collider2D selectedCollider = GetRespectiveColliderByLayer(layer);
@@ -93,7 +103,8 @@ public abstract class Gear: MonoBehaviour ,IMoveable
         return foundJoint;
 
     }
-    public abstract void AddSpeedAndRotation(float speed, Vector3 direction);
+
+    public abstract void AddSpeedAndRotation(float speed, Vector3 direction); //depends on the gears as some gears can only rotate one direction
     private float GetCalculateSpeedDrivenGear(Gear driverGear, Gear drivenGear, float speed)
     {
         float gearRatio = (float)drivenGear.Teeths / (float)driverGear.Teeths;
@@ -103,8 +114,6 @@ public abstract class Gear: MonoBehaviour ,IMoveable
     }
 
     public abstract void Propogate(Gear previousGear =null, bool isJoint = false);
-
-
     protected void RotateDrivenGear(Gear driverGear, Gear drivenGear, bool isJoint = false)
     {
         float newSpeed;
@@ -121,6 +130,7 @@ public abstract class Gear: MonoBehaviour ,IMoveable
         }//same speed in same joint
         drivenGear.AddSpeedAndRotation(newSpeed, direction);
     }
+
 
     private Vector3 ChangeDirection(Vector3 direction)
     {

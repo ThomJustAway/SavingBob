@@ -10,22 +10,22 @@ public class GearBehaviour : Gear
 {
     [Range(-50f, 50f)]
     public float friction = 20f;
-    private Gear[] surroundingGear;
+    //private Gear[] surroundingGear;
 
 
-    private void Update()
-    {
-        if (speed > 0)
-        {
-            RotateGear();
-            AddFriction();
-        }
-        else
-        {
-            speed = 0;
-        }
-        Gear[] surroundingGear = GetGearsAroundRadiusBasedOnLayer(LayerData.GearAreaLayer);
-    }
+    //private void Update()
+    //{
+    //    if (speed > 0)
+    //    {
+    //        RotateGear();
+    //        AddFriction();
+    //    }
+    //    else
+    //    {
+    //        speed = 0;
+    //    }
+    //    Gear[] surroundingGear = GetGearsAroundRadiusBasedOnLayer(LayerData.GearAreaLayer);
+    //}
 
     private void AddFriction()
     {
@@ -41,28 +41,28 @@ public class GearBehaviour : Gear
     {
         this.speed = speed;
         this.direction = direction;
-        transform.Rotate(speed * direction * Time.deltaTime);
+        RotateGear();    
     }
 
-    public override void Propogate(Gear previousGear =null, bool isConnected =false)
-    {
-        if(previousGear != null)
-        {
-            RotateDrivenGear(previousGear, this, isConnected);
-        }
+    //public override void Propogate(Gear previousGear =null, bool isConnected =false)
+    //{
+    //    if(previousGear != null)
+    //    {
+    //        RotateDrivenGear(previousGear, this, isConnected);
+    //    }
 
-        //JointBehaviour[] connectedJoints = GetJointsAroundGear();
+    //    //JointBehaviour[] connectedJoints = GetJointsAroundGear();
 
-        foreach(Gear gear in  surroundingGear)
-        {
-            if(gear !=  previousGear)
-            {
-                gear.Propogate(this);
-            }
-        }
-        print("end of function");
+    //    foreach(Gear gear in  surroundingGear)
+    //    {
+    //        if(gear !=  previousGear)
+    //        {
+    //            gear.Propogate(this);
+    //        }
+    //    }
+    //    print("end of function");
 
-    }
+    //}
 
 }
 

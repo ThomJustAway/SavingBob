@@ -100,7 +100,6 @@ public class ItemButton : MonoBehaviour
 
     public void RemoveItem(GameObject SelectedItem)
     {
-        print("removing gears");
         SelectedItem.SetActive(false);
         pooledItem.Enqueue(SelectedItem);
         IMoveable item = SelectedItem.GetComponent<IMoveable>();

@@ -7,9 +7,14 @@ public class MoneyManager : MonoBehaviour
 {
     public static MoneyManager instance; //singleton since I wantto reference this object to different area of the code
     private string moneyIcon = " <sprite name=\"Money icon\">";
-    private TextMeshProUGUI moneyText;
+    private TextMeshProUGUI currentMoneyText;
     private GameManager gameManager;
     private int currentMoney;
+
+    //this is used for animation to show how much money is earn or not.
+    [SerializeField]private TextMeshProUGUI animationMoneyText;
+    [SerializeField]private Animator animator;
+    
 
     private void Awake()
     {
@@ -25,10 +30,12 @@ public class MoneyManager : MonoBehaviour
 
     void Start()
     {
-        moneyText = GetComponent<TextMeshProUGUI>();
+        currentMoneyText = GetComponent<TextMeshProUGUI>();
         gameManager = GameManager.instance;
         currentMoney = gameManager.currentGameData.money;
+
         SetText();
+      
     }
 
     public bool IfCanSubstractCost(int money)
@@ -43,6 +50,8 @@ public class MoneyManager : MonoBehaviour
         {
             //if can
             currentMoney -= money;
+            animationMoneyText.text = $"<color=#ff4d4d>-{money} "+moneyIcon;
+            animator.SetTrigger("spend money");
             SetText();
             return true;
         }
@@ -51,12 +60,23 @@ public class MoneyManager : MonoBehaviour
     public void RefundCost(int money)
     {
         currentMoney += money;
+        animationMoneyText.text = $"<color=\"green\">+{money}"+ moneyIcon; // this code is quite bad since it is repetitive
+        animator.SetTrigger("refund money");
         SetText();
+        
     }
 
     private void SetText()
     {
-        moneyText.text = currentMoney.ToString() + moneyIcon;
+        currentMoneyText.text = currentMoney.ToString() + moneyIcon;
+    }
+
+    private IEnumerator OnCompleteAttackAnimation()
+    {
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+            yield return null;
+
+        // TODO: Do something when animation did complete
     }
 
 }
