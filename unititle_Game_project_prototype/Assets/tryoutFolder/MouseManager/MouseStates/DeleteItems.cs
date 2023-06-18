@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,7 +11,7 @@ public class DeleteItems : IMouseStates
     public IMouseStates DoState(MouseBehaviour mouseBehaviour)
     {
         ListenAndDeleteSelectedItem(mouseBehaviour);
-        ListenForUIClick(mouseBehaviour);
+        Debug.Log("On Delete state!");
         if (mouseBehaviour.deleteActivated)
         {
             return mouseBehaviour.deleteItems;
@@ -19,23 +20,6 @@ public class DeleteItems : IMouseStates
         {
             return mouseBehaviour.mouseIdle;
         }
-    }
-
-    private void ListenForUIClick(MouseBehaviour mouseBehaviour)
-    {
-        PointerEventData eventData = new PointerEventData(EventSystem.current);
-        eventData.position = Input.mousePosition;
-        List<RaycastResult> raysastResults = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, raysastResults);
-        string deletebuttonName = "Delete button";
-        foreach (var raycastResult in raysastResults)
-        {
-            if (raycastResult.gameObject.name == deletebuttonName)
-            {
-                mouseBehaviour.deleteActivated = false;
-            }
-        }
-
     }
 
     private void ListenAndDeleteSelectedItem(MouseBehaviour mouseBehaviour)
@@ -53,10 +37,13 @@ public class DeleteItems : IMouseStates
                 maxDept
             );
 
-            if(collidedObject != null)
+
+            if(collidedObject.collider != null)
             {
+                Debug.Log(collidedObject.collider.name);
                 foreach(ItemButton itemButton in mouseBehaviour.itemButtons)
                 {
+                    Debug.Log(itemButton.name);
                     if (itemButton.IsGearRelated(collidedObject.collider.gameObject))
                     {
                         itemButton.RemoveItem(collidedObject.collider.gameObject);

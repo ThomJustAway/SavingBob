@@ -48,6 +48,12 @@ public class MoneyManager : MonoBehaviour
         }
     }
 
+    public void RefundCost(int money)
+    {
+        currentMoney += money;
+        SetText();
+    }
+
     private void SetText()
     {
         moneyText.text = currentMoney.ToString() + moneyIcon;

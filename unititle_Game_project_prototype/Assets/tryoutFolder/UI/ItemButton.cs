@@ -16,10 +16,12 @@ public class ItemButton : MonoBehaviour
 
     [Range(5,50)]
     [SerializeField] private float scale = 37f;
-    private Queue<GameObject> pooledGear = new Queue<GameObject>();
+    private Queue<GameObject> pooledItem = new Queue<GameObject>();
+    private HashSet<GameObject> existingPool = new HashSet<GameObject>(); //memory is o(n)
     private GameObject gearParent;
     private void Start()
     {
+        
         SettingUpButton();
 
         //GameObject gearImage;
@@ -70,7 +72,8 @@ public class ItemButton : MonoBehaviour
         {
             GameObject gear = Instantiate(itemPrefab, gearParent.transform);
             gear.SetActive(false);
-            pooledGear.Enqueue(gear);
+            pooledItem.Enqueue(gear); // not too sure if this is bad since I using memory to store the gears
+            existingPool.Add(gear);
         } //stores the gameobjects in a queue and put it in the parent to keep it more organise
     }
 
@@ -81,28 +84,31 @@ public class ItemButton : MonoBehaviour
     }
     public GameObject GetItem()
     {
-        if(pooledGear.Count > 0)
+        if(pooledItem.Count > 0)
         {
-            GameObject selectedGear = pooledGear.Dequeue();
-            selectedGear.SetActive(true);
-            return selectedGear;
+            GameObject item = pooledItem.Dequeue();
+            item.SetActive(true);
+            return item;
         }
         else
         {
             GameObject gear = Instantiate(itemPrefab, gearParent.transform);
+            existingPool.Add(gear);
             return gear;
         }
     }
 
-    public void RemoveItem(GameObject selectedGear)
+    public void RemoveItem(GameObject SelectedItem)
     {
-        selectedGear.SetActive(false);
-        pooledGear.Enqueue(selectedGear);
+        print("removing gears");
+        SelectedItem.SetActive(false);
+        pooledItem.Enqueue(SelectedItem);
+        IMoveable item = SelectedItem.GetComponent<IMoveable>();
+        MoneyManager.instance.RefundCost(item.Cost);
     }
 
     public bool IsGearRelated(GameObject selectedGameobject)
     {
-        if(selectedGameobject == itemPrefab) return true;
-        else return false;
-    }
+        return existingPool.Contains(selectedGameobject);
+    } //this look out is o(1) since it is using hashset
 }

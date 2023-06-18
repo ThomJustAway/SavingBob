@@ -19,11 +19,11 @@ public class MouseIdle : IMouseStates
                 //Debug.Log(mouseBehaviour.selectedObject);
                 return mouseBehaviour.mouseMoveSelectedObject;
             }
-            else if (mouseBehaviour.deleteActivated)
-            {
-                return mouseBehaviour.deleteItems;
-            }
             else return mouseBehaviour.mouseIdle;
+        }
+        else if (mouseBehaviour.deleteActivated)
+        {
+            return mouseBehaviour.deleteItems;
         }
         else return mouseBehaviour.mouseIdle;
     }
@@ -58,8 +58,6 @@ public class MouseIdle : IMouseStates
         List<RaycastResult> raysastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, raysastResults);
 
-        string deletebuttonName = "DeleteBtn";
-
         //this code only works for making Gear
         foreach (var raycastResult in raysastResults)
         {
@@ -78,10 +76,7 @@ public class MouseIdle : IMouseStates
                     mouseBehaviour.selectedObject.Move(cellPosition);
                 }
             }
-            else if(raycastResult.gameObject.tag == deletebuttonName) 
-            {
-                mouseBehaviour.deleteActivated = true;
-            }
+
 
         }
     }

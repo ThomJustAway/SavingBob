@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GearMenuBehaviour : MonoBehaviour
 {
-    private RectTransform rectTransform;
-    private bool isActivated= false;
     private Animator animator;
     private int isActivatedHash = Animator.StringToHash("IsActivated");
 

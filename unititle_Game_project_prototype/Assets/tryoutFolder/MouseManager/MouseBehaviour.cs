@@ -41,10 +41,23 @@ public class MouseBehaviour : MonoBehaviour
         }
     }
 
+    public void ToggleDeletedActiavted()
+    {
+        print("This is called once!");
+        deleteActivated = !deleteActivated;
+        print("The value is " + deleteActivated);
+    }
+
     private void Update()
     {
         currentState = currentState.DoState(this);
     }
+
+    //private IEnumerable ChangeActiavated()
+    //{
+    //    deleteActivated = !deleteActivated;
+        
+    //}
 }
 
 
