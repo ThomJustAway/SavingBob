@@ -17,8 +17,8 @@ public class StartingGearClass : MonoBehaviour
     private void Update()
     {
         Vector3 direction = GetVector3FromDirection(rotationDirection);
+        gearHost.SetNoFriction();
         gearHost.AddSpeedAndRotation(speed, direction);
-        gearHost.Propogate();
     }
 
     private enum RotationDirection

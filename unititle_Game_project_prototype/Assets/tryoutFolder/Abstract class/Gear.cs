@@ -24,13 +24,18 @@ public abstract class Gear: MonoBehaviour ,IMoveable
         
         The rest of the function in the class are very self explaintory.
      */
+
     [SerializeField]private int gearTeeth;
     [SerializeField]private CircleCollider2D entireGearArea;
     [SerializeField]private Collider2D innerGearArea;
     [SerializeField] private int cost;
+    [Range(-50f, 50f)]
+    private float friction = 20f;
     protected float speed ;
     protected Vector3 direction;
     private float gearRadius;
+    private Gear[] surroundingGear;
+    private Gear driverGear;
 
     public int Cost { get { return cost; } }
     public float Speed { get { return speed; } }
@@ -44,21 +49,59 @@ public abstract class Gear: MonoBehaviour ,IMoveable
         {
             return transform.position.z + 0.5f;
         } }
-
+    public Gear DriverGear { get { return driverGear; } }
     private void Start()
     {
         gearRadius = entireGearArea.radius;
     }
 
-    private Gear[] surroundingGear;
-    private Gear DriverGear;
 
     private void Update()
     {
+        surroundingGear = GetGearsAroundRadiusBasedOnLayer(LayerData.GearAreaLayer);
+        if(driverGear != null)
+        {
+            CheckIfDriverGearStillExist();
+        }
+        if (speed > 0)
+        {
+            foreach(Gear gear in surroundingGear.Where(selectedGear => selectedGear != driverGear)) 
+            {
+                Vector3 newDirection = ChangeDirection(direction);
+                float newSpeed=GetCalculateSpeedDrivenGear(this,gear,speed);
+                gear.AddSpeedAndRotation(newSpeed, newDirection, this);
+            }
+            //after finishing to rotate all the gears
+            AddFriction();
+        }
+        if(speed <= 0)
+        {
+            speed = 0;
+        }
+        //check if gear driven.
+
+        //if so then rotate
+        //but what if the gear just dont have speed?
         
+
     }
 
+    private void CheckIfDriverGearStillExist()
+    {
+        for(int i = 0; i < surroundingGear.Length; i++)
+        {
+            if (surroundingGear[i] == driverGear)
+            {
+                if(driverGear.Speed > 0) //check if the driverGear is still rotating
+                {
+                    return; 
+                }
+                break;
+            }
+        }
+        driverGear = null; //else set the driver gear to null;
 
+    }
 
     public Collider2D[] GetColliderAroundRadiusBasedOnLayer(LayerMask layer)
     {
@@ -84,6 +127,11 @@ public abstract class Gear: MonoBehaviour ,IMoveable
         return selectedGear;
     }
 
+    public void SetNoFriction()
+    {
+        friction = 0;
+    }
+
     private Collider2D GetRespectiveColliderByLayer(LayerMask layer)
     {
         if (layer == LayerData.GearAreaLayer) return entireGearArea;
@@ -104,7 +152,24 @@ public abstract class Gear: MonoBehaviour ,IMoveable
 
     }
 
-    public abstract void AddSpeedAndRotation(float speed, Vector3 direction); //depends on the gears as some gears can only rotate one direction
+    public virtual void AddSpeedAndRotation(float speed, Vector3 direction, Gear driverGear = null) 
+    {
+        this.driverGear = driverGear;
+        this.speed = speed;
+        this.direction = direction;
+        RotateGear();
+    } //depends on the gears as some gears can only rotate one direction
+
+    private void RotateGear()
+    {
+        transform.Rotate(speed * direction * Time.deltaTime);
+    }
+
+    private void AddFriction()
+    {
+        speed -= friction * Time.deltaTime;
+    }
+
     private float GetCalculateSpeedDrivenGear(Gear driverGear, Gear drivenGear, float speed)
     {
         float gearRatio = (float)drivenGear.Teeths / (float)driverGear.Teeths;
@@ -113,23 +178,23 @@ public abstract class Gear: MonoBehaviour ,IMoveable
 
     }
 
-    public abstract void Propogate(Gear previousGear =null, bool isJoint = false);
-    protected void RotateDrivenGear(Gear driverGear, Gear drivenGear, bool isJoint = false)
-    {
-        float newSpeed;
-        Vector3 direction;
-        if (!isJoint)
-        {
-            newSpeed = GetCalculateSpeedDrivenGear(driverGear, drivenGear, driverGear.Speed);
-            direction = ChangeDirection(driverGear.Direction);
-        }
-        else
-        {
-            newSpeed = driverGear.Speed;
-            direction = drivenGear.Direction;
-        }//same speed in same joint
-        drivenGear.AddSpeedAndRotation(newSpeed, direction);
-    }
+    //public abstract void Propogate(Gear previousGear =null, bool isJoint = false);
+    //protected void RotateDrivenGear(Gear driverGear, Gear drivenGear, bool isJoint = false)
+    //{
+    //    float newSpeed;
+    //    Vector3 direction;
+    //    if (!isJoint)
+    //    {
+    //        newSpeed = GetCalculateSpeedDrivenGear(driverGear, drivenGear, driverGear.Speed);
+    //        direction = ChangeDirection(driverGear.Direction);
+    //    }
+    //    else
+    //    {
+    //        newSpeed = driverGear.Speed;
+    //        direction = drivenGear.Direction;
+    //    }//same speed in same joint
+    //    drivenGear.AddSpeedAndRotation(newSpeed, direction);
+    //}
 
 
     private Vector3 ChangeDirection(Vector3 direction)
@@ -138,6 +203,7 @@ public abstract class Gear: MonoBehaviour ,IMoveable
         else return Vector3.forward;
     }
 
+    //this is the imoveable functions
     public void CheckValidPosition()
     {
         Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
