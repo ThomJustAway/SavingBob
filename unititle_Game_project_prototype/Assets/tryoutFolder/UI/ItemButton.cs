@@ -106,7 +106,7 @@ public class ItemButton : MonoBehaviour
         MoneyManager.instance.RefundCost(item.Cost);
     }
 
-    public bool IsGearRelated(GameObject selectedGameobject)
+    public bool IsGameObjectRelated(GameObject selectedGameobject)
     {
         return existingPool.Contains(selectedGameobject);
     } //this look out is o(1) since it is using hashset

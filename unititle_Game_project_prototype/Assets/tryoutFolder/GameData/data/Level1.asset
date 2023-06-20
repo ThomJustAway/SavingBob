@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b5772d5f1271444891323376de57c5, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  money: 20
-  gearButtons: []
+  money: 100
+  gearButtons:
+  - {fileID: 5673723472028752552, guid: 0a4d5cca66046274db94ea3268ccebae, type: 3}

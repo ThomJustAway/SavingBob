@@ -15,17 +15,12 @@ public class JointBehaviour : MonoBehaviour ,IMoveable
 
     public int Cost { get { return cost; } }
 
-
-
     void Update()
     {
         CheckBothJoint();
-        if(CheckIsConnected())
+
+        if(CheckIsConnected()) // to move the gears
         {
-            if(connectedGearLower.Speed > 0 && connectedGearUpper.Speed > 0)
-            {
-                Debug.Log("Invalid position");
-            }
             if (connectedGearLower.Speed > 0 && connectedGearLower.DriverGear != null)
             {
                 connectedGearUpper.AddSpeedAndRotation(connectedGearLower.Speed, connectedGearLower.Direction, connectedGearLower);
@@ -94,25 +89,17 @@ public class JointBehaviour : MonoBehaviour ,IMoveable
 
     public void CheckValidPosition() //fix this later
     {
-        //if (isConnected)
-        //{
-        //    if(connectedGearLower == null)
-        //    {
-        //        transform.position = connectedGearUpper.transform.position;
-        //    }
-        //    else if(connectedGearUpper == null)
-        //    {
-        //        transform.position = connectedGearLower.transform.position;
-        //    }
-        //    else
-        //    {
-        //        print("what should I do here?");
-        //    }
-        //}
-        //else
-        //{
-        //    print("no valid position");
-        //}
+        CheckBothJoint();
+        if(connectedGearLower != null)
+        {
+            transform.position = connectedGearLower.transform.position;
+        }
+        else if (connectedGearUpper != null)
+        {
+            Vector3 newPosition = connectedGearUpper.transform.position;
+            newPosition.z = newPosition.z + 3; // formula
+            transform.position = newPosition;
+        }
     }
 
     public void Move(Vector3 position)

@@ -43,7 +43,7 @@ public class DeleteItems : IMouseStates
                 foreach(ItemButton itemButton in mouseBehaviour.itemButtons)
                 {
                     Debug.Log(itemButton.name);
-                    if (itemButton.IsGearRelated(collidedObject.collider.gameObject))
+                    if (itemButton.IsGameObjectRelated(collidedObject.collider.gameObject))
                     {
                         itemButton.RemoveItem(collidedObject.collider.gameObject);
                         break;
