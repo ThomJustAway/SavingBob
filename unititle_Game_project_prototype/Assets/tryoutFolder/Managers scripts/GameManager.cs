@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
     private bool isSolve;
     public static GameManager instance;
     public GameDataScriptableObject currentGameData;
-
+    [SerializeField] private GameObject itemButtonPrefab; //contains the item button script
+    [SerializeField] private Transform gearPanel;
     private void Awake()
     {
         if (instance == null)
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
+        CreateButtons();
         inactiavatedGears = GameObject.FindObjectsOfType(typeof(EndGearClass)) as EndGearClass[];
     }
 
@@ -57,5 +58,14 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private void CreateButtons()
+    {
+        ItemButtonData[] dataAboutButtons = currentGameData.itemButtons;
+        foreach(var data in dataAboutButtons)
+        {
+            var button=Instantiate(itemButtonPrefab,gearPanel);
+            button.GetComponent<ItemButton>().Init(data);
+        }
+    }
 
 }

@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class ItemButton : MonoBehaviour
 {
-    [SerializeField]private GameObject itemPrefab;
-    [SerializeField]private int numberOfItem = 10;
+    [SerializeField] public GameObject itemPrefab;
+    [SerializeField] private int numberOfItem = 10;
     [SerializeField] private string nameOfItem;
     [SerializeField] private GameObject imageContainer;
     [SerializeField] private TextMeshProUGUI moneyTextBox;
@@ -28,8 +28,19 @@ public class ItemButton : MonoBehaviour
         AddingItemToPool();
     }
 
+    public void Init(ItemButtonData data)
+    {
+        nameOfItem = data.buttonName; // I feel like this is redundant as you introduce more human error(misspell)
+        itemPrefab = data.prefab;
+    }
+
     private void SettingUpButton()
     {
+
+
+        //bad idea since I am using magic string....
+
+
         itemButtonNameDisplay.text = nameOfItem; //setting the name
 
         Transform item = Instantiate(itemPrefab, imageContainer.transform).transform;

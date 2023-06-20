@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b5772d5f1271444891323376de57c5, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  money: 100
-  gearButtons:
-  - {fileID: 5673723472028752552, guid: 0a4d5cca66046274db94ea3268ccebae, type: 3}
+  money: 10000
+  itemButtons:
+  - prefab: {fileID: 6780680903311915335, guid: 6b35b34122605e14882f4a903ec9d657, type: 3}
+    cost: 10
+    buttonName: 12 Tooth Gear
+  - prefab: {fileID: 1709325144562333668, guid: 1564c373c2efcb24f836a4b2ee2930f3, type: 3}
+    cost: 20
+    buttonName: Joint
