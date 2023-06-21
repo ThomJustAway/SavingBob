@@ -49,7 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lowerJoint: {fileID: 6666779471731449544}
   upperJoint: {fileID: 5078499827077187086}
-  isConnected: 0
+  cost: 20
+  name: Joint
 --- !u!58 &3606466023598432367
 CircleCollider2D:
   m_ObjectHideFlags: 0

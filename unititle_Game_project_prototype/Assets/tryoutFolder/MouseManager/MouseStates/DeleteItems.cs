@@ -39,10 +39,8 @@ public class DeleteItems : IMouseStates
 
             if(collidedObject.collider != null)
             {
-                Debug.Log(collidedObject.collider.name);
                 foreach(ItemButton itemButton in mouseBehaviour.itemButtons)
                 {
-                    Debug.Log(itemButton.name);
                     if (itemButton.IsGameObjectRelated(collidedObject.collider.gameObject))
                     {
                         itemButton.RemoveItem(collidedObject.collider.gameObject);

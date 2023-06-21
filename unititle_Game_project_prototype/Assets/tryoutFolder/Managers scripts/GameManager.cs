@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public GameDataScriptableObject currentGameData;
     [SerializeField] private GameObject itemButtonPrefab; //contains the item button script
     [SerializeField] private Transform gearPanel;
+
+    public UnityEvent FinishCreatingGearButtonEvent = new UnityEvent();
     private void Awake()
     {
         if (instance == null)
@@ -60,12 +62,13 @@ public class GameManager : MonoBehaviour
 
     private void CreateButtons()
     {
-        ItemButtonData[] dataAboutButtons = currentGameData.itemButtons;
-        foreach(var data in dataAboutButtons)
+        IMoveable[] dataAboutButtons = currentGameData.moveables;
+        foreach (var data in dataAboutButtons)
         {
-            var button=Instantiate(itemButtonPrefab,gearPanel);
+            var button = Instantiate(itemButtonPrefab, gearPanel);
             button.GetComponent<ItemButton>().Init(data);
         }
+        FinishCreatingGearButtonEvent?.Invoke();
     }
 
 }

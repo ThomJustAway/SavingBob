@@ -9,11 +9,17 @@ public class JointBehaviour : MonoBehaviour ,IMoveable
     [SerializeField] private Collider2D lowerJoint;
     [SerializeField] private Collider2D upperJoint;
     [SerializeField] private int cost;
+    [SerializeField] private string name;
     private Gear connectedGearLower;
     private Gear connectedGearUpper;
     private float radius = 0.5f;
 
     public int Cost { get { return cost; } }
+
+    public GameObject Getprefab => this.gameObject;
+
+    public string Name => name;
+
 
     void Update()
     {

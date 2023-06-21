@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-public abstract class Gear: MonoBehaviour ,IMoveable
+public class Gear: MonoBehaviour ,IMoveable
 {
     //README
     /*
@@ -31,12 +31,14 @@ public abstract class Gear: MonoBehaviour ,IMoveable
     [SerializeField] private int cost;
     [Range(0, 50f)]
     [SerializeField] private float friction = 10f;
+    [SerializeField] private string name;
     protected float speed ;
     protected Vector3 direction;
     private float gearRadius;
     private Gear[] surroundingGear;
     private Gear driverGear;
 
+    public string Name { get { return name; } }
     public int Cost { get { return cost; } }
     public float Speed { get { return speed; } }
     public Vector3 Direction { get { return direction; } }
@@ -50,6 +52,9 @@ public abstract class Gear: MonoBehaviour ,IMoveable
             return transform.position.z + 0.5f;
         } }
     public Gear DriverGear { get { return driverGear; } }
+
+    public GameObject Getprefab { get { return gameObject; } }
+
     private void Start()
     {
         gearRadius = entireGearArea.radius;
@@ -169,7 +174,9 @@ public abstract class Gear: MonoBehaviour ,IMoveable
     public void CheckValidPosition()
     {
         Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
-        if (surroundInnerGear != null)
+        Collider2D[] surroundingJoint = GetColliderAroundRadiusBasedOnLayer(LayerData.JointLayer);
+        
+        if (surroundInnerGear.Length > 0 )
         {
             //improve the finding of the valid position
             ColliderDistance2D distance;
@@ -178,25 +185,32 @@ public abstract class Gear: MonoBehaviour ,IMoveable
             {
                 distance = innerGear.Distance(EntireGearArea);
                 Vector2 resolveDistance = Math.Abs(distance.distance) * distance.normal;
-
                 transform.Translate(resolveDistance);
             }
-        }        
+        }
+        else if (surroundingJoint.Length > 0 )
+        {
+            if(surroundingJoint.Length == 1)
+            {
+                Debug.Log("There is one surrounding joint!");
+                Collider2D joint = surroundingJoint[0];
+                transform.position = joint.gameObject.transform.position;
+            }
+            else
+            {
+                Debug.Log("hello");
+                Debug.Log("gg");
+            }
+        }
     }
 
     public void Move(Vector3 position)
     {
         transform.position = position;
         //do some code to visually show that the gear can be place or not.
+
     }
-}
 
-public interface IMoveable
-{
-    public int Cost { get; }
-
-    public void CheckValidPosition();
-
-    public void Move(Vector3 position);
 
 }
+

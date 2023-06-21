@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,15 +9,17 @@ public class GameDataScriptableObject : ScriptableObject
 {
 
     public int money;
-    public ItemButtonData[] itemButtons = new ItemButtonData[4];
+    public GameObject[] items = new GameObject[4];
+
+    public IMoveable[] moveables
+    {
+        get
+        {
+            return items.Select(item => item.GetComponent<IMoveable>()).ToArray();
+        }
+    }
+
 }
 
 
-[System.Serializable]
-public class ItemButtonData 
-{
-    public GameObject prefab;
-    public int cost;
-    public string buttonName;
-}
 

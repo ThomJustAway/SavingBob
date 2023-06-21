@@ -7,9 +7,8 @@ using UnityEngine;
 
 public class ItemButton : MonoBehaviour
 {
-    [SerializeField] public GameObject itemPrefab;
+    [SerializeField] public IMoveable moveableItem;
     [SerializeField] private int numberOfItem = 10;
-    [SerializeField] private string nameOfItem;
     [SerializeField] private GameObject imageContainer;
     [SerializeField] private TextMeshProUGUI moneyTextBox;
     [SerializeField] private TextMeshProUGUI itemButtonNameDisplay;
@@ -28,22 +27,16 @@ public class ItemButton : MonoBehaviour
         AddingItemToPool();
     }
 
-    public void Init(ItemButtonData data)
+    public void Init(IMoveable data)
     {
-        nameOfItem = data.buttonName; // I feel like this is redundant as you introduce more human error(misspell)
-        itemPrefab = data.prefab;
+        moveableItem = data;
     }
 
     private void SettingUpButton()
     {
+        itemButtonNameDisplay.text = moveableItem.Name; //setting the name
 
-
-        //bad idea since I am using magic string....
-
-
-        itemButtonNameDisplay.text = nameOfItem; //setting the name
-
-        Transform item = Instantiate(itemPrefab, imageContainer.transform).transform;
+        Transform item = Instantiate(moveableItem.Getprefab, imageContainer.transform).transform;
 
         if(item.TryGetComponent<Gear>(out Gear gearComponent))
         {
@@ -74,14 +67,19 @@ public class ItemButton : MonoBehaviour
 
     private void MakeImageFromJoint(Transform imageJointObject, JointBehaviour jointComponent)
     {
-        print("Making image for joint");
+        moneyTextBox.text = jointComponent.Cost.ToString() + " <sprite name=\"Money icon\">";
+
+        RectTransform rectTransform = imageJointObject.AddComponent<RectTransform>();
+        rectTransform.localScale = new Vector3(scale, scale, 0);
+        Destroy(jointComponent); // destroy the component to make it work
+
     }
     private void AddingItemToPool()
     {
-        gearParent = GameObject.FindGameObjectWithTag("ParentGear");
+        gearParent = GameObject.FindGameObjectWithTag("ParentGear"); // the gameobject that will store all the gears and where all the gear interact
         for (int i = 0; i < numberOfItem; i++)
         {
-            GameObject gear = Instantiate(itemPrefab, gearParent.transform);
+            GameObject gear = Instantiate(moveableItem.Getprefab, gearParent.transform);
             gear.SetActive(false);
             pooledItem.Enqueue(gear); // not too sure if this is bad since I using memory to store the gears
             existingPool.Add(gear);
@@ -90,8 +88,7 @@ public class ItemButton : MonoBehaviour
 
     public bool CanBuyItem()
     {
-        IMoveable moveable = itemPrefab.GetComponent<IMoveable>();
-        return MoneyManager.instance.IfCanSubstractCost(moveable.Cost);
+        return MoneyManager.instance.IfCanSubstractCost(moveableItem.Cost);
     }
     public GameObject GetItem()
     {
@@ -103,7 +100,7 @@ public class ItemButton : MonoBehaviour
         }
         else
         {
-            GameObject gear = Instantiate(itemPrefab, gearParent.transform);
+            GameObject gear = Instantiate(moveableItem.Getprefab, gearParent.transform);
             existingPool.Add(gear);
             return gear;
         }

@@ -2,6 +2,6 @@
     <ui:Label text="Edit the money, layer and gears that exist the game" display-tooltip-when-elided="true" style="height: 28px; width: 310px;" />
     <uie:PropertyField binding-path="money" label="Money" />
     <ui:Foldout text="Buttons">
-        <uie:PropertyField name="Buttons" binding-path="itemButtons" label="Buttons" />
+        <uie:PropertyField name="Buttons" binding-path="items" label="Buttons" />
     </ui:Foldout>
 </ui:UXML>
