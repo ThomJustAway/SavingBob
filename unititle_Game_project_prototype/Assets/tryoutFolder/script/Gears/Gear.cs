@@ -102,7 +102,7 @@ public class Gear: MonoBehaviour ,IMoveable
         }
         driverGear = null; //else set the driver gear to null;
 
-    }
+    } //take apart this
 
     public Collider2D[] GetColliderAroundRadiusBasedOnLayer(LayerMask layer)
     {
@@ -192,14 +192,12 @@ public class Gear: MonoBehaviour ,IMoveable
         {
             if(surroundingJoint.Length == 1)
             {
-                Debug.Log("There is one surrounding joint!");
                 Collider2D joint = surroundingJoint[0];
                 transform.position = joint.gameObject.transform.position;
             }
             else
             {
-                Debug.Log("hello");
-                Debug.Log("gg");
+                Debug.LogWarning("Invalid position");
             }
         }
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GearMenuBehaviour : MonoBehaviour
+public class MenuBehvaiour : MonoBehaviour
 {
     private Animator animator;
     private int isActivatedHash = Animator.StringToHash("IsActivated");
@@ -16,7 +16,4 @@ public class GearMenuBehaviour : MonoBehaviour
     {
         animator.SetBool(isActivatedHash, !animator.GetBool(isActivatedHash));
     }
-
-
-
 }

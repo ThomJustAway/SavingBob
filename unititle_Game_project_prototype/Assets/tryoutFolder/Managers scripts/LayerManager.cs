@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LayerManager : MonoBehaviour
 {
@@ -28,11 +29,14 @@ public class LayerManager : MonoBehaviour
             3. Giving out the current position of gears z index when needed.
      */
 
-    public static LayerManager Current; //singleton because I want to have an object that stores the current layer of the game.
+    public static LayerManager instance; //singleton because I want to have an object that stores the current layer of the game.
     private Camera mainCamera;
     public Transform background;
 
     private int currentLayer = 1;
+
+    public int CurrentLayer { get { return currentLayer; } }
+    [HideInInspector] public UnityEvent onButtonClick = new UnityEvent();
 
     private void Start()
     {
@@ -40,7 +44,7 @@ public class LayerManager : MonoBehaviour
         mainCamera = Camera.main;
         mainCamera.transform.position = new Vector3(0, 0, StartingPoint);
         background.position = new Vector3(0, 0, StartingPoint + 2);
-        Current = this;
+        instance = this;
     }
 
     public int GetGearZIndexBasedOnCurrentLayer()

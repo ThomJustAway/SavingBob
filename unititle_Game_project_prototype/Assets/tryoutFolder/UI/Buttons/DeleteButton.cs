@@ -6,31 +6,25 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DeleteButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler 
+public class DeleteButton : CustomButton
 {
-    [SerializeField] private Color normalColor;
-    [SerializeField] private Color HoverColor;
-    [SerializeField] private Color ClickColor;
-    [SerializeField] private Color ActivatedColor;
-
-    private Image image;
     private MouseBehaviour mouseBehaviour;
     //public UnityEvent isClicked = new UnityEvent(); 
     //Maybe add a unity event for the delete button since you want to add a tooltip to appear to show that it has been clicked!
 
-    private void Start()
+    //private  void Start()
+    //{
+    //    image = GetComponent<Image>();
+    //    image.color = normalColor;
+    //    mouseBehaviour = FindObjectOfType<MouseBehaviour>();
+    //}
+    protected override void Start()
     {
-        image = GetComponent<Image>();
-        image.color = normalColor;
+        base.Start();
         mouseBehaviour = FindObjectOfType<MouseBehaviour>();
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        image.color = HoverColor;
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
+    public override void OnPointerExit(PointerEventData eventData)
     {
         if (mouseBehaviour.deleteActivated)
         {
@@ -42,15 +36,13 @@ public class DeleteButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHa
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        image.color = ClickColor;
-    }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public override void OnPointerUp(PointerEventData eventData)
     {
         mouseBehaviour.ToggleDeletedActiavted();
         //isClicked?.Invoke();
         image.color = HoverColor;
     }
 }
+
+

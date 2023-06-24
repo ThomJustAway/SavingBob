@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,8 +18,10 @@ public class GameManager : MonoBehaviour
     public GameDataScriptableObject currentGameData;
     [SerializeField] private GameObject itemButtonPrefab; //contains the item button script
     [SerializeField] private Transform gearPanel;
+    [SerializeField] private GameObject layerButtonPrefab;
+    [SerializeField] private Transform LayerPanel;
 
-    public UnityEvent FinishCreatingGearButtonEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent FinishCreatingGearButtonEvent = new UnityEvent();
     private void Awake()
     {
         if (instance == null)
@@ -33,6 +37,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         CreateButtons();
+        CreateLayerButtons();
         inactiavatedGears = GameObject.FindObjectsOfType(typeof(EndGearClass)) as EndGearClass[];
     }
 
@@ -71,4 +76,13 @@ public class GameManager : MonoBehaviour
         FinishCreatingGearButtonEvent?.Invoke();
     }
 
+    private void CreateLayerButtons()
+    {
+        for(int i = 1; i <= currentGameData.NumberOfLayers; i++)
+        {
+            var layerButton = Instantiate(layerButtonPrefab, LayerPanel);
+            LayerButton layerComponent = layerButton.GetComponent<LayerButton>();
+            layerComponent.Init(i);
+        }
+    }
 }

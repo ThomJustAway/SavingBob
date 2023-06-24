@@ -26,8 +26,8 @@ public class DeleteItems : IMouseStates
         if(Input.GetMouseButtonDown(0))
         {
             Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            float minDept = LayerManager.Current.GetGearZIndexBasedOnCurrentLayer() - 0.5f;
-            float maxDept = LayerManager.Current.GetGearZIndexBasedOnCurrentLayer() + 0.5f;
+            float minDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() - 0.5f;
+            float maxDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() + 0.5f;
             var collidedObject = Physics2D.Raycast(positionOfMouse,
                 Vector2.zero,
                 float.PositiveInfinity,
@@ -39,11 +39,12 @@ public class DeleteItems : IMouseStates
 
             if(collidedObject.collider != null)
             {
-                foreach(ItemButton itemButton in mouseBehaviour.itemButtons)
+                IMoveable ImoveableComponent = mouseBehaviour.GetImoveableComponent(collidedObject.collider);
+                foreach (ItemButton itemButton in mouseBehaviour.itemButtons)
                 {
-                    if (itemButton.IsGameObjectRelated(collidedObject.collider.gameObject))
+                    if (itemButton.IsGameObjectRelated(ImoveableComponent.Getprefab))
                     {
-                        itemButton.RemoveItem(collidedObject.collider.gameObject);
+                        itemButton.RemoveItem(ImoveableComponent.Getprefab);
                         break;
                     }
                 }

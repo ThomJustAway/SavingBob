@@ -31,6 +31,21 @@ public class MouseBehaviour : MonoBehaviour
     [HideInInspector] public DeleteItems deleteItems = new DeleteItems();
 
 
+    public IMoveable GetImoveableComponent(Collider2D collider)
+    {
+        Transform hitGameObject = collider.transform;
+        //mouseBehaviour.selectedObject = hitGameObject.GetComponent<IMoveable>();
+        if (hitGameObject.TryGetComponent<IMoveable>(out IMoveable selectedObject))
+        {
+           return selectedObject;
+        }
+        else
+        {
+            //the joint
+           return hitGameObject.GetComponentInParent<IMoveable>();
+        }
+    }
+
 
     private void Start()
     {

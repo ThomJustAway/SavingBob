@@ -71,7 +71,7 @@ public class ItemButton : MonoBehaviour
 
         RectTransform rectTransform = imageJointObject.AddComponent<RectTransform>();
         rectTransform.localScale = new Vector3(scale, scale, 0);
-        Destroy(jointComponent); // destroy the component to make it work
+        Destroy(jointComponent); // destroy the component that makes the joint work
 
     }
     private void AddingItemToPool()

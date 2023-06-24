@@ -31,8 +31,8 @@ public class MouseIdle : IMouseStates
     private void RayCastGameObject(MouseBehaviour mouseBehaviour)
     {
         Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float minDept = LayerManager.Current.GetGearZIndexBasedOnCurrentLayer() - 0.5f;
-        float maxDept = LayerManager.Current.GetGearZIndexBasedOnCurrentLayer() + 0.5f;
+        float minDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() - 0.5f;
+        float maxDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() + 0.5f;
         var collidedObject = Physics2D.Raycast(positionOfMouse, 
             Vector2.zero,
             float.PositiveInfinity,
@@ -40,14 +40,17 @@ public class MouseIdle : IMouseStates
             minDept,
             maxDept
             ); 
+
         //getting the objects that are colliding with the raycast. this is from the moveable gear layer.
         //The z index restriction is to prevent gears from top or bottom from mixing together
         //need to add code to get different things
+
+
+        //problem now is that only the bottom part of the joint can be move.
+        // the top part of the joint cant be move.
         if (collidedObject.collider != null)
         {
-            //GetType(collidedObject.collider);
-            Transform hitGameObject = collidedObject.collider.transform;
-            mouseBehaviour.selectedObject = hitGameObject.GetComponent<IMoveable>();
+            mouseBehaviour.selectedObject = mouseBehaviour.GetImoveableComponent(collidedObject.collider);
         }
     }
 
@@ -72,7 +75,7 @@ public class MouseIdle : IMouseStates
                 
                     Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     Vector3Int cellPosition = mouseBehaviour.grid.WorldToCell(positionOfMouse);
-                    cellPosition.z = LayerManager.Current.GetGearZIndexBasedOnCurrentLayer();
+                    cellPosition.z = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer();
                     mouseBehaviour.selectedObject.Move(cellPosition);
                 }
             }

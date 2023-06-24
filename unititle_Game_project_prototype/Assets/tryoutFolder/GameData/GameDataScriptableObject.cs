@@ -10,6 +10,7 @@ public class GameDataScriptableObject : ScriptableObject
 
     public int money;
     public GameObject[] items = new GameObject[4];
+    public int NumberOfLayers;
 
     public IMoveable[] moveables
     {

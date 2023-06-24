@@ -44,7 +44,7 @@ public class MouseMoveSelectedObject : IMouseStates
         Vector3 newPosition = mouseBehaviour.grid.GetCellCenterLocal(cellPosition);
 
         // make sure that the gear is place on top of the UI component
-        newPosition.z = LayerManager.Current.GetGearZIndexBasedOnCurrentLayer() ;
+        newPosition.z = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() ;
         return newPosition;
     }
 }

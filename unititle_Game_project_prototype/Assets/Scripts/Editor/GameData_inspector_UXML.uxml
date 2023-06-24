@@ -4,4 +4,5 @@
     <ui:Foldout text="Buttons">
         <uie:PropertyField name="Buttons" binding-path="items" label="Buttons" />
     </ui:Foldout>
+    <uie:PropertyField focusable="false" binding-path="NumberOfLayers" label="Number Of Layers" />
 </ui:UXML>

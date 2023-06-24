@@ -16,3 +16,4 @@ MonoBehaviour:
   items:
   - {fileID: 6780680903311915335, guid: 6b35b34122605e14882f4a903ec9d657, type: 3}
   - {fileID: 1709325144562333668, guid: 1564c373c2efcb24f836a4b2ee2930f3, type: 3}
+  NumberOfLayers: 3
