@@ -163,12 +163,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ff7915dfc2a394892946ae77c5cf82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gearTeeth: 12
+  teeths: 12
+  hasFriction: 1
+  friction: 10
   entireGearArea: {fileID: 2017939731767806787}
   innerGearArea: {fileID: 134693580693490428}
+  nameOfElement: 12-tooth-gear
   cost: 10
-  friction: 10
-  name: 12-Tooth-gear
 --- !u!1 &8063703219970345224
 GameObject:
   m_ObjectHideFlags: 0

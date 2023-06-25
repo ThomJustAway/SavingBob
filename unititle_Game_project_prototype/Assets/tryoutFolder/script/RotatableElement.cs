@@ -13,7 +13,7 @@ namespace Assets.tryoutFolder.script
         protected Vector3 rotationDirection;
         [SerializeField] protected int teeths;
 
-        [SerializeField] private bool hasFriction;
+        [SerializeField] private bool hasFriction =true;
         [Range(0,30f)]
         [SerializeField] protected float friction = 10f;
 
@@ -23,12 +23,12 @@ namespace Assets.tryoutFolder.script
 
         protected virtual void Update()
         {
-            FindingRotatingElement();
+            surroundingElements = FindingRotatingElement();
             if(driverElement != null)
             {
                 CheckingDriverElement();
             }
-            if(speed != 0)
+            if(speed >= 0)
             {
                 RotateElementVisually();
                 RotateSurroundingElements();
@@ -65,7 +65,7 @@ namespace Assets.tryoutFolder.script
             driverElement = null;
         }
 
-        protected abstract void FindingRotatingElement();
+        protected abstract RotatableElement[] FindingRotatingElement();
 
         public virtual void AddSpeedAndRotation(float speed, Vector3 rotation , RotatableElement driver = null)
         {
@@ -78,10 +78,11 @@ namespace Assets.tryoutFolder.script
 
         protected virtual void RotateSurroundingElements()
         {
-            for(int i = 0; i < this.surroundingElements.Length; i++)
+            for(int i = 0; i < surroundingElements.Length; i++)
             {
                 RotatableElement selectedRotatableElement = surroundingElements[i];
-                if(selectedRotatableElement.teeths == 0)
+
+                if(selectedRotatableElement.Teeths == 0)
                 {   //this meant that it is a joint
                     selectedRotatableElement.AddSpeedAndRotation(speed, rotationDirection, this);
                 }

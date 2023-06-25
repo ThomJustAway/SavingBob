@@ -48,10 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d174b00adbb7d4c86819c229aa45b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teeths: 0
+  hasFriction: 1
+  friction: 10
   lowerJoint: {fileID: 6666779471731449544}
   upperJoint: {fileID: 5078499827077187086}
+  nameOfElement: Joint
   cost: 20
-  name: Joint
 --- !u!1 &1737401168219637215
 GameObject:
   m_ObjectHideFlags: 0

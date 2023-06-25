@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     1. Check If all inactivated gears are activated
     2. Send an event that the puzzle is solve.
     */
-    private EndGearClass[] inactiavatedGears;
     private bool isSolve;
     public static GameManager instance;
     public GameDataScriptableObject currentGameData;
@@ -22,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform LayerPanel;
 
     [HideInInspector] public UnityEvent FinishCreatingGearButtonEvent = new UnityEvent();
+    //private EndGearClass[] inactiavatedGears;
     private void Awake()
     {
         if (instance == null)
@@ -38,32 +38,32 @@ public class GameManager : MonoBehaviour
     {
         CreateButtons();
         CreateLayerButtons();
-        inactiavatedGears = GameObject.FindObjectsOfType(typeof(EndGearClass)) as EndGearClass[];
+        //inactiavatedGears = GameObject.FindObjectsOfType(typeof(EndGearClass)) as EndGearClass[];
     }
 
-    void Update()
-    {
-        CheckIfSolve();
-    }
+    //void Update()
+    //{
+    //    CheckIfSolve();
+    //}
 
-    private void CheckIfSolve()
-    {
-        if(inactiavatedGears == null)
-        {
-            Debug.LogError("You have not have any inactiavated gears in the scene!");
-            return;
-        }
+    //private void CheckIfSolve()
+    //{
+    //    if(inactiavatedGears == null)
+    //    {
+    //        Debug.LogError("You have not have any inactiavated gears in the scene!");
+    //        return;
+    //    }
 
-        bool solve = true;
+    //    bool solve = true;
 
-        foreach (var gear in inactiavatedGears)
-        {
-            solve = solve && gear.IsActivated;
-        }//check if all the gears are activated;
+    //    foreach (var gear in inactiavatedGears)
+    //    {
+    //        solve = solve && gear.IsActivated;
+    //    }//check if all the gears are activated;
 
-        isSolve = solve;
+    //    isSolve = solve;
 
-    }
+    //}
 
     private void CreateButtons()
     {
