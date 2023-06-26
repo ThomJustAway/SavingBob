@@ -80,6 +80,7 @@ public class ItemButton : MonoBehaviour
         for (int i = 0; i < numberOfItem; i++)
         {
             GameObject gear = Instantiate(moveableItem.Getprefab, gearParent.transform);
+            gear.name = $"{moveableItem.Getprefab.name} {i}";
             gear.SetActive(false);
             pooledItem.Enqueue(gear); // not too sure if this is bad since I using memory to store the gears
             existingPool.Add(gear);

@@ -81,7 +81,7 @@ namespace Assets.tryoutFolder.script
             for(int i = 0; i < surroundingElements.Length; i++)
             {
                 RotatableElement selectedRotatableElement = surroundingElements[i];
-
+                if (selectedRotatableElement == driverElement) continue; 
                 if(selectedRotatableElement.Teeths == 0)
                 {   //this meant that it is a joint
                     selectedRotatableElement.AddSpeedAndRotation(speed, rotationDirection, this);

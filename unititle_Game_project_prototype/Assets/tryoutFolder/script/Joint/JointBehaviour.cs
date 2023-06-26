@@ -177,6 +177,7 @@ using UnityEngine;
 using Assets.tryoutFolder.script;
 using System.Linq;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using System.Collections.Generic;
 
 public class JointBehaviour : RotatableElement, IMoveable
 {
@@ -199,22 +200,9 @@ public class JointBehaviour : RotatableElement, IMoveable
     {
         RotatableElement[] lowerJointElements = GetElementsFromJoint(lowerJoint);
         RotatableElement[] upperJointElements = GetElementsFromJoint(upperJoint);
-        if (lowerJointElements != null && upperJointElements != null)
-        {
-            return lowerJointElements.Concat(upperJointElements).ToArray();
-        }
-        else if (lowerJointElements != null && upperJointElements == null)
-        {
-            return lowerJointElements;
-        }
-        else if (upperJointElements != null && lowerJointElements == null)
-        {
-            return upperJointElements;
-        }
-        else
-        {
-            return null;
-        }
+        return lowerJointElements.Concat(upperJointElements).ToArray();
+
+
     }
 
     protected override void RotateSurroundingElements()
@@ -223,7 +211,8 @@ public class JointBehaviour : RotatableElement, IMoveable
         {
             for (int i = 0; i < surroundingElements.Length; i++)
             {
-                surroundingElements[i].AddSpeedAndRotation(speed, rotationDirection, this);
+                if (surroundingElements[i] != driverElement) 
+                    surroundingElements[i].AddSpeedAndRotation(speed, rotationDirection, this);
             }
         }
     }
@@ -232,29 +221,27 @@ public class JointBehaviour : RotatableElement, IMoveable
     {
         float minDept = joint.transform.position.z - 0.3f;
         float maxDept = joint.transform.position.z + 0.3f;
-        RotatableElement connectedGear = FindRotatableElementFromJoint(minDept, maxDept, LayerData.GearAreaLayer);
-        RotatableElement connectedJoint = FindRotatableElementFromJoint(minDept, maxDept, LayerData.JointLayer);
-        if (connectedGear != null && connectedJoint != null)
+        RotatableElement connectedGear = FindRotatableGearFromJoint(minDept, maxDept);
+        RotatableElement connectedJoint = FindRotatableJointFromJoint(minDept, maxDept, joint);
+
+        List<RotatableElement> elements = new List<RotatableElement>();
+        if (connectedGear != null )
         {
-            return new RotatableElement[] { connectedGear, connectedJoint };
+            elements.Add(connectedGear); 
         }
-        else if (connectedGear == null && connectedJoint != null)
+        if(connectedJoint != null )
         {
-            return new RotatableElement[] { connectedJoint };
+            elements.Add(connectedJoint);
         }
-        else if (connectedGear != null && connectedJoint == null)
-        {
-            return new RotatableElement[] { connectedGear };
-        }
-        else
-        {
-            return null;
-        }
+
+        return elements.ToArray();
+
     }
 
-    private RotatableElement FindRotatableElementFromJoint(float minDept, float maxDept, int layer)
+
+    private RotatableElement FindRotatableGearFromJoint(float minDept, float maxDept)
     {
-        var collider = Physics2D.OverlapCircle(transform.position, radius, layer, minDept, maxDept);
+        var collider = Physics2D.OverlapCircle(transform.position, radius, LayerData.GearAreaLayer, minDept, maxDept);
         if (collider != null)
         {
             return collider.GetComponentInParent<RotatableElement>();
@@ -262,7 +249,18 @@ public class JointBehaviour : RotatableElement, IMoveable
         return null;
     }
 
-
+    private RotatableElement FindRotatableJointFromJoint(float minDept, float maxDept, Collider2D joint)
+    {
+        var colliders = Physics2D.OverlapCircleAll(transform.position, radius, LayerData.JointLayer, minDept, maxDept);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider != joint)
+            {
+                return collider.GetComponentInParent<RotatableElement>();
+            }
+        }
+        return null;
+    }
 
     private void CheckBothJoint()
     {
