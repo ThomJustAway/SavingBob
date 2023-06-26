@@ -6,6 +6,7 @@ TagManager:
   tags:
   - StartingGear
   - InactivedGear
+  - ParentGear
   layers:
   - Default
   - TransparentFX

@@ -19,25 +19,62 @@ public class MouseBehaviour : MonoBehaviour
      3. checking if the gear is placeable or not
      4. buying gears
      */
-    [HideInInspector]public Grid grid;
-    [HideInInspector]public Transform selectedObject=null;
+    [HideInInspector] public Grid grid;
+    [HideInInspector] public IMoveable selectedObject = null;
+    [HideInInspector] public bool deleteActivated = false;
+    [HideInInspector] public ItemButton[] itemButtons;
 
     //States
     [HideInInspector] public IMouseStates currentState;
-    [HideInInspector] public MouseDragGear mouseDragGear = new MouseDragGear();
+    [HideInInspector] public MouseMoveSelectedObject mouseMoveSelectedObject = new MouseMoveSelectedObject();
     [HideInInspector] public MouseIdle mouseIdle = new MouseIdle();
+    [HideInInspector] public DeleteItems deleteItems = new DeleteItems();
+
+
+    public IMoveable GetImoveableComponent(Collider2D collider)
+    {
+        Transform hitGameObject = collider.transform;
+        //mouseBehaviour.selectedObject = hitGameObject.GetComponent<IMoveable>();
+        if (hitGameObject.TryGetComponent<IMoveable>(out IMoveable selectedObject))
+        {
+           return selectedObject;
+        }
+        else
+        {
+            //the joint
+           return hitGameObject.GetComponentInParent<IMoveable>();
+        }
+    }
 
 
     private void Start()
     {
         grid = Grid.FindObjectOfType<Grid>();
         currentState = mouseIdle;
+        GameManager.instance.FinishCreatingGearButtonEvent.AddListener(SetButtons);
+    }
+
+    private void SetButtons()
+    {
+        itemButtons = ItemButton.FindObjectsOfType<ItemButton>();
+        GameManager.instance.FinishCreatingGearButtonEvent.RemoveAllListeners();
+    }
+
+    public void ToggleDeletedActiavted()
+    {
+        deleteActivated = !deleteActivated;
     }
 
     private void Update()
     {
         currentState = currentState.DoState(this);
     }
+
+    //private IEnumerable ChangeActiavated()
+    //{
+    //    deleteActivated = !deleteActivated;
+        
+    //}
 }
 
 

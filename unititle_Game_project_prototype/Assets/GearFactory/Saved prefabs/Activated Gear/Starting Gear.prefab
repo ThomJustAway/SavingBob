@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3392369408920956644}
   - component: {fileID: 223431450440270513}
   - component: {fileID: 4168689670351499210}
-  - component: {fileID: 1899395210684386665}
   - component: {fileID: 892317360955091054}
+  - component: {fileID: 5427805789416612101}
   m_Layer: 0
   m_Name: Starting Gear
   m_TagString: Untagged
@@ -307,23 +307,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6780680903311915335}
   m_Mesh: {fileID: 4300000, guid: 5aedb57e5d5529949ad3bde50d656577, type: 2}
---- !u!114 &1899395210684386665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6780680903311915335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a344fc0977bda24da741f3bdbe19f82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gearRadius: 1.17
-  gearTeeth: 12
-  entireGearArea: {fileID: 2129299522509921523}
-  innerGearArea: {fileID: 4685615040777156431}
-  friction: 0
 --- !u!114 &892317360955091054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,7 +320,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  RotationDirection: 0
+  rotationDirection: 0
+--- !u!114 &5427805789416612101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6780680903311915335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82ff7915dfc2a394892946ae77c5cf82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teeths: 12
+  hasFriction: 0
+  friction: 0
+  entireGearArea: {fileID: 2129299522509921523}
+  innerGearArea: {fileID: 4685615040777156431}
+  nameOfElement: 
+  cost: 0
 --- !u!1 &8260667733587611504
 GameObject:
   m_ObjectHideFlags: 0
