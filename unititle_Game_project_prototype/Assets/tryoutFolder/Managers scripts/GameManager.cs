@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,16 +13,16 @@ public class GameManager : MonoBehaviour
     1. Check If all inactivated gears are activated
     2. Send an event that the puzzle is solve.
     */
-    private bool isSolve;
     public static GameManager instance;
     public GameDataScriptableObject currentGameData;
     [SerializeField] private GameObject itemButtonPrefab; //contains the item button script
     [SerializeField] private Transform gearPanel;
     [SerializeField] private GameObject layerButtonPrefab;
     [SerializeField] private Transform LayerPanel;
-
     [HideInInspector] public UnityEvent FinishCreatingGearButtonEvent = new UnityEvent();
-    //private EndGearClass[] inactiavatedGears;
+
+
+
     private void Awake()
     {
         if (instance == null)
@@ -38,32 +39,11 @@ public class GameManager : MonoBehaviour
     {
         CreateButtons();
         CreateLayerButtons();
-        //inactiavatedGears = GameObject.FindObjectsOfType(typeof(EndGearClass)) as EndGearClass[];
+
     }
 
-    //void Update()
-    //{
-    //    CheckIfSolve();
-    //}
 
-    //private void CheckIfSolve()
-    //{
-    //    if(inactiavatedGears == null)
-    //    {
-    //        Debug.LogError("You have not have any inactiavated gears in the scene!");
-    //        return;
-    //    }
 
-    //    bool solve = true;
-
-    //    foreach (var gear in inactiavatedGears)
-    //    {
-    //        solve = solve && gear.IsActivated;
-    //    }//check if all the gears are activated;
-
-    //    isSolve = solve;
-
-    //}
 
     private void CreateButtons()
     {

@@ -40,7 +40,6 @@ public class DeleteButton : CustomButton
     public override void OnPointerUp(PointerEventData eventData)
     {
         mouseBehaviour.ToggleDeletedActiavted();
-        //isClicked?.Invoke();
         image.color = HoverColor;
     }
 }

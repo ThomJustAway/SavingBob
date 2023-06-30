@@ -63,6 +63,15 @@ public class MouseBehaviour : MonoBehaviour
     public void ToggleDeletedActiavted()
     {
         deleteActivated = !deleteActivated;
+        if(deleteActivated)
+        {
+            TooltipBehvaiour.instance.StartMessage("\n<color=yellow>You are now on delete mode! \r\nTo stop, press the button again");
+        }
+        else
+        {
+            TooltipBehvaiour.instance.EndMessage();
+        }
+    
     }
 
     private void Update()
