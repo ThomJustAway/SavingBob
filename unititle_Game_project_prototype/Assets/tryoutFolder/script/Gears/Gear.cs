@@ -32,15 +32,19 @@ public class Gear : RotatableElement, IMoveable
     {
         get
         {
-            return transform.position.z + 0.5f;
+            return transform.position.z + 0.7f;
         }
+    }
+
+    private void Awake()
+    {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     protected override void Start()
     {
         base.Start();
         gearRadius = entireGearArea.radius;
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     protected override RotatableElement[] FindingRotatingElement()
@@ -139,13 +143,14 @@ public class Gear : RotatableElement, IMoveable
         {
             return;
         }
+        print(surroundInnerGear.Length);
         if (surroundInnerGear.Length > 0)
         {
             spriteRenderer.color = colorData.invalidPositionColor;
         }
         else
         {
-            spriteRenderer.color = Color.white; //this code got problem!
+            spriteRenderer.color = colorData.validPositionColor; 
         }
         //do some code to visually show that the gear can be place or not.
     }
