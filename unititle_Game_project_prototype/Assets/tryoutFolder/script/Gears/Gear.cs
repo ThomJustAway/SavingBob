@@ -15,7 +15,6 @@ public class Gear : RotatableElement, IMoveable
     
     private float gearRadius;
     private SpriteRenderer spriteRenderer;
-    [SerializeField] private ColorScriptableObject colorData;
     public int Cost => cost;
     public string Name => nameOfElement;
     public GameObject Getprefab => gameObject;
@@ -28,6 +27,7 @@ public class Gear : RotatableElement, IMoveable
         }
     }
 
+    private ColorData colorData = ColorData.Instance;
     private float MaxDept
     {
         get

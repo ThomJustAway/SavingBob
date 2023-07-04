@@ -22,6 +22,11 @@ public class LayerManager : MonoBehaviour
                 layer 2:-3
                 layer 3:-6
 
+                background z position in every layer
+                layer 1: 1
+                layer 2: -2
+                layer 3: -5
+
         The layerManager is in charge of any responsibility regarding the layer which include
 
             1. making sure the camera and background are at the right layer

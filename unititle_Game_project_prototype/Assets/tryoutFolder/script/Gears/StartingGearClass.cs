@@ -12,6 +12,7 @@ public class StartingGearClass : MonoBehaviour
     private void Start()
     {
         gearHost = GetComponent<RotatableElement>();
+        gearHost.GetComponent<SpriteRenderer>().color = ColorData.Instance.StartingGearColor;
     }
 
     private void Update()

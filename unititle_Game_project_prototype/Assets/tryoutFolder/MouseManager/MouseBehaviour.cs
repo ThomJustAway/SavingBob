@@ -31,6 +31,18 @@ public class MouseBehaviour : MonoBehaviour
     [HideInInspector] public DeleteItems deleteItems = new DeleteItems();
 
 
+
+    private void Start()
+    {
+        grid = Grid.FindObjectOfType<Grid>();
+        currentState = mouseIdle;
+        GameManager.instance.FinishCreatingGearButtonEvent.AddListener(SetButtons);
+    }
+
+    private void Update()
+    {
+        currentState = currentState.DoState(this);
+    }
     public IMoveable GetImoveableComponent(Collider2D collider)
     {
         Transform hitGameObject = collider.transform;
@@ -45,15 +57,6 @@ public class MouseBehaviour : MonoBehaviour
            return hitGameObject.GetComponentInParent<IMoveable>();
         }
     }
-
-
-    private void Start()
-    {
-        grid = Grid.FindObjectOfType<Grid>();
-        currentState = mouseIdle;
-        GameManager.instance.FinishCreatingGearButtonEvent.AddListener(SetButtons);
-    }
-
     private void SetButtons()
     {
         itemButtons = ItemButton.FindObjectsOfType<ItemButton>();
@@ -74,16 +77,18 @@ public class MouseBehaviour : MonoBehaviour
     
     }
 
-    private void Update()
+    public Vector3 GetVector3FromMousePosition()
     {
-        currentState = currentState.DoState(this);
+        Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3Int cellPosition = mouseBehaviour.grid.WorldToCell(positionOfMouse);
+        //make the gear follow the mouse while snaping to the grid
+        //Vector3 newPosition = mouseBehaviour.grid.GetCellCenterLocal(cellPosition);
+        var newPosition = new Vector3(positionOfMouse.x, positionOfMouse.y, LayerManager.instance.GetGearZIndexBasedOnCurrentLayer());
+        // make sure that the gear is place on top of the UI component
+        //newPosition.z = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() ;
+        return newPosition;
     }
 
-    //private IEnumerable ChangeActiavated()
-    //{
-    //    deleteActivated = !deleteActivated;
-        
-    //}
 }
 
 

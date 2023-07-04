@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GearRemainerChecker : MonoBehaviour
 {
     private EndGearClass[] inactivatedGears;
     private bool isSolve;
     private TextMeshProUGUI gearText;
-
+    [SerializeField] private UnityEvent SolvedEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class GearRemainerChecker : MonoBehaviour
         isSolve = CheckIfSolve();
         if (isSolve)
         {
+            SolvedEvent?.Invoke();
             //do something here!
         }
     }

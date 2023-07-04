@@ -10,7 +10,6 @@ public class EndGearClass : MonoBehaviour
     private bool isActivated;
     [SerializeField] private float speedCondition;
     [SerializeField] private TypeOfRotatingCondition rotatingCondition;
-
     public bool IsActivated { get { return isActivated; } }
 
     private enum TypeOfRotatingCondition
@@ -23,6 +22,7 @@ public class EndGearClass : MonoBehaviour
     private void Start()
     {
         gearHost = GetComponent<Gear>();
+        gearHost.GetComponent<SpriteRenderer>().color = ColorData.Instance.EndingGearColor;
     }
 
     private void Update()
