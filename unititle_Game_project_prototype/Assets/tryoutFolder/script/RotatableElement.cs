@@ -45,6 +45,7 @@ namespace Assets.tryoutFolder.script
             {
                 CheckingDriverElement();
             }
+            print($"{name}: {speed}");
             if(speed >= 0)
             {
                 RotateElementVisually();
