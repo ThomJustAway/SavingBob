@@ -131,7 +131,7 @@ public class Gear : RotatableElement, IMoveable
                 Debug.LogWarning("Invalid position");
             }
         }
-        spriteRenderer.color = colorData.normalColor;
+        spriteRenderer.color = colorData.NormalColor;
 
     }
 
@@ -146,11 +146,11 @@ public class Gear : RotatableElement, IMoveable
         print(surroundInnerGear.Length);
         if (surroundInnerGear.Length > 0)
         {
-            spriteRenderer.color = colorData.invalidPositionColor;
+            spriteRenderer.color = colorData.InvalidPositionColor;
         }
         else
         {
-            spriteRenderer.color = colorData.validPositionColor; 
+            spriteRenderer.color = colorData.ValidPositionColor; 
         }
         //do some code to visually show that the gear can be place or not.
     }

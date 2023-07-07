@@ -3564,7 +3564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &455126424
 Transform:
   m_ObjectHideFlags: 0
@@ -7271,6 +7271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bb02af9249c73479f17404d3046e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SolvedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &996541673
 GameObject:
   m_ObjectHideFlags: 0
@@ -7411,7 +7414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1389031579
 Transform:
   m_ObjectHideFlags: 0
@@ -11557,11 +11560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c912c826c0fb5594886f4b0fec2b04ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  validPositionColor: {r: 0.61820304, g: 0.8301887, b: 0.46521893, a: 1}
-  invalidPositionColor: {r: 0.9056604, g: 0.50751156, b: 0.50751156, a: 1}
-  normalColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
-  StartingGearColor: {r: 0.36308295, g: 0.8867924, b: 0.36308295, a: 1}
-  EndingGearColor: {r: 0.9056604, g: 0.33663222, b: 0.33663222, a: 1}
+  scriptableObject: {fileID: 11400000, guid: c704a1397d1a1334c828ea9379a6ccd8, type: 2}
 --- !u!1001 &2122378074
 PrefabInstance:
   m_ObjectHideFlags: 0
