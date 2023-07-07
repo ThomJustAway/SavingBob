@@ -201,8 +201,6 @@ public class JointBehaviour : RotatableElement, IMoveable
         RotatableElement[] lowerJointElements = GetElementsFromJoint(lowerJoint);
         RotatableElement[] upperJointElements = GetElementsFromJoint(upperJoint);
         return lowerJointElements.Concat(upperJointElements).ToArray();
-
-
     }
 
     protected override void RotateSurroundingElements()

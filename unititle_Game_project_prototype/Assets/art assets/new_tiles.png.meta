@@ -787,15 +787,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      new_tiles_14: -976192723
       new_tiles_15: -1103062578
       new_tiles_9: -391289329
       new_tiles_11: -1502131959
-      new_tiles_23: 1127655868
+      new_tiles_24: 1118572798
       new_tiles_29: 1013710936
       new_tiles_7: 888191348
       new_tiles_21: -1289323166
       new_tiles_13: -1181395014
-      new_tiles_24: 1118572798
       new_tiles_31: 952312497
       new_tiles_27: 977474434
       new_tiles_2: -1587144121
@@ -818,7 +818,7 @@ TextureImporter:
       new_tiles_3: -327340259
       new_tiles_19: -436981885
       new_tiles_16: 1147199573
-      new_tiles_14: -976192723
+      new_tiles_23: 1127655868
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

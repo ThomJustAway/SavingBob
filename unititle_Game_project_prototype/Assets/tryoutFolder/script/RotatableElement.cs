@@ -21,13 +21,31 @@ namespace Assets.tryoutFolder.script
         public Vector3 RotationDirection { get { return rotationDirection; } }
         public int Teeths { get { return teeths; } }
 
+        protected bool isStartingElement;
+
+        protected virtual void Start()
+        {
+            var startingGearComponent = GetComponent<StartingGearClass>();
+            if (startingGearComponent != null) { isStartingElement = true; }
+            else isStartingElement = false;
+        }
+
         protected virtual void Update()
         {
+
+            /*
+                why does the gear does not move when touch with another gear that is moving.
+                1. starting gear does not have driver gear.
+                2. the movement of the starting gear is override with the gear that is not connected to anything
+                3. they will both slow down until they reach to zero.
+                4. afterwards, the starting gear script would add speed again to the starting gear
+             */
             surroundingElements = FindingRotatingElement();
-            if(driverElement != null)
+            if(driverElement != null && !isStartingElement) 
             {
                 CheckingDriverElement();
             }
+            print($"{name}: {speed}");
             if(speed >= 0)
             {
                 RotateElementVisually();
@@ -55,7 +73,7 @@ namespace Assets.tryoutFolder.script
             {
                 if (surroundingElements[i] == driverElement)
                 {
-                    if (driverElement.Speed > 0)
+                    if (driverElement.Speed > 0 )
                     {
                         return;
                     }
@@ -71,7 +89,11 @@ namespace Assets.tryoutFolder.script
         {
             this.speed = speed;
             this.rotationDirection = rotation;
-            this.driverElement = driver;
+            if (!isStartingElement)
+            {
+                this.driverElement = driver;
+            }
+
         }
 
         protected virtual void RotateElementVisually() { }

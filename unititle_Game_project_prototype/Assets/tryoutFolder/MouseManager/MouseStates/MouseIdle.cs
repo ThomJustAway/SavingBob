@@ -72,11 +72,9 @@ public class MouseIdle : IMouseStates
                 {
                     GameObject gear = manager.GetItem(); //get Item from pool
                     mouseBehaviour.selectedObject = gear.GetComponent<IMoveable>(); //make it the selected object               
-                
-                    Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    Vector3Int cellPosition = mouseBehaviour.grid.WorldToCell(positionOfMouse);
-                    cellPosition.z = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer();
-                    mouseBehaviour.selectedObject.Move(cellPosition);
+
+                    var newPosition = mouseBehaviour.GetVector3FromMousePosition();
+                    mouseBehaviour.selectedObject.Move(newPosition);
                 }
             }
 

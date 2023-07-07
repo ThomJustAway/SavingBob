@@ -164,8 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a780b32ea2e50b4fb6c3f338f4ddcf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedCondition: 0
-  rotatingCondition: 0
+  speedCondition: 30
+  rotatingCondition: 2
 --- !u!114 &5821458570923497081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,12 +178,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ff7915dfc2a394892946ae77c5cf82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gearTeeth: 12
+  teeths: 12
+  hasFriction: 1
+  friction: 20
   entireGearArea: {fileID: 4025953053660873821}
   innerGearArea: {fileID: 7515184631326850476}
+  nameOfElement: 
   cost: 0
-  friction: 20
-  name: 
 --- !u!1 &5763589740608457867
 GameObject:
   m_ObjectHideFlags: 0
