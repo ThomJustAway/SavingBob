@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ColorDataScriptableObject : ScriptableObject
 {
+    //will store the colors and will persist throughout different levels
     public Color validPositionColor = Color.white;
     public Color invalidPositionColor = Color.white;
     public Color normalColor = Color.white;
