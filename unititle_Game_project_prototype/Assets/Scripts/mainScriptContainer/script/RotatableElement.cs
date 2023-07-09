@@ -12,7 +12,6 @@ namespace Assets.tryoutFolder.script
         protected float speed;
         protected Vector3 rotationDirection;
         [SerializeField] protected int teeths;
-
         [SerializeField] private bool hasFriction =true;
         [Range(0,30f)]
         [SerializeField] protected float friction = 10f;
@@ -40,13 +39,16 @@ namespace Assets.tryoutFolder.script
                 3. they will both slow down until they reach to zero.
                 4. afterwards, the starting gear script would add speed again to the starting gear
              */
+
+            
+
             surroundingElements = FindingRotatingElement();
             if(driverElement != null && !isStartingElement) 
             {
                 CheckingDriverElement();
             }
-            print($"{name}: {speed}");
-            if(speed >= 0)
+            
+            if(speed > 0) //can also be >= 0 to make the gear jam.
             {
                 RotateElementVisually();
                 RotateSurroundingElements();
