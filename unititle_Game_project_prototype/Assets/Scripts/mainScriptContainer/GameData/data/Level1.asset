@@ -18,4 +18,4 @@ MonoBehaviour:
   - {fileID: 6780680903311915335, guid: fa2a62943783b8248a54a8b4630797da, type: 3}
   - {fileID: 6780680903311915335, guid: c8add24777d20ab42aa09ca8670772ef, type: 3}
   - {fileID: 6780680903311915335, guid: 60a327dbc64a68d4082b31293f49883a, type: 3}
-  NumberOfLayers: 3
+  NumberOfLayers: 2

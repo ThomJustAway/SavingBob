@@ -38,7 +38,7 @@ public class ItemButton : MonoBehaviour
 
         Transform item = Instantiate(moveableItem.Getprefab, imageContainer.transform).transform;
 
-        if(item.TryGetComponent<Gear>(out Gear gearComponent))
+        if(item.TryGetComponent<DragableGear>(out DragableGear gearComponent))
         {
             MakeImageFromGear(item,gearComponent);
         }
@@ -49,7 +49,7 @@ public class ItemButton : MonoBehaviour
 
     } //making the button to set up to be like the gear
 
-    private void MakeImageFromGear(Transform imageGearObject, Gear gearComponent)
+    private void MakeImageFromGear(Transform imageGearObject, DragableGear gearComponent)
     {
         foreach (Transform child in imageGearObject) //destroy the component inside the gameobject
         {

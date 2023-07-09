@@ -12,7 +12,7 @@ namespace Assets.tryoutFolder.script
         protected float speed;
         protected Vector3 rotationDirection;
         [SerializeField] protected int teeths;
-        [SerializeField] private bool hasFriction =true;
+        [SerializeField] protected bool hasFriction =true;
         [Range(0,30f)]
         [SerializeField] protected float friction = 10f;
 
@@ -64,7 +64,7 @@ namespace Assets.tryoutFolder.script
 
         }
 
-        private void ApplyFriction()
+        protected void ApplyFriction()
         {
             speed -= friction * Time.deltaTime;
         }

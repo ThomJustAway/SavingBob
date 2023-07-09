@@ -2,12 +2,12 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Gear))]
-public class StartingGearClass : MonoBehaviour
+[RequireComponent(typeof(DragableGear))]
+public class StartingGearClass : MonoBehaviour 
 {
     private RotatableElement gearHost;
     [SerializeField] private float speed;
-    [SerializeField] private RotationDirection rotationDirection;
+    [SerializeField] private RotationDirectionClass.RotationDirection rotationDirection;
 
     private void Start()
     {
@@ -17,26 +17,7 @@ public class StartingGearClass : MonoBehaviour
 
     private void Update()
     {
-        Vector3 direction = GetVector3FromDirection(rotationDirection);
+        Vector3 direction = RotationDirectionClass.GetVector3FromDirection(rotationDirection);
         gearHost.AddSpeedAndRotation(speed, direction);
-    }
-
-    private enum RotationDirection
-    {
-        clockWise,
-        antiClockWise
-    }
-
-    private Vector3 GetVector3FromDirection(RotationDirection direction)
-    {
-        switch (direction)
-        {
-            case RotationDirection.clockWise:
-                return Vector3.back;
-            case RotationDirection.antiClockWise:
-                return Vector3.forward;
-            default:
-                return Vector3.forward;
-        }
     }
 }

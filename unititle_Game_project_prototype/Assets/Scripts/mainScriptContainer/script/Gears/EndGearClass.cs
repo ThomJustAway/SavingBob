@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class EndGearClass : MonoBehaviour
 {
-    private Gear gearHost;
-    public Gear GearHost { get { return gearHost; } }
+    private DragableGear gearHost;
+    public DragableGear GearHost { get { return gearHost; } }
     private bool isActivated;
     [SerializeField] private float speedCondition;
     [SerializeField] private TypeOfRotatingCondition rotatingCondition;
@@ -21,7 +21,7 @@ public class EndGearClass : MonoBehaviour
 
     private void Start()
     {
-        gearHost = GetComponent<Gear>();
+        gearHost = GetComponent<DragableGear>();
         gearHost.GetComponent<SpriteRenderer>().color = ColorData.Instance.EndingGearColor;
     }
 
