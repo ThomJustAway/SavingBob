@@ -48,7 +48,7 @@ public class Gear : RotatableElement
             }
             return newElements.ToArray();
         }
-        return surroundingRotatableComponents;
+        return surroundingRotatableComponents; 
     }
 
     protected override void RotateElementVisually()

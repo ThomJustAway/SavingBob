@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class RotationDirectionClass 
+public struct RotationDirectionClass 
 {
     public enum RotationDirection
     {
@@ -15,9 +15,9 @@ public class RotationDirectionClass
         switch (direction)
         {
             case RotationDirection.clockWise:
-                return Vector3.back;
-            case RotationDirection.antiClockWise:
                 return Vector3.forward;
+            case RotationDirection.antiClockWise:
+                return Vector3.back;
             default:
                 return Vector3.forward;
         }

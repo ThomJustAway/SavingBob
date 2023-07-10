@@ -9,16 +9,19 @@ namespace Assets.tryoutFolder.script
 
         protected RotatableElement driverElement;
         protected RotatableElement[] surroundingElements;
+        protected RotatableElement driverJammingElement;
         protected float speed;
         protected Vector3 rotationDirection;
         [SerializeField] protected int teeths;
-        [SerializeField] protected bool hasFriction =true;
-        [Range(0,30f)]
+        [SerializeField] protected bool hasFriction = true;
+        [Range(0, 30f)]
         [SerializeField] protected float friction = 10f;
 
         public float Speed { get { return speed; } }
         public Vector3 RotationDirection { get { return rotationDirection; } }
         public int Teeths { get { return teeths; } }
+
+        public bool IsJamming => driverJammingElement != null;
 
         protected bool isStartingElement;
 
@@ -26,33 +29,45 @@ namespace Assets.tryoutFolder.script
         {
             var startingGearComponent = GetComponent<StartingGearClass>();
             if (startingGearComponent != null) { isStartingElement = true; }
-            else isStartingElement = false;
+            else
+            {
+                isStartingElement = false;
+            }
         }
 
         protected virtual void Update()
         {
-
-            /*
-                why does the gear does not move when touch with another gear that is moving.
-                1. starting gear does not have driver gear.
-                2. the movement of the starting gear is override with the gear that is not connected to anything
-                3. they will both slow down until they reach to zero.
-                4. afterwards, the starting gear script would add speed again to the starting gear
-             */
-
-            
-
             surroundingElements = FindingRotatingElement();
-            if(driverElement != null && !isStartingElement) 
+            if (driverElement != null && !isStartingElement)
             {
                 CheckingDriverElement();
             }
-            
-            if(speed > 0) //can also be >= 0 to make the gear jam.
+            if (driverJammingElement != null)
+            {
+                //check if there is a jamming gear still exist
+                CheckJammingElement();
+            }
+
+            if (driverJammingElement != null)
+            {
+                //if the jamming element still exist
+                speed = 0;
+                JamSurroundingElements();
+            }
+            else
+            {
+                RotateOtherElements();
+            }
+        }
+
+        private void RotateOtherElements()
+        {
+            // do the standard gear rotation
+            if (speed > 0) //can also be >= 0 to make the gear jam.
             {
                 RotateElementVisually();
                 RotateSurroundingElements();
-                if(hasFriction)
+                if (hasFriction)
                 {
                     ApplyFriction();
                 }
@@ -61,7 +76,6 @@ namespace Assets.tryoutFolder.script
             {
                 speed = 0;
             }
-
         }
 
         protected void ApplyFriction()
@@ -75,7 +89,7 @@ namespace Assets.tryoutFolder.script
             {
                 if (surroundingElements[i] == driverElement)
                 {
-                    if (driverElement.Speed > 0 )
+                    if (driverElement.Speed > 0)
                     {
                         return;
                     }
@@ -85,40 +99,82 @@ namespace Assets.tryoutFolder.script
             driverElement = null;
         }
 
+        protected virtual void CheckJammingElement()
+        {
+            for (int i = 0; i < surroundingElements.Length; i++)
+            {
+                if (surroundingElements[i] == driverJammingElement)
+                {
+                    if (driverJammingElement.IsJamming)
+                    {
+                        return;
+                    }
+                    break;
+                }
+            }
+            driverJammingElement = null;
+        }
+
         protected abstract RotatableElement[] FindingRotatingElement();
 
-        public virtual void AddSpeedAndRotation(float speed, Vector3 rotation , RotatableElement driver = null)
+        public virtual void AddSpeedAndRotation(float speed, Vector3 rotation, RotatableElement driver = null)
         {
-            this.speed = speed;
-            this.rotationDirection = rotation;
-            if (!isStartingElement)
+            if (isStartingElement)
+            {// ignore this as this is a edge case
+                this.speed = speed;
+                this.rotationDirection = rotation;
+            }
+            else if(this.driverElement == null )
             {
+                //if the rotate element is not assign a rotatable element
+                this.speed = speed;
+                this.rotationDirection = rotation;
                 this.driverElement = driver;
             }
+            else if(this.driverElement == driver)
+            { //only rotate accept rotation from the driver only
+                this.speed = speed;
+                this.rotationDirection = rotation;
+            }
+        }
 
+        public void AddJamingElement(RotatableElement jammingElement)
+        {
+            driverJammingElement = jammingElement;
         }
 
         protected virtual void RotateElementVisually() { }
 
         protected virtual void RotateSurroundingElements()
         {
-            for(int i = 0; i < surroundingElements.Length; i++)
+            for (int i = 0; i < surroundingElements.Length; i++)
             {
                 RotatableElement selectedRotatableElement = surroundingElements[i];
-                if (selectedRotatableElement == driverElement) continue; 
-                if(selectedRotatableElement.Teeths == 0)
+                if (selectedRotatableElement == driverElement) continue;
+                if (selectedRotatableElement.Teeths == 0)
                 {   //this meant that it is a joint
                     selectedRotatableElement.AddSpeedAndRotation(speed, rotationDirection, this);
                 }
                 else
                 { //for gears
                     float newSpeed = CalculateSpeed(this, selectedRotatableElement);
-                    selectedRotatableElement.AddSpeedAndRotation(newSpeed, ChangeDirection(rotationDirection) , this);
+                    selectedRotatableElement.AddSpeedAndRotation(newSpeed, ChangeDirection(rotationDirection), this);
                 }
             }
         } // rotate all element
 
-        private float CalculateSpeed(RotatableElement driver , RotatableElement driven)
+        protected virtual void JamSurroundingElements()
+        {
+            for(int i = 0; i < surroundingElements.Length; i++)
+            {
+                if (surroundingElements[i] != driverJammingElement)
+                {
+                    surroundingElements[i].AddJamingElement(this);
+                }
+            }
+        }
+
+        private float CalculateSpeed(RotatableElement driver, RotatableElement driven)
         {
             float gearRatio = (float)driven.Teeths / (float)driver.Teeths;
             float calculatedSpeed = driver.Speed / gearRatio;
@@ -130,5 +186,7 @@ namespace Assets.tryoutFolder.script
             if (direction == Vector3.forward) return Vector3.back;
             else return Vector3.forward;
         }
+
+
     }
 }

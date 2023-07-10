@@ -12,28 +12,19 @@ public class OneDirectionGearClass : Gear
     {
         base.Start();
         vector3Direction = RotationDirectionClass.GetVector3FromDirection(direction);
+        print(vector3Direction);
+        if (direction == RotationDirectionClass.RotationDirection.clockWise)
+        {
+            GetComponent<SpriteRenderer>().flipY = true;
+        }
     }
 
-    protected override void Update()
+    protected override void CheckJammingElement()
     {
-        surroundingElements = FindingRotatingElement();
-        if (driverElement != null && !isStartingElement)
-        {
-            CheckingDriverElement();
-        }
-
-        if (speed >= 0) //can also be >= 0 to make the gear jam.
-        {
-            RotateElementVisually();
-            RotateSurroundingElements();
-            if (hasFriction && speed != 0)
-            {
-                ApplyFriction();
-            }
-        }
+        if (driverJammingElement == this) return;
         else
         {
-            speed = 0;
+            base.CheckJammingElement();
         }
     }
 
@@ -41,11 +32,13 @@ public class OneDirectionGearClass : Gear
     {
         if (rotation == vector3Direction)
         {
-            base.AddSpeedAndRotation(speed, rotation, driver);
+            base.AddSpeedAndRotation(speed, vector3Direction, driver);
+            driverJammingElement = null;
+        }
+        else
+        {
+            this.speed = 0;
+            driverJammingElement = this;
         }
     }
-
-
-
-
 }
