@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,8 +11,8 @@ public class EndGearClass : MonoBehaviour
     private bool isActivated;
     [SerializeField] private float speedCondition;
     [SerializeField] private TypeOfRotatingCondition rotatingCondition;
+    [SerializeField] private Sprite spriteForOneDirection;
     public bool IsActivated { get { return isActivated; } }
-
     private enum TypeOfRotatingCondition
     {
         clockwise,
@@ -22,14 +23,32 @@ public class EndGearClass : MonoBehaviour
     private void Start()
     {
         gearHost = GetComponent<DragableGear>();
-        gearHost.GetComponent<SpriteRenderer>().color = ColorData.Instance.EndingGearColor;
+        SetGearVisual();
+    }
+
+    private void SetGearVisual()
+    {
+        SpriteRenderer gearhostSpriteRenderer = gearHost.GetComponent<SpriteRenderer>();
+        gearhostSpriteRenderer.color = ColorData.Instance.EndingGearColor;
+        switch(rotatingCondition)
+        {
+            case TypeOfRotatingCondition.clockwise:
+                gearhostSpriteRenderer.sprite = spriteForOneDirection;
+                break;
+            case TypeOfRotatingCondition.antiClockwise:
+                gearhostSpriteRenderer.sprite = spriteForOneDirection;
+                gearhostSpriteRenderer.flipY = true;
+                break;
+            default:
+                break;
+        }
+
     }
 
     private void Update()
     {
         isActivated = IfConditionMet(gearHost.Speed, gearHost.RotationDirection);
     }
-
     public bool IfConditionMet(float speed, Vector3 direction)
     {
         bool rotatationConditionMet = GetRotationConditionIsMet(direction);
@@ -52,7 +71,6 @@ public class EndGearClass : MonoBehaviour
                 break;
             case TypeOfRotatingCondition.none:
                 return true;
-
             default:
                 return false;
         }

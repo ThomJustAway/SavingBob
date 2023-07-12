@@ -30,13 +30,15 @@ public class MouseBehaviour : MonoBehaviour
     [HideInInspector] public MouseIdle mouseIdle = new MouseIdle();
     [HideInInspector] public DeleteItems deleteItems = new DeleteItems();
 
-
+    private void Awake()
+    {
+        GameManager.instance.FinishCreatingGearButtonEvent.AddListener(SetButtons);
+    }
 
     private void Start()
     {
         grid = Grid.FindObjectOfType<Grid>();
         currentState = mouseIdle;
-        GameManager.instance.FinishCreatingGearButtonEvent.AddListener(SetButtons);
     }
 
     private void Update()

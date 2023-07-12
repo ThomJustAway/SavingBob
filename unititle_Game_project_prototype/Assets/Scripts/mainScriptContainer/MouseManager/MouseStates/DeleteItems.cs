@@ -39,6 +39,7 @@ public class DeleteItems : IMouseStates
 
             if(collidedObject.collider != null)
             {
+
                 IMoveable ImoveableComponent = mouseBehaviour.GetImoveableComponent(collidedObject.collider);
                 foreach (ItemButton itemButton in mouseBehaviour.itemButtons)
                 {

@@ -6,7 +6,6 @@ namespace Assets.tryoutFolder.script
 {
     public abstract class RotatableElement : MonoBehaviour
     {
-
         protected RotatableElement driverElement;
         protected RotatableElement[] surroundingElements;
         protected RotatableElement driverJammingElement;

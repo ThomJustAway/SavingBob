@@ -117,9 +117,8 @@ MonoBehaviour:
   friction: 10
   entireGearArea: {fileID: 2017939731767806787}
   innerGearArea: {fileID: 134693580693490428}
-  nameOfElement: 12-tooth-gear
+  nameOfElement: 18-tooth-gear
   cost: 10
-  colorData: {fileID: 11400000, guid: 370cf96885175114e80629fb90e6f325, type: 2}
 --- !u!212 &7608644141049222791
 SpriteRenderer:
   m_ObjectHideFlags: 0
