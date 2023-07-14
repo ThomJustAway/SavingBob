@@ -12,7 +12,6 @@ public class OneDirectionGearClass : Gear
     {
         base.Start();
         vector3Direction = RotationDirectionClass.GetVector3FromDirection(direction);
-        print(vector3Direction);
         if (direction == RotationDirectionClass.RotationDirection.clockWise)
         {
             GetComponent<SpriteRenderer>().flipY = true;

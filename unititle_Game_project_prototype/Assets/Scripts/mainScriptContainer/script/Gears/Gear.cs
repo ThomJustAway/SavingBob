@@ -9,7 +9,7 @@ public class Gear : RotatableElement
 {
     [SerializeField] protected CircleCollider2D entireGearArea;
     [SerializeField] protected Collider2D innerGearArea;
-    protected float gearRadius;
+    public float GearRadius { get; private set; }
     protected float MinDept
     {
         get
@@ -30,7 +30,7 @@ public class Gear : RotatableElement
     protected override void Start()
     {
         base.Start();
-        gearRadius = entireGearArea.radius;
+        GearRadius = entireGearArea.radius;
     }
 
     protected override RotatableElement[] FindingRotatingElement()
@@ -59,7 +59,7 @@ public class Gear : RotatableElement
     public Collider2D[] GetColliderAroundRadiusBasedOnLayer(LayerMask layer)
     {
         Collider2D selectedCollider = GetRespectiveColliderByLayer(layer);
-        Collider2D[] surroundingGears = Physics2D.OverlapCircleAll(transform.position, gearRadius, layer, MinDept, MaxDept)
+        Collider2D[] surroundingGears = Physics2D.OverlapCircleAll(transform.position, GearRadius, layer, MinDept, MaxDept)
             .Where(collider =>
             {
                 return collider != selectedCollider;
@@ -70,7 +70,7 @@ public class Gear : RotatableElement
 
     public RotatableElement GetJointComponent()
     {
-        Collider2D childCollider = Physics2D.OverlapCircle(transform.position, gearRadius, LayerData.JointLayer, MinDept, MaxDept);
+        Collider2D childCollider = Physics2D.OverlapCircle(transform.position, GearRadius, LayerData.JointLayer, MinDept, MaxDept);
         if (childCollider != null)
         {
             return childCollider.GetComponentInParent<RotatableElement>();

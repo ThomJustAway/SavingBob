@@ -6,12 +6,10 @@ using UnityEngine.Events;
 
 public class EndGearClass : MonoBehaviour
 {
-    private DragableGear gearHost;
-    public DragableGear GearHost { get { return gearHost; } }
+    private Gear gearHost;
+    public Gear GearHost { get { return gearHost; } }
     private bool isActivated;
     [SerializeField] private float speedCondition;
-    [SerializeField] private TypeOfRotatingCondition rotatingCondition;
-    [SerializeField] private Sprite spriteForOneDirection;
     public bool IsActivated { get { return isActivated; } }
     private enum TypeOfRotatingCondition
     {
@@ -19,63 +17,38 @@ public class EndGearClass : MonoBehaviour
         antiClockwise,
         none
     }
+    private bool IsHovered = false;
+
+    private void Awake()
+    {
+        gameObject.tag = "InactivedGear"; // this is not great idea to find gameobject ....
+    }
 
     private void Start()
     {
         gearHost = GetComponent<DragableGear>();
         SetGearVisual();
+
     }
 
     private void SetGearVisual()
     {
         SpriteRenderer gearhostSpriteRenderer = gearHost.GetComponent<SpriteRenderer>();
         gearhostSpriteRenderer.color = ColorData.Instance.EndingGearColor;
-        switch(rotatingCondition)
-        {
-            case TypeOfRotatingCondition.clockwise:
-                gearhostSpriteRenderer.sprite = spriteForOneDirection;
-                break;
-            case TypeOfRotatingCondition.antiClockwise:
-                gearhostSpriteRenderer.sprite = spriteForOneDirection;
-                gearhostSpriteRenderer.flipY = true;
-                break;
-            default:
-                break;
-        }
 
     }
 
     private void Update()
     {
-        isActivated = IfConditionMet(gearHost.Speed, gearHost.RotationDirection);
+        isActivated = IfConditionMet(gearHost.Speed);
+        CheckMouseHovering();
     }
-    public bool IfConditionMet(float speed, Vector3 direction)
+    public bool IfConditionMet(float speed)
     {
-        bool rotatationConditionMet = GetRotationConditionIsMet(direction);
         bool speedConditionMet = GetSpeedConditionIsMet(speed);
-        bool conditionMet = rotatationConditionMet && speedConditionMet;
-        return conditionMet;
+        return speedConditionMet;
     }
 
-    private bool GetRotationConditionIsMet(Vector3 direction)
-    {
-        switch (rotatingCondition)
-        {
-            case TypeOfRotatingCondition.clockwise:
-                if (direction == Vector3.forward)
-                    return true;
-                break;
-            case TypeOfRotatingCondition.antiClockwise:
-                if (direction == Vector3.back)
-                    return true;
-                break;
-            case TypeOfRotatingCondition.none:
-                return true;
-            default:
-                return false;
-        }
-        return false;
-    }
     // the naming conventiion here is confusing
 
     private bool GetSpeedConditionIsMet(float speed)
@@ -90,6 +63,52 @@ public class EndGearClass : MonoBehaviour
         }
     }
 
+    private void CheckMouseHovering()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer();
+        Vector3 position = Camera.main.ScreenToWorldPoint(mousePosition);
+        if (CheckIfWithinCircle(position))
+        {
+            if (TooltipBehvaiour.instance.IsActivated)
+            {
+                TooltipBehvaiour.instance.SetText(CreateMessage()); //changing the message on the file
+            }
+            else
+            {
+                TooltipBehvaiour.instance.StartMessage(CreateMessage());
+                IsHovered = true; // made sure to check if the gear is hovered
+            }
+        }
+        else
+        {
+            if (IsHovered)
+            { //if hovered then delete the message
+                TooltipBehvaiour.instance.EndMessage();
+                IsHovered = false;
+            }
+
+        }
+    }
+
+    private bool CheckIfWithinCircle(Vector3 positionOfMouse)
+    {
+        if (transform.position.z != LayerManager.instance.GetGearZIndexBasedOnCurrentLayer())
+        {//if the mosue is not at the layer of the end gear
+            return false;
+        }
+        Vector2 mousePosition = new Vector2(positionOfMouse.x, positionOfMouse.y);
+        Vector2 gearPosition = new Vector2(transform.position.x, transform.position.y);
+        float distance = Vector2.Distance(mousePosition, gearPosition);
+        return gearHost.GearRadius >= distance;
+    }
+
+    private string CreateMessage()
+    {
+        string message = $"Speed condition: {speedCondition}\n " +
+                             $"Current Speed: {gearHost.Speed}\n ";
+        return message;
+    }
     //re look at this later
 }
 

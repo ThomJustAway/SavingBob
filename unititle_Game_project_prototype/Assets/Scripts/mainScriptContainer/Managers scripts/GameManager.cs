@@ -18,10 +18,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject itemButtonPrefab; //contains the item button script
     [SerializeField] private Transform gearPanel;
     [SerializeField] private GameObject layerButtonPrefab;
-    [SerializeField] private Transform LayerPanel;
+    [SerializeField] private Transform LayerPanel; // all this variable are set at the inspectors
+
     [HideInInspector] public UnityEvent FinishCreatingGearButtonEvent = new UnityEvent();
-
-
+    [HideInInspector] public UnityEvent SolvedEvent = new UnityEvent();
 
     private void Awake()
     {
@@ -40,9 +40,6 @@ public class GameManager : MonoBehaviour
         CreateButtons();
         CreateLayerButtons();
     }
-
-
-
 
     private void CreateButtons()
     {

@@ -9,7 +9,7 @@ public class TooltipBehvaiour : MonoBehaviour
     private Animator animator;
     private TextMeshProUGUI textMessage;
     private int isActivatedHash = Animator.StringToHash("IsActivated");
-    private bool isActivated = false;
+    public bool IsActivated { get; private set; }
 
     private void Awake()
     {
@@ -21,35 +21,36 @@ public class TooltipBehvaiour : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         textMessage = GetComponent<TextMeshProUGUI>();
+        IsActivated = false;
     }
 
     public void StartMessage(string message)
     {
-        if (!isActivated)
+        if (!IsActivated)
         {
-            isActivated = !isActivated;
+            IsActivated = !IsActivated;
             SetText(message);
-            animator.SetBool(isActivatedHash, isActivated);
+            animator.SetBool(isActivatedHash, IsActivated);
         }
     }
 
     public void EndMessage() 
     { 
-        if (isActivated) 
+        if (IsActivated) 
         {
-            isActivated = !isActivated;
-            animator.SetBool(isActivatedHash, isActivated);
-            
+            IsActivated = !IsActivated;
+            animator.SetBool(isActivatedHash, IsActivated);
         }
     }
 
-    private void SetText(string message)
+    public void SetText(string message)
     {
         textMessage.text = message;
     }
     
     public void ResetText()
     {
+        //this is called in some other script so you wont see the references
         textMessage.text = "";
     }
 

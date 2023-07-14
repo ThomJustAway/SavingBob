@@ -61,7 +61,6 @@ public class DragableGear : Gear, IMoveable
             }
         }
         spriteRenderer.color = colorData.NormalColor;
-
     }
 
     public void Move(Vector3 position)

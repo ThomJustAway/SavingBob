@@ -8,9 +8,8 @@ using UnityEngine.Events;
 public class GearRemainerChecker : MonoBehaviour
 {
     private EndGearClass[] inactivatedGears;
-    private bool isSolve;
+    private bool IsSolve;
     private TextMeshProUGUI gearText;
-    [SerializeField] private UnityEvent SolvedEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +24,11 @@ public class GearRemainerChecker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isSolve = CheckIfSolve();
-        if (isSolve)
+        IsSolve = CheckIfSolve();
+        if (IsSolve)
         {
-            SolvedEvent?.Invoke();
-            //do something here!
+            GameManager.instance.SolvedEvent?.Invoke();
+            GameManager.instance.SolvedEvent.RemoveAllListeners();
         }
     }
 
