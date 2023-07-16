@@ -5,6 +5,7 @@ using Assets.tryoutFolder.script;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Assets.Scripts.mainScriptContainer;
 
 //Have a Gear class called Gear
 //The dragable one are called dragable gears
@@ -21,6 +22,8 @@ public class DragableGear : Gear, IMoveable
     public GameObject Getprefab => gameObject;
 
     private ColorData colorData = ColorData.Instance;
+
+    private Vector3 previousValidPosition;
     private void Awake()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -34,17 +37,20 @@ public class DragableGear : Gear, IMoveable
         if (surroundInnerGear.Length > 0)
         {
             //improve the finding of the valid position
-            ColliderDistance2D distance;
+            //ColliderDistance2D distance;
 
             foreach (var innerGear in surroundInnerGear)
             {
-                distance = innerGear.Distance(entireGearArea);
+                //distance = innerGear.Distance(entireGearArea);
 
-                Debug.DrawLine(distance.pointA, distance.pointB, Color.red, 2f);
-                Debug.DrawLine(distance.pointA, Vector3.zero, Color.yellow, 2f);
-                Debug.DrawLine(distance.pointB, Vector3.zero, Color.black, 2f);
-                print($"Point A:{distance.pointA} Point B: {distance.pointB}");
-                Vector2 resolveDistance = Math.Abs(distance.distance) * distance.normal;
+                //Debug.DrawLine(distance.pointA, distance.pointB, Color.red, 2f);
+                //Debug.DrawLine(distance.pointA, Vector3.zero, Color.yellow, 2f);
+                //Debug.DrawLine(distance.pointB, Vector3.zero, Color.black, 2f); 
+                //print($"Point A:{distance.pointA} Point B: {distance.pointB}");
+                //Vector2 resolveDistance = Math.Abs(distance.distance) * distance.normal;
+                //transform.Translate(resolveDistance);
+                Gear Parentgear = innerGear.GetComponentInParent<Gear>();
+                Vector2 resolveDistance = CircleCalculator.DistanceToMoveBetweenDriverAndDrivenGear(Parentgear, this);
                 transform.Translate(resolveDistance);
             }
         }
@@ -59,7 +65,7 @@ public class DragableGear : Gear, IMoveable
             {
                 Debug.LogWarning("Invalid position");
             }
-        }
+        } //change this
         spriteRenderer.color = colorData.NormalColor;
     }
 
@@ -78,6 +84,7 @@ public class DragableGear : Gear, IMoveable
         else
         {
             spriteRenderer.color = colorData.ValidPositionColor;
+            previousValidPosition = position;
         }
         //do some code to visually show that the gear can be place or not.
     }
