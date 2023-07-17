@@ -19,8 +19,14 @@ namespace Assets.Scripts.mainScriptContainer
             Vector2 pointA = lineConnectingBothGear.GetPointThatIsIntersectCircle(driverCircle , drivenCircle);
             Vector2 pointB = lineConnectingBothGear.GetPointThatIsIntersectCircle(drivenCircle, driverCircle);
 
-            float distance = Vector2.Distance(pointA, pointB);
-            return lineConnectingBothGear.NormaliseVector2 * distance;
+
+
+            //float distance = Vector2.Distance(pointA, pointB);
+
+            //Debug.DrawLine(pointA, Vector3.zero, Color.red, 5f);
+            //Debug.DrawLine(pointB, Vector3.zero, Color.yellow, 5f);
+            //Debug.Log(distance);
+            return pointA - pointB;
 
         }
     }

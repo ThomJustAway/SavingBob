@@ -37,21 +37,25 @@ public class DragableGear : Gear, IMoveable
         if (surroundInnerGear.Length > 0)
         {
             //improve the finding of the valid position
-            //ColliderDistance2D distance;
+            ColliderDistance2D distance;
 
             foreach (var innerGear in surroundInnerGear)
             {
-                //distance = innerGear.Distance(entireGearArea);
+                distance = innerGear.Distance(entireGearArea);
 
                 //Debug.DrawLine(distance.pointA, distance.pointB, Color.red, 2f);
                 //Debug.DrawLine(distance.pointA, Vector3.zero, Color.yellow, 2f);
-                //Debug.DrawLine(distance.pointB, Vector3.zero, Color.black, 2f); 
+                //Debug.DrawLine(distance.pointB, Vector3.zero, Color.black, 2f);
                 //print($"Point A:{distance.pointA} Point B: {distance.pointB}");
-                //Vector2 resolveDistance = Math.Abs(distance.distance) * distance.normal;
-                //transform.Translate(resolveDistance);
-                Gear Parentgear = innerGear.GetComponentInParent<Gear>();
-                Vector2 resolveDistance = CircleCalculator.DistanceToMoveBetweenDriverAndDrivenGear(Parentgear, this);
+                Vector2 resolveDistance = Math.Abs(distance.distance) * distance.normal;
                 transform.Translate(resolveDistance);
+
+
+                //this line of code is a custome made distance detector I made. 
+                //as my hand is injuried, I stop working for this and work different parts of the game
+                //Gear Parentgear = innerGear.GetComponentInParent<Gear>();
+                //Vector2 resolveDistance = CircleCalculator.DistanceToMoveBetweenDriverAndDrivenGear(Parentgear, this);
+                //transform.Translate(resolveDistance);
             }
         }
         else if (surroundingJoint.Length > 0)
@@ -67,6 +71,7 @@ public class DragableGear : Gear, IMoveable
             }
         } //change this
         spriteRenderer.color = colorData.NormalColor;
+        MusicManager.Instance.PlayMusicClip("PlacingEffect"); // quite bad since I am using magic string
     }
 
     public void Move(Vector3 position)
