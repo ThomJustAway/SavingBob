@@ -71,7 +71,7 @@ public class DragableGear : Gear, IMoveable
             }
         } //change this
         spriteRenderer.color = colorData.NormalColor;
-        MusicManager.Instance.PlayMusicClip("PlacingEffect"); // quite bad since I am using magic string
+        MusicManager.Instance.PlayMusicClip(SoundData.PlacingSound); // quite bad since I am using magic string
     }
 
     public void Move(Vector3 position)

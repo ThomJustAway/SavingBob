@@ -50,8 +50,9 @@ public class MoneyManager : MonoBehaviour
         {
             //if can
             currentMoney -= money;
-            animationMoneyText.text = $"<color=#ff4d4d>-{money} "+moneyIcon;
+            animationMoneyText.text = $"<color=#ff4d4d>-{money} "+ moneyIcon;
             animator.SetTrigger("spend money");
+            MusicManager.Instance.PlayMusicClip(SoundData.BuyingGear);
             SetText();
             return true;
         }
@@ -63,20 +64,12 @@ public class MoneyManager : MonoBehaviour
         animationMoneyText.text = $"<color=\"green\">+{money}"+ moneyIcon; // this code is quite bad since it is repetitive
         animator.SetTrigger("refund money");
         SetText();
-        
+        MusicManager.Instance.PlayMusicClip(SoundData.SellingGear);
     }
 
     private void SetText()
     {
         currentMoneyText.text = currentMoney.ToString() + moneyIcon;
-    }
-
-    private IEnumerator OnCompleteAttackAnimation()
-    {
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
-            yield return null;
-
-        // TODO: Do something when animation did complete
     }
 
 }

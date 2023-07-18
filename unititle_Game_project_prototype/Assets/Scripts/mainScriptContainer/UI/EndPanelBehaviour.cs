@@ -21,6 +21,7 @@ public class EndPanelBehaviour : MonoBehaviour
         int isActivatedHash = Animator.StringToHash("IsActivated");
         Animator animator = GetComponent<Animator>();
         animator.SetBool(isActivatedHash, true); //start playing the animation
+        MusicManager.Instance.PlayMusicClip(SoundData.WinningSound);
     }
 
 

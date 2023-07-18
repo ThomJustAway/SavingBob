@@ -8,27 +8,22 @@ public class EndGearClass : MonoBehaviour
 {
     private Gear gearHost;
     public Gear GearHost { get { return gearHost; } }
-    private bool isActivated;
     [SerializeField] private float speedCondition;
     public bool IsActivated { get { return isActivated; } }
-    private enum TypeOfRotatingCondition
-    {
-        clockwise,
-        antiClockwise,
-        none
-    }
-    private bool IsHovered = false;
+    private bool IsHovered = false; //to check if the mouse is hovering the gear. The monobehviour on hover sometimes does not work
+    private bool isActivated;
+    private bool hasPlayedMusic;
 
     private void Awake()
     {
         gameObject.tag = "InactivedGear"; // this is not great idea to find gameobject ....
+        hasPlayedMusic = false;
     }
 
     private void Start()
     {
         gearHost = GetComponent<DragableGear>();
         SetGearVisual();
-
     }
 
     private void SetGearVisual()
@@ -41,6 +36,16 @@ public class EndGearClass : MonoBehaviour
     private void Update()
     {
         isActivated = IfConditionMet(gearHost.Speed);
+        //when it is not activated
+        if (hasPlayedMusic == false && isActivated == true)
+        {
+            MusicManager.Instance.PlayMusicClip(SoundData.EndGearRotating);
+            hasPlayedMusic = true;
+        }
+        if(isActivated == false)
+        {
+            hasPlayedMusic = false;
+        }
         CheckMouseHovering();
     }
     public bool IfConditionMet(float speed)
