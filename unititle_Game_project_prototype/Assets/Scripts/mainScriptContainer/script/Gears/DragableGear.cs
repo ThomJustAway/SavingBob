@@ -76,6 +76,10 @@ public class DragableGear : Gear, IMoveable
 
     public void Move(Vector3 position)
     {
+        if(speed > 0)
+        {
+            speed = 0;
+        }
         transform.position = position;
         Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
         if (surroundInnerGear == null)

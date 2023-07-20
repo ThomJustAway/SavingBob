@@ -31,8 +31,6 @@ namespace Assets.Scripts.mainScriptContainer
         }
     }
 
-
-
     public struct Line
     {
         public float K { get; private set; }

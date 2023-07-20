@@ -20,7 +20,17 @@ public class OneDirectionGearClass : Gear
 
     protected override void CheckJammingElement()
     {
-        if (driverJammingElement == this) return;
+        if (driverJammingElement == this)
+        {
+            if (surroundingElements.Length > 0)
+            {
+                return;
+            }
+            else
+            {
+                driverJammingElement = null;
+            }
+        }
         else
         {
             base.CheckJammingElement();

@@ -9,6 +9,7 @@ public class SoundData
     public static string WinningSound { get { return "winning sound"; } }
     public static string EndGearRotating { get { return "EndGearRotating"; } }
     public static string SellingGear { get { return "SellingMoney"; } }
-
     public static string BuyingGear { get { return "BuyGearSound"; } }
+    public static string ClickButton { get { return "clickButtonSound"; } }
+    public static string NoMoneySoundEffect { get { return "NoMoneySoundEffect"; } }
 }

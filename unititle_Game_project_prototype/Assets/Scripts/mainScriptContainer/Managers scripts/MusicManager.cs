@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] audioClips;
+    [SerializeField] private ClipSetter[] audioClips = new ClipSetter[4];
     public static MusicManager Instance { get; private set; }
 
     private void Awake()
@@ -12,10 +12,11 @@ public class MusicManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(Instance);
         }
         else
         {
-            Destroy(Instance);
+            Destroy(gameObject);
         }
     }
 
@@ -24,7 +25,8 @@ public class MusicManager : MonoBehaviour
         for (int i = 0; i < audioClips.Length; i++)
         {
             var audioInstance = gameObject.AddComponent<AudioSource>();
-            audioInstance.clip = audioClips[i];
+            audioInstance.clip = audioClips[i].clip;
+            audioInstance.volume = audioClips[i].volume;
         }
     }
 
@@ -41,6 +43,12 @@ public class MusicManager : MonoBehaviour
         }
         Debug.LogError("There is no clips to play. there might be something wrong with the string");
     }
+}
 
-
+[System.Serializable]
+public struct ClipSetter
+{
+    public AudioClip clip;
+    [Range(0,1)]
+    public float volume;
 }

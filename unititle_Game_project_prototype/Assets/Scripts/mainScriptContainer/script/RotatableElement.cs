@@ -47,6 +47,8 @@ namespace Assets.tryoutFolder.script
                 CheckJammingElement();
             }
 
+            //print($"{name}: jamming Gear: {driverJammingElement}");
+
             if (driverJammingElement != null)
             {
                 //if the jamming element still exist
@@ -164,14 +166,21 @@ namespace Assets.tryoutFolder.script
 
         protected virtual void JamSurroundingElements()
         {
-            for(int i = 0; i < surroundingElements.Length; i++)
+            for (int i = 0; i < surroundingElements.Length; i++)
             {
                 if (surroundingElements[i] != driverJammingElement)
                 {
                     surroundingElements[i].AddJamingElement(this);
                 }
             }
-        }
+
+            /*problem: sometimes, this does not work as intented, Even though they have 
+                jamming element, it does not seem to be jaming the surround gears for some reason.
+            I tried to check why but the logic I saw made sense. So it is quite strange...
+            In some gameplay, it does not work, in others it works.... er i try to figure
+            it again soon
+            */
+        } // this is where Gears are forcefully stopped due to jamming gears.
 
         private float CalculateSpeed(RotatableElement driver, RotatableElement driven)
         {
@@ -185,7 +194,6 @@ namespace Assets.tryoutFolder.script
             if (direction == Vector3.forward) return Vector3.back;
             else return Vector3.forward;
         }
-
 
     }
 }

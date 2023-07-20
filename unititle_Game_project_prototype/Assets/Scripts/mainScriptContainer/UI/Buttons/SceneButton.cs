@@ -16,17 +16,20 @@ public class SceneButton : MonoBehaviour
     */
     public void GoNextSceneBuild()
     {
+        PlayClickButtonSound();
         StartCoroutine(PauseBeforeChangeScene(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
     public void GoSpecifiedScene(int index)
     {
+        PlayClickButtonSound();
         // 1 is the level menu scene
         StartCoroutine(PauseBeforeChangeScene(index));
     }
 
     public void RestartScene()
     {
+        PlayClickButtonSound();
         StartCoroutine(PauseBeforeChangeScene(SceneManager.GetActiveScene().buildIndex));
     }
 
@@ -36,4 +39,13 @@ public class SceneButton : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
+    private void PlayClickButtonSound()
+    {
+        MusicManager.Instance.PlayMusicClip(SoundData.ClickButton);
+    }
+
+    public void StopGame()
+    {
+        Application.Quit();
+    }
 }

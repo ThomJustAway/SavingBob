@@ -43,7 +43,7 @@ public class MoneyManager : MonoBehaviour
         if(currentMoney < money)
         {
             //if the cost of the specific item is more than the current money
-            print("No money!");
+            MusicManager.Instance.PlayMusicClip(SoundData.NoMoneySoundEffect);
             return false;
         }
         else
