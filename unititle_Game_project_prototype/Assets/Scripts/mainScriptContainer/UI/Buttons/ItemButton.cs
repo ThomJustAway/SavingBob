@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,14 +14,14 @@ public class ItemButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyTextBox;
     [SerializeField] private TextMeshProUGUI itemButtonNameDisplay;
 
-    [Range(5,50)]
+    [Range(5, 50)]
     [SerializeField] private float scale = 37f;
     private Queue<GameObject> pooledItem = new Queue<GameObject>();
     private HashSet<GameObject> existingPool = new HashSet<GameObject>(); //memory is o(n)
     private GameObject gearParent;
     private void Start()
     {
-        
+
         SettingUpButton();
 
         //GameObject gearImage;
@@ -38,11 +39,11 @@ public class ItemButton : MonoBehaviour
 
         Transform item = Instantiate(moveableItem.Getprefab, imageContainer.transform).transform;
 
-        if(item.TryGetComponent<DragableGear>(out DragableGear gearComponent))
+        if (item.TryGetComponent<DragableGear>(out DragableGear gearComponent))
         {
-            MakeImageFromGear(item,gearComponent);
+            MakeImageFromGear(item, gearComponent);
         }
-        else if(item.TryGetComponent<JointBehaviour>(out JointBehaviour jointComponent))
+        else if (item.TryGetComponent<JointBehaviour>(out JointBehaviour jointComponent))
         {
             MakeImageFromJoint(item, jointComponent);
         }
@@ -93,7 +94,7 @@ public class ItemButton : MonoBehaviour
     }
     public GameObject GetItem()
     {
-        if(pooledItem.Count > 0)
+        if (pooledItem.Count > 0)
         {
             GameObject item = pooledItem.Dequeue();
             item.SetActive(true);
@@ -120,4 +121,17 @@ public class ItemButton : MonoBehaviour
         print($"this button is for {moveableItem.Getprefab}");
         return existingPool.Contains(selectedGameobject);
     } //this look out is o(1) since it is using hashset
+
+    public void ReturnAllGameObject()
+    {
+        var allExistingGameObject = existingPool.ToArray();
+        for(int i = 0; i < allExistingGameObject.Length; i++)
+        {
+            if (allExistingGameObject[i].activeInHierarchy)
+            {
+                allExistingGameObject[i].SetActive(false);
+                pooledItem.Enqueue(allExistingGameObject[i]);
+            }
+        }
+    }
 }

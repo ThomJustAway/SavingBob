@@ -3865,6 +3865,10 @@ PrefabInstance:
       propertyPath: speedCondition
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 589733745, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_text
+      value: How???
+      objectReference: {fileID: 0}
     - target: {fileID: 1731086874, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

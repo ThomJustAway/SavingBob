@@ -32,14 +32,19 @@ public class MouseBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.instance.FinishCreatingGearButtonEvent.AddListener(SetButtons);
+        GameManager.instance.FinishCreatingGearButtonEvent += SetButton; ;
         GameManager.instance.SolvedEvent.AddListener(() =>
         {
             gameObject.SetActive(false);
         });
     }
 
-
+    private void SetButton(ItemButton[] obj)
+    {
+        itemButtons = obj;
+        print(obj.Length);
+        GameManager.instance.FinishCreatingGearButtonEvent -= SetButton;
+    }
 
     private void Start()
     {
@@ -64,11 +69,6 @@ public class MouseBehaviour : MonoBehaviour
             //the joint
            return hitGameObject.GetComponentInParent<IMoveable>();
         }
-    }
-    private void SetButtons()
-    {
-        itemButtons = ItemButton.FindObjectsOfType<ItemButton>();
-        GameManager.instance.FinishCreatingGearButtonEvent.RemoveAllListeners();
     }
 
     public void ToggleDeletedActiavted()

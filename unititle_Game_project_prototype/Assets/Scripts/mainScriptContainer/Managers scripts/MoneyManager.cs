@@ -12,13 +12,13 @@ public class MoneyManager : MonoBehaviour
     private int currentMoney;
 
     //this is used for animation to show how much money is earn or not.
-    [SerializeField]private TextMeshProUGUI animationMoneyText;
-    [SerializeField]private Animator animator;
-    
+    [SerializeField] private TextMeshProUGUI animationMoneyText;
+    [SerializeField] private Animator animator;
+
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -35,12 +35,12 @@ public class MoneyManager : MonoBehaviour
         currentMoney = gameManager.currentGameData.money;
 
         SetText();
-      
+
     }
 
     public bool IfCanSubstractCost(int money)
     {
-        if(currentMoney < money)
+        if (currentMoney < money)
         {
             //if the cost of the specific item is more than the current money
             MusicManager.Instance.PlayMusicClip(SoundData.NoMoneySoundEffect);
@@ -50,7 +50,7 @@ public class MoneyManager : MonoBehaviour
         {
             //if can
             currentMoney -= money;
-            animationMoneyText.text = $"<color=#ff4d4d>-{money} "+ moneyIcon;
+            animationMoneyText.text = $"<color=#ff4d4d>-{money} " + moneyIcon;
             animator.SetTrigger("spend money");
             MusicManager.Instance.PlayMusicClip(SoundData.BuyingGear);
             SetText();
@@ -61,7 +61,7 @@ public class MoneyManager : MonoBehaviour
     public void RefundCost(int money)
     {
         currentMoney += money;
-        animationMoneyText.text = $"<color=\"green\">+{money}"+ moneyIcon; // this code is quite bad since it is repetitive
+        animationMoneyText.text = $"<color=\"green\">+{money}" + moneyIcon; // this code is quite bad since it is repetitive
         animator.SetTrigger("refund money");
         SetText();
         MusicManager.Instance.PlayMusicClip(SoundData.SellingGear);
@@ -70,6 +70,12 @@ public class MoneyManager : MonoBehaviour
     private void SetText()
     {
         currentMoneyText.text = currentMoney.ToString() + moneyIcon;
+    }
+
+    public void ResetMoney()
+    {
+        int differenceInMoney = GameManager.instance.currentGameData.money - currentMoney;
+        RefundCost(differenceInMoney);
     }
 
 }

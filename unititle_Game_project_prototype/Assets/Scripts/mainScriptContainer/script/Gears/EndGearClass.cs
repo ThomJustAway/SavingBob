@@ -4,6 +4,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Gear))]
 public class EndGearClass : MonoBehaviour
 {
     private Gear gearHost;
@@ -22,7 +23,7 @@ public class EndGearClass : MonoBehaviour
 
     private void Start()
     {
-        gearHost = GetComponent<DragableGear>();
+        gearHost = GetComponent<Gear>();
         SetGearVisual();
     }
 

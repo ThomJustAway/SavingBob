@@ -130,6 +130,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 330782392, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: speedCondition
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 589733745, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_text
+      value: Good Job!
+      objectReference: {fileID: 0}
+    - target: {fileID: 734388574, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: speedCondition
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 1058223406532152809, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.43
