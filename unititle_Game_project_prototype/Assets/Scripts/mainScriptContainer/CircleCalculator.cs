@@ -12,21 +12,31 @@ namespace Assets.Scripts.mainScriptContainer
             Gear driverGear,
             Gear drivenGear)
         {
-            Circle driverCircle = new Circle(driverGear.transform.position, driverGear.GearRadius);
+            Circle driverCircle = new Circle(driverGear.transform.position, driverGear.InnerGearRadius);
             Circle drivenCircle = new Circle(drivenGear.transform.position, drivenGear.GearRadius);
             Line lineConnectingBothGear = new Line(driverGear.transform.position, drivenGear.transform.position);
 
-            Vector2 pointA = lineConnectingBothGear.GetPointThatIsIntersectCircle(driverCircle , drivenCircle);
+            Vector2 pointA = lineConnectingBothGear.GetPointThatIsIntersectCircle(driverCircle, drivenCircle);
             Vector2 pointB = lineConnectingBothGear.GetPointThatIsIntersectCircle(drivenCircle, driverCircle);
 
+            //pointA is the point at the driver circle
+            //pointB is the point at the driven circle
+            Debug.DrawLine(pointA, Vector3.zero, Color.red, 5f);
+            Debug.DrawLine(pointB, Vector3.zero, Color.yellow, 5f);
+            
 
+            return pointA - pointB;
 
+            //var normalizeVector2 =  pointB - pointA;
+            //normalizeVector2.Normalize();
+            //print($"normalize vector: {normalizeVector2} ");
             //float distance = Vector2.Distance(pointA, pointB);
 
-            //Debug.DrawLine(pointA, Vector3.zero, Color.red, 5f);
-            //Debug.DrawLine(pointB, Vector3.zero, Color.yellow, 5f);
-            //Debug.Log(distance);
-            return pointA - pointB;
+
+            //return normalizeVector2 * distance;
+
+            //Debug.Log($"point a: {pointA}, point B: {pointB} difference pointA - pointB: {pointA-pointB}");
+            //return pointA - pointB; 
 
         }
     }
@@ -36,7 +46,6 @@ namespace Assets.Scripts.mainScriptContainer
         public float K { get; private set; }
         public float C { get; private set; }
 
-        public Vector2 NormaliseVector2 { get; private set; }
 
         //formula for line : y = kx + C 
         /*
@@ -49,7 +58,12 @@ namespace Assets.Scripts.mainScriptContainer
             float xDifference = driverGearOrigin.x - drivenGearOrigin.x;
             K = yDifference / xDifference;
             C = driverGearOrigin.y - (K * driverGearOrigin.x);
-            NormaliseVector2 = new Vector2(xDifference, yDifference);
+
+            // V = (x, y, z), |V| = sqrt(x*x + y*y + z*z) 
+            //https://stackoverflow.com/questions/10002918/what-is-the-need-for-normalizing-a-vector
+            // V/|V| = (x/|V|, y/|V|, z/|V|)
+
+
 
         }
 

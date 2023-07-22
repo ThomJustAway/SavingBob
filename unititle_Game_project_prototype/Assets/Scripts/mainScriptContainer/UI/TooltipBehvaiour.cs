@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class TooltipBehvaiour : MonoBehaviour
@@ -34,9 +35,9 @@ public class TooltipBehvaiour : MonoBehaviour
         }
     }
 
-    public void EndMessage() 
-    { 
-        if (IsActivated) 
+    public void EndMessage()
+    {
+        if (IsActivated)
         {
             IsActivated = !IsActivated;
             animator.SetBool(isActivatedHash, IsActivated);
@@ -47,11 +48,23 @@ public class TooltipBehvaiour : MonoBehaviour
     {
         textMessage.text = message;
     }
-    
+
     public void ResetText()
     {
         //this is called in some other script so you wont see the references
         textMessage.text = "";
+    }
+
+    public void StartShortMessage(string message)
+    {
+        StartCoroutine(ShortMessage(message));
+    }
+
+    private IEnumerator ShortMessage(string message)
+    {
+        StartMessage(message);
+        yield return new WaitForSeconds(3);
+        EndMessage();
     }
 
 }

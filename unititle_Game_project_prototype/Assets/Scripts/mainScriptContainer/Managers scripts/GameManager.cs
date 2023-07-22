@@ -19,10 +19,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform gearPanel;
     [SerializeField] private GameObject layerButtonPrefab;
     [SerializeField] private Transform LayerPanel; // all this variable are set at the inspectors
-
+    
     [HideInInspector] public event Action<ItemButton[]> FinishCreatingGearButtonEvent;
 
     [HideInInspector] public UnityEvent SolvedEvent = new UnityEvent();
+
+    public ItemButton[] itemButtons { get; private set; } 
 
     private void Awake()
     {
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour
     private void CreateButtons()
     {
         IMoveable[] dataAboutButtons = currentGameData.moveables;
-        ItemButton[] itemButtons = new ItemButton[dataAboutButtons.Length];
+        itemButtons = new ItemButton[dataAboutButtons.Length];
         //foreach (var data in dataAboutButtons)
         //{
         //    var button = Instantiate(itemButtonPrefab, gearPanel);

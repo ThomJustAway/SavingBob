@@ -33,30 +33,25 @@ public class DragableGear : Gear, IMoveable
     {
         Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
         Collider2D[] surroundingJoint = GetColliderAroundRadiusBasedOnLayer(LayerData.JointLayer);
-
-        if (surroundInnerGear.Length > 0)
+        print(surroundInnerGear.Length);
+        if (surroundInnerGear.Length == 1)
         {
-            //improve the finding of the valid position
-            ColliderDistance2D distance;
 
-            foreach (var innerGear in surroundInnerGear)
+
+            var gearComponent = surroundInnerGear[0].GetComponentInParent<Gear>();
+            if(gearComponent != null)
             {
-                distance = innerGear.Distance(entireGearArea);
-
-                //Debug.DrawLine(distance.pointA, distance.pointB, Color.red, 2f);
-                //Debug.DrawLine(distance.pointA, Vector3.zero, Color.yellow, 2f);
-                //Debug.DrawLine(distance.pointB, Vector3.zero, Color.black, 2f);
-                //print($"Point A:{distance.pointA} Point B: {distance.pointB}");
-                Vector2 resolveDistance = Math.Abs(distance.distance) * distance.normal;
-                transform.Translate(resolveDistance);
-
-
-                //this line of code is a custome made distance detector I made. 
-                //as my hand is injuried, I stop working for this and work different parts of the game
-                //Gear Parentgear = innerGear.GetComponentInParent<Gear>();
-                //Vector2 resolveDistance = CircleCalculator.DistanceToMoveBetweenDriverAndDrivenGear(Parentgear, this);
-                //transform.Translate(resolveDistance);
+                Vector2 resolveDistance = CircleCalculator.DistanceToMoveBetweenDriverAndDrivenGear(gearComponent, this);
+                transform.position = transform.position + (Vector3)resolveDistance;
             }
+            else
+            {// this mean that it is a wall
+                print("it is a wall!");
+                TryGoBackLastPosition();
+            }
+            //it appear that translate cant do this so I had to 
+            //directly change the position
+
         }
         else if (surroundingJoint.Length > 0)
         {
@@ -70,13 +65,19 @@ public class DragableGear : Gear, IMoveable
                 Debug.LogWarning("Invalid position");
             }
         } //change this
-        spriteRenderer.color = colorData.NormalColor;
-        MusicManager.Instance.PlayMusicClip(SoundData.PlacingSound); // quite bad since I am using magic string
-    }
 
+        //surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
+
+        //if (surroundInnerGear.Length > 0)
+        //{ //that means that the moving of gear is still within a invalid spot
+        //    TryGoBackLastPosition() ;
+        //}
+        spriteRenderer.color = colorData.NormalColor;
+        MusicManager.Instance.PlayMusicClip(SoundData.PlacingSound);
+    }
     public void Move(Vector3 position)
     {
-        if(speed > 0)
+        if (speed > 0)
         {
             speed = 0;
         }
@@ -96,6 +97,35 @@ public class DragableGear : Gear, IMoveable
             previousValidPosition = position;
         }
         //do some code to visually show that the gear can be place or not.
+    }
+
+    private void TryGoBackLastPosition()
+    {
+        if (previousValidPosition != null)
+        {
+            transform.position = new Vector3(previousValidPosition.x,
+                previousValidPosition.y,
+                LayerManager.instance.GetGearZIndexBasedOnCurrentLayer());
+        }
+        //else
+        //{
+        //    //this means that the game object did not have a valid position and was just brought from thh gear menu
+        //    DeleteGear();
+        //}
+    }
+
+    private void DeleteGear()
+    {
+        var itemButtons = GameManager.instance.itemButtons;
+        for (int i = 0; i < itemButtons.Length; i++)
+        {
+            if (itemButtons[i].IsGameObjectRelated(gameObject))
+            {
+                TooltipBehvaiour.instance.StartShortMessage("Remember to drag and drop!");
+                itemButtons[i].RemoveItem(gameObject);
+                break;
+            }
+        }
     }
 }
 

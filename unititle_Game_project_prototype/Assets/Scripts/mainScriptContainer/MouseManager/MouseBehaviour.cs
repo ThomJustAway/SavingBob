@@ -19,7 +19,6 @@ public class MouseBehaviour : MonoBehaviour
      3. checking if the gear is placeable or not
      4. buying gears
      */
-    [HideInInspector] public Grid grid;
     [HideInInspector] public IMoveable selectedObject = null;
     [HideInInspector] public bool deleteActivated = false;
     [HideInInspector] public ItemButton[] itemButtons;
@@ -48,7 +47,6 @@ public class MouseBehaviour : MonoBehaviour
 
     private void Start()
     {
-        grid = Grid.FindObjectOfType<Grid>();
         currentState = mouseIdle;
     }
 

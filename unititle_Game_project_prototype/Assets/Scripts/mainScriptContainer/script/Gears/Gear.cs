@@ -8,8 +8,9 @@ using UnityEngine;
 public class Gear : RotatableElement
 {
     [SerializeField] protected CircleCollider2D entireGearArea;
-    [SerializeField] protected Collider2D innerGearArea;
+    [SerializeField] protected CircleCollider2D innerGearArea;
     public float GearRadius { get; private set; }
+    public float InnerGearRadius { get; private set; }
     protected float MinDept
     {
         get
@@ -31,6 +32,7 @@ public class Gear : RotatableElement
     {
         base.Start();
         GearRadius = entireGearArea.radius;
+        InnerGearRadius = innerGearArea.radius;
     }
 
     protected override RotatableElement[] FindingRotatingElement()

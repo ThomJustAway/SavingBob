@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(DragableGear))]
+[RequireComponent(typeof(Gear))]
 public class StartingGearClass : MonoBehaviour 
 {
     private RotatableElement gearHost;
