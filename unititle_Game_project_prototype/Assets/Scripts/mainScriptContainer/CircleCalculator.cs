@@ -8,6 +8,7 @@ namespace Assets.Scripts.mainScriptContainer
 {
     public class CircleCalculator : MonoBehaviour
     {
+        //used to calculate the vector 2 position needed to seperate two circluar object.
         public static Vector2 DistanceToMoveBetweenDriverAndDrivenGear(
             Gear driverGear,
             Gear drivenGear)
@@ -19,12 +20,13 @@ namespace Assets.Scripts.mainScriptContainer
             Vector2 pointA = lineConnectingBothGear.GetPointThatIsIntersectCircle(driverCircle, drivenCircle);
             Vector2 pointB = lineConnectingBothGear.GetPointThatIsIntersectCircle(drivenCircle, driverCircle);
 
+
+
             //pointA is the point at the driver circle
             //pointB is the point at the driven circle
-            Debug.DrawLine(pointA, Vector3.zero, Color.red, 5f);
-            Debug.DrawLine(pointB, Vector3.zero, Color.yellow, 5f);
-            
-
+            Debug.DrawLine(pointA, driverGear.transform.position, Color.red, 5f);
+            Debug.DrawLine(pointB, drivenGear.transform.position, Color.yellow, 5f);
+            Debug.DrawLine(pointA, pointB, Color.blue, 5f);
             return pointA - pointB;
 
             //var normalizeVector2 =  pointB - pointA;
@@ -78,11 +80,19 @@ namespace Assets.Scripts.mainScriptContainer
                     return twopoints[i];
                 }
             }
-            return Vector2.zero;
+
+            //problem
+            /*
+            1. if the circle is bigger, then it return vector 2 zero. this is bad and 
+            it can send the gear flying.
+            */
+            return twopoints[1]; // return the furthest point.
         }
         private Vector2[] GetTwoPointsIntersectingTheCircle(Circle circle)
         {
-            float[] xValues = GetXValuesFromCircle(circle);
+            // whenever a line intersect a circle, it will depends on have one or two points.
+            //in this case,it is usually two points as no way a a circle that overlap forms a tangents in one of the circles.
+            float[] xValues = GetXValuesFromCircle(circle); 
             Vector2[] points = new Vector2[2];
             for (int i = 0; i < xValues.Length; i++)
             {
@@ -106,7 +116,11 @@ namespace Assets.Scripts.mainScriptContainer
             // quadratic equation: x = (-b + sqrt(b^2 - 4ac)) / 2a
             float a = 1 + (K * K);
             float b = (2 * C * K) - (2 * circle.XOrigin) - (2 * circle.YOrigin * K);
-            float c = (circle.Radius * circle.Radius) - (circle.XOrigin * circle.XOrigin) - (C * C) + (2 * circle.YOrigin * C) - (circle.YOrigin * circle.YOrigin);
+            float c = (circle.Radius * circle.Radius) - 
+                (circle.XOrigin * circle.XOrigin) - 
+                (C * C) + 
+                (2 * circle.YOrigin * C) - 
+                (circle.YOrigin * circle.YOrigin);
             return new float[] { QuadraticEquation(a, b, -c, false) , QuadraticEquation(a, b, -c, true) };
         }
 

@@ -33,25 +33,24 @@ public class DragableGear : Gear, IMoveable
     {
         Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
         Collider2D[] surroundingJoint = GetColliderAroundRadiusBasedOnLayer(LayerData.JointLayer);
-        print(surroundInnerGear.Length);
         if (surroundInnerGear.Length == 1)
         {
-
-
             var gearComponent = surroundInnerGear[0].GetComponentInParent<Gear>();
-            if(gearComponent != null)
+            if (gearComponent != null)
             {
                 Vector2 resolveDistance = CircleCalculator.DistanceToMoveBetweenDriverAndDrivenGear(gearComponent, this);
                 transform.position = transform.position + (Vector3)resolveDistance;
             }
             else
             {// this mean that it is a wall
-                print("it is a wall!");
                 TryGoBackLastPosition();
             }
             //it appear that translate cant do this so I had to 
             //directly change the position
-
+        }
+        else if(surroundInnerGear.Length > 1)
+        {
+            TryGoBackLastPosition();
         }
         else if (surroundingJoint.Length > 0)
         {
@@ -66,12 +65,12 @@ public class DragableGear : Gear, IMoveable
             }
         } //change this
 
-        //surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
+        surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
 
-        //if (surroundInnerGear.Length > 0)
-        //{ //that means that the moving of gear is still within a invalid spot
-        //    TryGoBackLastPosition() ;
-        //}
+        if (surroundInnerGear.Length > 0)
+        { //that means that the moving of gear is still within a invalid spot
+            TryGoBackLastPosition();
+        }
         spriteRenderer.color = colorData.NormalColor;
         MusicManager.Instance.PlayMusicClip(SoundData.PlacingSound);
     }
@@ -101,17 +100,17 @@ public class DragableGear : Gear, IMoveable
 
     private void TryGoBackLastPosition()
     {
-        if (previousValidPosition != null)
+        if (previousValidPosition != Vector3.zero)
         {
             transform.position = new Vector3(previousValidPosition.x,
                 previousValidPosition.y,
                 LayerManager.instance.GetGearZIndexBasedOnCurrentLayer());
         }
-        //else
-        //{
-        //    //this means that the game object did not have a valid position and was just brought from thh gear menu
-        //    DeleteGear();
-        //}
+        else
+        {
+            //this means that the game object did not have a valid position and was just brought from the gear menu
+            DeleteGear();
+        }
     }
 
     private void DeleteGear()
