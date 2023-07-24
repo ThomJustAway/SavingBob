@@ -6,6 +6,14 @@ using UnityEngine;
 
 namespace Assets.Scripts.mainScriptContainer
 {
+    /* a bit of a short history.
+    
+    I initally used collider.2d to 
+    do my correction of position. https://docs.unity3d.com/ScriptReference/Collider2D.Distance.html
+    However, it did not work as expected so I had to come up with my own collision detection. this is where
+    the circlecalculator comes in.
+    It takes two circles and does calculation to find out a vector2 to seperate them apart.
+    */
     public class CircleCalculator : MonoBehaviour
     {
         //used to calculate the vector 2 position needed to seperate two circluar object.
@@ -54,19 +62,12 @@ namespace Assets.Scripts.mainScriptContainer
              k: gradient of line, also the normalise vector 
              c: Constant
         */
-        public Line(Vector3 driverGearOrigin, Vector3 drivenGearOrigin)
+    public Line(Vector3 driverGearOrigin, Vector3 drivenGearOrigin)
         {
             float yDifference = driverGearOrigin.y - drivenGearOrigin.y;
             float xDifference = driverGearOrigin.x - drivenGearOrigin.x;
             K = yDifference / xDifference;
             C = driverGearOrigin.y - (K * driverGearOrigin.x);
-
-            // V = (x, y, z), |V| = sqrt(x*x + y*y + z*z) 
-            //https://stackoverflow.com/questions/10002918/what-is-the-need-for-normalizing-a-vector
-            // V/|V| = (x/|V|, y/|V|, z/|V|)
-
-
-
         }
 
 

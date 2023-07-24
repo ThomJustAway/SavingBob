@@ -8,6 +8,14 @@ using UnityEngine.UI;
 
 public class MouseIdle : IMouseStates 
     {
+    //Readme
+    /*
+    The mouse idle state is as you guess, a state that does not do anything.
+    It will keep track and see what the player do and notice if there is any
+    change in state (like for instance if the delete state is activated).
+    It checks for clicks and raycast them (both UI and Gameobject). Do check
+    those functions.
+    */
     public IMouseStates DoState(MouseBehaviour mouseBehaviour)
     {
         if (Input.GetMouseButtonDown(0))
@@ -64,8 +72,7 @@ public class MouseIdle : IMouseStates
         //this code only works for making Gear
         foreach (var raycastResult in raysastResults)
         {
-            //do code that make the gear follow.
-            //if gear is not place in scene, hide the gear using Gearpool.
+           
             if (raycastResult.gameObject.TryGetComponent<ItemButton>(out ItemButton manager))
             {
                 if (manager.CanBuyItem())
@@ -82,18 +89,4 @@ public class MouseIdle : IMouseStates
         }
     }
 
-    //private System.Type[] existingSystemType = { typeof(Gear), typeof(JointBehaviour) }; 
-
-    //private void GetType(Collider2D collider)
-    //{
-    //    foreach(System.Type type in existingSystemType)
-    //    {
-    //        if(collider.TryGetComponent(type, out Component compenent))
-    //        {
-    //            Debug.Log(compenent.gameObject.name);
-    //            return;
-    //        }
-    //    }
-    //    Debug.Log("no avaliable component detected");
-    //}
 }

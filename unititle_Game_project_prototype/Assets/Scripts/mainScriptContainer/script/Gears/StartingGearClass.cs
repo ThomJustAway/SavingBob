@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Gear))]
 public class StartingGearClass : MonoBehaviour 
 {
+    // 
+
     private RotatableElement gearHost;
     [SerializeField] private float speed;
     [SerializeField] private RotationDirectionClass.RotationDirection rotationDirection;

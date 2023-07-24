@@ -9,18 +9,21 @@ using UnityEngine.EventSystems;
 
 public class MouseBehaviour : MonoBehaviour
 {
-
-    //This behaviour uses the finite state machine pattern 
-
-    //this is used for 
+    //readme
     /*
-     1. moving gears
-     2. deleting gear
-     3. checking if the gear is placeable or not
-     4. buying gears
-     */
-    [HideInInspector] public IMoveable selectedObject = null;
-    [HideInInspector] public bool deleteActivated = false;
+    The mousebehaviour is what makes the mouse able to interact with the different
+    items in the game such as dragging, deleting and buying gears.
+
+    It uses the finite state machine pattern where the are a different states in use.
+
+    The only bad thing I can comment is that many of the variables are public
+    but as long as I dont expose this behaviour to other class other than the states, 
+    the implementation should be fine
+    */
+
+    
+    [HideInInspector] public IMoveable selectedObject = null; //You can see this used in the idle and mousemoveSelectedObject state
+    [HideInInspector] public bool deleteActivated = false; // used only on the delete state. This is toggled by a delete button
     [HideInInspector] public ItemButton[] itemButtons;
 
     //States
@@ -41,7 +44,6 @@ public class MouseBehaviour : MonoBehaviour
     private void SetButton(ItemButton[] obj)
     {
         itemButtons = obj;
-        print(obj.Length);
         GameManager.instance.FinishCreatingGearButtonEvent -= SetButton;
     }
 

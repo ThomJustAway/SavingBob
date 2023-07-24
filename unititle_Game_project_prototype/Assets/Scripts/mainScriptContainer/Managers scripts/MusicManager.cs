@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
+    //readme
+    /*
+        The musicmanager is sort of inspired by brackey video
+    but I did not follow through the tutorial as I got the idea https://www.youtube.com/watch?v=6OT43pvUyfY .
+
+    I did not like how they use magic strings to play music. So I decided
+    to use a script to store the data (sounddata script). This is a script
+    that persist throughout the game as you can see from the DontDestroyOnLoad().
+
+    it does one thing which is to play music clips .
+    I am not too sure If I should add a button to stop and start music.
+    */
     [SerializeField] private ClipSetter[] audioClips = new ClipSetter[4];
     public static MusicManager Instance { get; private set; }
 

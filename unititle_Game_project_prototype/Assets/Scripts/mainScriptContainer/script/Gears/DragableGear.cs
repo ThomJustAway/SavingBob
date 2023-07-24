@@ -13,6 +13,13 @@ using Assets.Scripts.mainScriptContainer;
 
 public class DragableGear : Gear, IMoveable
 {
+    //readme
+    /*
+    Inherit the IMoveable which is a interface IMoveable which is used for all the dragging of gears.
+    It uses the circle calculator to do the detection correction of placement. You can find out more
+    under the Move and CheckValidPostion function
+    */
+
     [SerializeField] private string nameOfElement;
     [SerializeField] private int cost;
 
@@ -35,6 +42,8 @@ public class DragableGear : Gear, IMoveable
         Collider2D[] surroundingJoint = GetColliderAroundRadiusBasedOnLayer(LayerData.JointLayer);
         if (surroundInnerGear.Length == 1)
         {
+            // as of now, it is only possible to correct position 
+            //with only one gear rest of the time it will be invalid.
             var gearComponent = surroundInnerGear[0].GetComponentInParent<Gear>();
             if (gearComponent != null)
             {
@@ -45,8 +54,6 @@ public class DragableGear : Gear, IMoveable
             {// this mean that it is a wall
                 TryGoBackLastPosition();
             }
-            //it appear that translate cant do this so I had to 
-            //directly change the position
         }
         else if(surroundInnerGear.Length > 1)
         {
@@ -68,7 +75,8 @@ public class DragableGear : Gear, IMoveable
         surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
 
         if (surroundInnerGear.Length > 0)
-        { //that means that the moving of gear is still within a invalid spot
+        { 
+            //that means that the moving of gear is still within a invalid spot
             TryGoBackLastPosition();
         }
         spriteRenderer.color = colorData.NormalColor;
@@ -100,7 +108,8 @@ public class DragableGear : Gear, IMoveable
 
     private void TryGoBackLastPosition()
     {
-        if (previousValidPosition != Vector3.zero)
+        if (previousValidPosition != Vector3.zero) 
+            //i am not sure why but whenever a vector3 is initalise, the inital value is vector.zero
         {
             transform.position = new Vector3(previousValidPosition.x,
                 previousValidPosition.y,

@@ -6,6 +6,37 @@ namespace Assets.tryoutFolder.script
 {
     public abstract class RotatableElement : MonoBehaviour
     {
+        //readme!
+        /*
+        Rotatable Element is the base abstract class for all implementation
+        of class that requires to rotate. It follows a strict update loop 
+        which you can look down.
+
+        How it works:
+        1. In order for a element to rotate, it requires an element to rotate.
+        2. a starting gear. ususally using a Starting gear script will be rotating throughout the game
+        3. It passes speed through the AddSpeedAndRotation() method. where the element that is being rotated will
+        store memory to the driver element as you can see below. It will also set the speed and rotation of the driven element
+        4. In every update call, whenever there is speed, it will show that speed through RotateElementVisually(). 
+        where it will show the speed (like gears) or not (like joints)
+        5. lastly, it will slowly reduce the speed using friction.
+
+        Some things to consider:
+        1. the rotatable element will ususally check if there is a rotatable element within its surrounding.
+        (this is called using the FindingRotatingElement() function)
+        2. There will also be jamming gear ( like the one directional gear ) which will immediately stop all 
+        movement in the gear. the JamSurroundingElements() also function the same way as the AddSpeedAndRotation() 
+        but you will have to see the one direction gear to find out more.
+        3. You can briefly look through the update call to understand how a rotatable act within each update call.
+
+
+        Some problem I face (currently):
+        1. there will be times where the certain function does not do its own responsiblity
+        2. Some bugs will still appear which I plan to fix
+        */
+
+        //most of the code are self documenting
+
         protected RotatableElement driverElement;
         protected RotatableElement[] surroundingElements;
         protected RotatableElement driverJammingElement;
@@ -46,8 +77,6 @@ namespace Assets.tryoutFolder.script
                 //check if there is a jamming gear still exist
                 CheckJammingElement();
             }
-
-            //print($"{name}: jamming Gear: {driverJammingElement}");
 
             if (driverJammingElement != null)
             {

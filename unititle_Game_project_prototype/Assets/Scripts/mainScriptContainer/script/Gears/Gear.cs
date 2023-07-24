@@ -7,6 +7,29 @@ using UnityEngine;
 
 public class Gear : RotatableElement
 {
+    //readme
+    /*
+        Read Rotatable elements before reading this.
+
+    How the Gear does rotation?
+    1. There are two collider in a gear prefab.
+        - entire gear area
+            :It is the entire area of the gear
+        - inner gear area
+            : it only consist of the area that is not affected by the teeth.
+        *look at the prefabs of the gear to understand what this means
+    2. The entiregeararea collider will find the surrounding gears based on
+        Physic2d collision. Which can be seen in FindingRotatingElement() function
+    3. Afterwards, it follows the update called by the rotatable elements.
+
+    some thing to note:
+    1. the Min dept and max dept are used for the gears know which layer is need to rotate.
+    2. gear radius is used to detech surrounding rotatable element based on physic2d
+    3. InnerGear Radius is used for circle calculator. To find out more look at the circle calculator
+    (To help players to move gears to a valid position)
+
+    */
+
     [SerializeField] protected CircleCollider2D entireGearArea;
     [SerializeField] protected CircleCollider2D innerGearArea;
     public float GearRadius { get; private set; }

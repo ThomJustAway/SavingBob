@@ -7,6 +7,19 @@ using System.Collections.Generic;
 
 public class JointBehaviour : RotatableElement, IMoveable
 {
+    //readme
+    /*
+        You can think of joints as two gear at different layers.
+        The gear will has two joint, lower and upper joint.
+        Basically what is that it check for any connected gear 
+        from either joint. 
+
+        Afterwards, it will tell the opposing gear to follow the rotation
+        and speed of the gear. It is also dragable due to the IMoveable interface
+        The methods are pretty self documenting so feel free to start at the 
+        FindingRotatingElement() to find out how it detect the surrounding joints.
+    */
+
     [SerializeField] private CircleCollider2D lowerJoint;
     [SerializeField] private CircleCollider2D upperJoint;
     [SerializeField] private string nameOfElement;
@@ -61,7 +74,6 @@ public class JointBehaviour : RotatableElement, IMoveable
         return elements.ToArray();
 
     }
-
 
     private RotatableElement FindRotatableGearFromJoint(float minDept, float maxDept)
     {

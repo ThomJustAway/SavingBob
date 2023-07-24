@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class RestartButton : MonoBehaviour
 {
-
+    //readme
+    /*
+    This is the button for restarting.
+    What this does is that it will 
+    get call the itembutton.returnallgameobject function
+    to return all the gameobject in the game.
+    */
     private ItemButton[] buttons;
 
     private void Awake()

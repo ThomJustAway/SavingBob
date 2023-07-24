@@ -5,7 +5,16 @@ using UnityEngine.Events;
 
 public class MoneyManager : MonoBehaviour
 {
-    public static MoneyManager instance; //singleton since I wantto reference this object to different area of the code
+    //readme
+    /*
+        Keep track of the money in the game. singleton since I want to reference this object
+        to different area of the code. It does all thing money related
+
+    1. subtracting money
+    2. get refund money
+    3. play music and animation to show those changes.
+    */
+    public static MoneyManager instance; //singleton since I want to reference this object to different area of the code
     private string moneyIcon = " <sprite name=\"Money icon\">";
     private TextMeshProUGUI currentMoneyText;
     private GameManager gameManager;

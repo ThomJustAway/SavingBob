@@ -54,14 +54,17 @@ public class LayerManager : MonoBehaviour
 
     public int GetGearZIndexBasedOnCurrentLayer()
     {
-        return -3*(currentLayer-1);
+        // -3 is the difference in layer. For instance if 
+        //current layer = 1, the layer will be z-index of 0 which is what the (currentlayer - 1) is for.
+        return -3 * (currentLayer - 1); 
     }
 
     public void ChangeLayer(int layer)
     {
         int difference = (currentLayer - layer) * 3;
         currentLayer = layer;
-        int newZPosition = (int) mainCamera.transform.position.z + difference ;
+        int newZPosition = (int)mainCamera.transform.position.z + difference;
+        //just know the two line belows just change the z position according. look at readme to understand the number
         background.position = new Vector3(0, 0,newZPosition+2);
         mainCamera.transform.position = new Vector3(0, 0, newZPosition);
     }

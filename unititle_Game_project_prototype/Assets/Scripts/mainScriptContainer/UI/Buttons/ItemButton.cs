@@ -8,6 +8,21 @@ using UnityEngine;
 
 public class ItemButton : MonoBehaviour
 {
+    //readme
+    /*
+    Itembutton is a component required to make and keep gears.
+    It uses the pooling pattern as I know that There can be
+    multiple instances of different objects.
+
+    how it work:
+        1. once initialize by the gamemanger, it will produce
+        a set number of inactivated IMoveable gameobject. 
+        2. the mouseIdle will request a gameobject if they click on the Ui component
+        that stores the ItemMouse using the GetItem() function.
+        3. if Imoveable items are needed to be kept, they can use the ReturnAllGameObject() 
+        which keeps all the gameobject by iterating all the existing instances of said object
+        in the existing pool.
+    */
     [SerializeField] public IMoveable moveableItem;
     [SerializeField] private int numberOfItem = 10;
     [SerializeField] private GameObject imageContainer;

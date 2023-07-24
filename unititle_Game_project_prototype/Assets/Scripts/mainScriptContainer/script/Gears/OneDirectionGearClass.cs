@@ -5,6 +5,15 @@ using UnityEngine;
 
 public class OneDirectionGearClass : Gear
 {
+    // readme
+    /*
+    one direction gear are gears that cant be rotated in a certain direction (clockwise or anticlockwise)
+    
+    some changes to the inital Rotatable element:
+    1. It will add itself as a driver jamming gear if it detect it is being 
+    rotated at another direction
+    2. To compensate, it will check if the driver jamming element is itself. (CheckJammingElement())
+    */
     [SerializeField] private RotationDirectionClass.RotationDirection direction;
     private Vector3 vector3Direction;
 

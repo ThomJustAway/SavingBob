@@ -8,6 +8,16 @@ using UnityEngine.EventSystems;
 
 public class DeleteItems : IMouseStates
 {
+    //readme
+    /*
+    This state does one thing. listen for click and see if 
+    there is a Imoveable object. You can read abit on how the 
+    itembutton works but how this state works is by having a stored 
+    array of itembutton (in mousebehaviour) and bringing it back to the pool
+
+    it will return back to idle state if it sense the deleteActivated bool to 
+    be false.
+    */
     public IMouseStates DoState(MouseBehaviour mouseBehaviour)
     {
         ListenAndDeleteSelectedItem(mouseBehaviour);
@@ -26,6 +36,7 @@ public class DeleteItems : IMouseStates
         if(Input.GetMouseButtonDown(0))
         {
             Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //mb magic int this is the range for detecting the layer
             float minDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() - 0.5f;
             float maxDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() + 0.5f;
             var collidedObject = Physics2D.Raycast(positionOfMouse,
@@ -36,10 +47,8 @@ public class DeleteItems : IMouseStates
                 maxDept
             );
 
-
             if(collidedObject.collider != null)
             {
-
                 IMoveable ImoveableComponent = mouseBehaviour.GetImoveableComponent(collidedObject.collider);
                 foreach (ItemButton itemButton in mouseBehaviour.itemButtons)
                 {

@@ -12,4 +12,5 @@ public class ColorDataScriptableObject : ScriptableObject
     public Color normalColor = Color.white;
     public Color StartingGearColor = Color.green;
     public Color EndingGearColor = Color.red;
+    public Color ObsticleGearColor = Color.green;
 }

@@ -15,6 +15,8 @@ public class ColorData : MonoBehaviour
     public Color NormalColor { get; private set; }
     public Color StartingGearColor { get; private set; }
     public Color EndingGearColor { get; private set; }
+
+    public Color ObsticleGearColor { get; private set; }
     private void Awake()
     {
         if (Instance == null)
@@ -32,6 +34,6 @@ public class ColorData : MonoBehaviour
         NormalColor = scriptableObject.normalColor;
         StartingGearColor = scriptableObject.StartingGearColor;
         EndingGearColor = scriptableObject.EndingGearColor;
-
+        ObsticleGearColor = scriptableObject.ObsticleGearColor;
     }
 }

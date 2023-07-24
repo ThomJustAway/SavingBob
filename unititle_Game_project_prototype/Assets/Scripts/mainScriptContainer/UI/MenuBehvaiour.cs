@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class MenuBehvaiour : MonoBehaviour
 {
+
+    //readme
+    /*
+        This is a minor script used in the unity engine.
+        only used for menu like the gear and layer menu,.
+    */
     private Animator animator;
     private int isActivatedHash = Animator.StringToHash("IsActivated");
 
