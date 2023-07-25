@@ -17,28 +17,16 @@ public class SceneButton : MonoBehaviour
     public void GoNextSceneBuild()
     {
         PlayClickButtonSound();
-        StartCoroutine(PauseBeforeChangeScene(SceneManager.GetActiveScene().buildIndex + 1));
+        SceneTransitionManager.instance.StartTransition(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void GoSpecifiedScene(int index)
     {
         PlayClickButtonSound();
         // 1 is the level menu scene
-        StartCoroutine(PauseBeforeChangeScene(index));
-    }
+        SceneTransitionManager.instance.StartTransition(index);
 
-    public void RestartScene()
-    {
-        PlayClickButtonSound();
-        StartCoroutine(PauseBeforeChangeScene(SceneManager.GetActiveScene().buildIndex));
     }
-
-    private IEnumerator PauseBeforeChangeScene(int scene)
-    {
-        yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(scene);
-    }
-
     private void PlayClickButtonSound()
     {
         MusicManager.Instance.PlayMusicClip(SoundData.ClickButton);
