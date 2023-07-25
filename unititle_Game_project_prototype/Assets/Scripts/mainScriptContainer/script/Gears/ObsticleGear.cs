@@ -23,7 +23,6 @@ public class ObsticleGear : Gear
     private void ToggleBool()
     {
         bool hasSpeed = this.speed > 0;
-        print($"hasspeed {hasSpeed} isactivated {isActivated}");
         if (hasSpeed != isActivated)
         {
             if (hasSpeed == true)
@@ -31,7 +30,7 @@ public class ObsticleGear : Gear
                 obsticle.RemoveObsticle();
             }
             else
-            {
+            { 
                 obsticle.MoveObsticleBack();
             }
             //change the bool no matter what happen

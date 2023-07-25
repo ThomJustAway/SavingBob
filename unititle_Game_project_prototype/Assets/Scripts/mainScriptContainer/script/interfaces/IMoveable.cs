@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -19,4 +20,6 @@ public interface IMoveable
 
     public string Name { get; }
     // show the name of the object
+
+    public void RemoveItem();
 }

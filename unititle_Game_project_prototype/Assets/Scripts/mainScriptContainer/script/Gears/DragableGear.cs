@@ -118,18 +118,20 @@ public class DragableGear : Gear, IMoveable
         else
         {
             //this means that the game object did not have a valid position and was just brought from the gear menu
-            DeleteGear();
+            TooltipBehvaiour.instance.StartShortMessage("Remember to drag and drop!");
+            RemoveItem();
         }
     }
 
-    private void DeleteGear()
+   
+
+    public void RemoveItem()
     {
         var itemButtons = GameManager.instance.itemButtons;
         for (int i = 0; i < itemButtons.Length; i++)
         {
             if (itemButtons[i].IsGameObjectRelated(gameObject))
             {
-                TooltipBehvaiour.instance.StartShortMessage("Remember to drag and drop!");
                 itemButtons[i].RemoveItem(gameObject);
                 break;
             }

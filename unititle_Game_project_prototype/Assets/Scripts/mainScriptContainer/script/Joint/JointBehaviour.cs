@@ -183,4 +183,16 @@ public class JointBehaviour : RotatableElement, IMoveable
         MusicManager.Instance.PlayMusicClip(SoundData.PlacingSound);
     }
 
+    public void RemoveItem()
+    {
+        var itemButtons = GameManager.instance.itemButtons;
+        for (int i = 0; i < itemButtons.Length; i++)
+        {
+            if (itemButtons[i].IsGameObjectRelated(gameObject))
+            {
+                itemButtons[i].RemoveItem(gameObject);
+                break;
+            }
+        }
+    }
 }
