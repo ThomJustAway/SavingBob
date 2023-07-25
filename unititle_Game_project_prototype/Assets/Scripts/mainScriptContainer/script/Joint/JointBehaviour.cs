@@ -153,7 +153,7 @@ public class JointBehaviour : RotatableElement, IMoveable
 
     private void CheckCorrectLayer()
     {
-        int maxLayer = GameManager.instance.currentGameData.NumberOfLayers;
+        int maxLayer = LevelManager.instance.currentGameData.NumberOfLayers;
         int currentLayer = LayerManager.instance.CurrentLayer;
         if (currentLayer == maxLayer)
         {
@@ -185,7 +185,7 @@ public class JointBehaviour : RotatableElement, IMoveable
 
     public void RemoveItem()
     {
-        var itemButtons = GameManager.instance.itemButtons;
+        var itemButtons = LevelManager.instance.itemButtons;
         for (int i = 0; i < itemButtons.Length; i++)
         {
             if (itemButtons[i].IsGameObjectRelated(gameObject))

@@ -17,7 +17,7 @@ public class MoneyManager : MonoBehaviour
     public static MoneyManager instance; //singleton since I want to reference this object to different area of the code
     private string moneyIcon = " <sprite name=\"Money icon\">";
     private TextMeshProUGUI currentMoneyText;
-    private GameManager gameManager;
+    private LevelManager gameManager;
     private int currentMoney;
 
     //this is used for animation to show how much money is earn or not.
@@ -40,7 +40,7 @@ public class MoneyManager : MonoBehaviour
     void Start()
     {
         currentMoneyText = GetComponent<TextMeshProUGUI>();
-        gameManager = GameManager.instance;
+        gameManager = LevelManager.instance;
         currentMoney = gameManager.currentGameData.money;
 
         SetText();
@@ -83,7 +83,7 @@ public class MoneyManager : MonoBehaviour
 
     public void ResetMoney()
     {
-        int differenceInMoney = GameManager.instance.currentGameData.money - currentMoney;
+        int differenceInMoney = LevelManager.instance.currentGameData.money - currentMoney;
         RefundCost(differenceInMoney);
     }
 

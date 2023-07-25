@@ -247,6 +247,10 @@ PrefabInstance:
       propertyPath: speedCondition
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 19484796752929815, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: currentGameData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1dd879634c2945344ac92e35941e6c3a, type: 2}
     - target: {fileID: 1058223406532152809, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.43

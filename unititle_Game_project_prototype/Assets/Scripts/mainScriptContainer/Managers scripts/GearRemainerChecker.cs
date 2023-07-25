@@ -27,8 +27,8 @@ public class GearRemainerChecker : MonoBehaviour
         IsSolve = CheckIfSolve();
         if (IsSolve)
         {
-            GameManager.instance.SolvedEvent?.Invoke();
-            GameManager.instance.SolvedEvent.RemoveAllListeners();
+            LevelManager.instance.SolvedEvent?.Invoke();
+            LevelManager.instance.SolvedEvent.RemoveAllListeners();
         }
     }
 

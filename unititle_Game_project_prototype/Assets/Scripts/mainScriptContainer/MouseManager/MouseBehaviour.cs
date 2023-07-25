@@ -33,7 +33,7 @@ public class MouseBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.instance.SolvedEvent.AddListener(() =>
+        LevelManager.instance.SolvedEvent.AddListener(() =>
         {
             gameObject.SetActive(false);
         });

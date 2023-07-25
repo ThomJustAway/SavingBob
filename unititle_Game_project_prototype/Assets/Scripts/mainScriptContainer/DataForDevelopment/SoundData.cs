@@ -12,4 +12,6 @@ public class SoundData
     public static string BuyingGear { get { return "BuyGearSound"; } }
     public static string ClickButton { get { return "clickButtonSound"; } }
     public static string NoMoneySoundEffect { get { return "NoMoneySoundEffect"; } }
+
+    public static string ObsticleMoving { get { return "SlideObsticle"; } }
 }

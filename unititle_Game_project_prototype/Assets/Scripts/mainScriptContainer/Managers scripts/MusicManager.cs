@@ -19,11 +19,14 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private ClipSetter[] audioClips = new ClipSetter[4];
     public static MusicManager Instance { get; private set; }
 
+    private ClipSetter backgroundMusicClip;
+    public float MasterVolume { get; private set; }
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            MasterVolume = 1.0f;
             DontDestroyOnLoad(Instance);
         }
         else
@@ -39,21 +42,41 @@ public class MusicManager : MonoBehaviour
             var audioInstance = gameObject.AddComponent<AudioSource>();
             audioInstance.clip = audioClips[i].clip;
             audioInstance.volume = audioClips[i].volume;
+            audioClips[i].AudioSource = audioInstance;
+            if (audioClips[i].clip.name == "background Music")
+            {
+                audioInstance.loop = true;
+                backgroundMusicClip = audioClips[i];
+                audioInstance.Play();
+            }
         }
     }
 
     public void PlayMusicClip(string clipName)
     {
         var audiosources = gameObject.GetComponents<AudioSource>();
-        foreach (var audioSource in audiosources)
+        var clip = SearchForClip(clipName);    
+        clip.AudioSource.volume = MasterVolume * clip.volume;
+        clip.AudioSource.Play();
+    }
+
+    private ClipSetter SearchForClip(string clipName)
+    {
+        foreach (var clip in audioClips)
         {
-            if (audioSource.clip.name == clipName)
+            if (clip.clip.name == clipName)
             {
-                audioSource.Play();
-                return;
+                return clip;
             }
         }
         Debug.LogError("There is no clips to play. there might be something wrong with the string");
+        return audioClips[0];
+    }
+
+    public void ChangeSliderVolume(float volume)
+    {
+        MasterVolume = volume;
+        backgroundMusicClip.AudioSource.volume = volume * backgroundMusicClip.volume ;
     }
 }
 
@@ -61,6 +84,8 @@ public class MusicManager : MonoBehaviour
 public struct ClipSetter
 {
     public AudioClip clip;
-    [Range(0,1)]
+    [Range(0, 1)]
     public float volume;
+
+    [HideInInspector] public AudioSource AudioSource;
 }

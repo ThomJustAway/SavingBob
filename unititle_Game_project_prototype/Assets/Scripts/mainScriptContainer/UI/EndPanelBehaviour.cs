@@ -13,7 +13,7 @@ public class EndPanelBehaviour : MonoBehaviour
         //refer to the rule where 0 and 1 are used for main menu and level menu respectively. The first level will start at build 2
         int currentLevel = SceneManager.GetActiveScene().buildIndex - 1; //therefore, -1 to each respective build will calculate the current level 
         levelText.text = $"Level {currentLevel} Completed!";
-        GameManager.instance.SolvedEvent.AddListener(ActivatePanel);
+        LevelManager.instance.SolvedEvent.AddListener(ActivatePanel);
     }
 
     private void ActivatePanel()

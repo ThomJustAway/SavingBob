@@ -127,7 +127,7 @@ public class DragableGear : Gear, IMoveable
 
     public void RemoveItem()
     {
-        var itemButtons = GameManager.instance.itemButtons;
+        var itemButtons = LevelManager.instance.itemButtons;
         for (int i = 0; i < itemButtons.Length; i++)
         {
             if (itemButtons[i].IsGameObjectRelated(gameObject))

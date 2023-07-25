@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
     //Read me
     /*
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     layers and prefabs is needed for the game. It is also used to tell the
     other gameobjects if a game is completed
     */
-    public static GameManager instance;
+    public static LevelManager instance;
     public GameDataScriptableObject currentGameData;
     [SerializeField] private GameObject itemButtonPrefab; //contains the item button script
     [SerializeField] private Transform gearPanel;

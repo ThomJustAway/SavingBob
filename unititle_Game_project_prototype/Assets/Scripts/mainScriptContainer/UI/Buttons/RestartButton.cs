@@ -15,9 +15,9 @@ public class RestartButton : MonoBehaviour
     {
         MusicManager.Instance.PlayMusicClip(SoundData.ClickButton);
         MoneyManager.instance.ResetMoney();
-        for(int i  = 0; i < GameManager.instance.itemButtons.Length; i++)
+        for(int i  = 0; i < LevelManager.instance.itemButtons.Length; i++)
         {// get each itembutton to keep all the items
-            GameManager.instance.itemButtons[i].ReturnAllGameObject();
+            LevelManager.instance.itemButtons[i].ReturnAllGameObject();
         }
     }
 

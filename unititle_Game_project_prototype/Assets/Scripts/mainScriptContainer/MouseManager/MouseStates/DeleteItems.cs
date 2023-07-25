@@ -50,7 +50,7 @@ public class DeleteItems : IMouseStates
             if(collidedObject.collider != null)
             {
                 IMoveable ImoveableComponent = mouseBehaviour.GetImoveableComponent(collidedObject.collider);
-                foreach (ItemButton itemButton in GameManager.instance.itemButtons)
+                foreach (ItemButton itemButton in LevelManager.instance.itemButtons)
                 {
                     if (itemButton.IsGameObjectRelated(ImoveableComponent.Getprefab))
                     {

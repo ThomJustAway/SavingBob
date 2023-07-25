@@ -4202,6 +4202,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19484796752929815, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: currentGameData
+      value: 
+      objectReference: {fileID: 11400000, guid: be130bd54ff25264395823f1379506c6, type: 2}
     - target: {fileID: 1058223405723638229, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.99
