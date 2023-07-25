@@ -24,7 +24,6 @@ public class MouseBehaviour : MonoBehaviour
     
     [HideInInspector] public IMoveable selectedObject = null; //You can see this used in the idle and mousemoveSelectedObject state
     [HideInInspector] public bool deleteActivated = false; // used only on the delete state. This is toggled by a delete button
-    [HideInInspector] public ItemButton[] itemButtons;
 
     //States
     [HideInInspector] public IMouseStates currentState;
@@ -34,17 +33,10 @@ public class MouseBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.instance.FinishCreatingGearButtonEvent += SetButton; ;
         GameManager.instance.SolvedEvent.AddListener(() =>
         {
             gameObject.SetActive(false);
         });
-    }
-
-    private void SetButton(ItemButton[] obj)
-    {
-        itemButtons = obj;
-        GameManager.instance.FinishCreatingGearButtonEvent -= SetButton;
     }
 
     private void Start()

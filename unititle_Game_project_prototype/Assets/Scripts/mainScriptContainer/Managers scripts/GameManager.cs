@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject layerButtonPrefab;
     [SerializeField] private Transform LayerPanel; // all this variable are set at the inspectors
     
-    [HideInInspector] public event Action<ItemButton[]> FinishCreatingGearButtonEvent;
 
     [HideInInspector] public UnityEvent SolvedEvent = new UnityEvent();
 
@@ -62,7 +61,6 @@ public class GameManager : MonoBehaviour
             itemButtons[i] = itemComponent;
             itemComponent.Init(dataAboutButtons[i]); 
         }
-        FinishCreatingGearButtonEvent?.Invoke(itemButtons);
     }
     private void CreateLayerButtons()
     {

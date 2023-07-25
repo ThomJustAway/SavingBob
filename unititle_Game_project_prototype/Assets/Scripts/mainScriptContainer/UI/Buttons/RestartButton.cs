@@ -11,27 +11,14 @@ public class RestartButton : MonoBehaviour
     get call the itembutton.returnallgameobject function
     to return all the gameobject in the game.
     */
-    private ItemButton[] buttons;
-
-    private void Awake()
-    {
-        GameManager.instance.FinishCreatingGearButtonEvent += GetButtons;
-    }
-
     public void ResetLevel()
     {
         MusicManager.Instance.PlayMusicClip(SoundData.ClickButton);
         MoneyManager.instance.ResetMoney();
-        for(int i  = 0; i < buttons.Length; i++)
-        {
-            buttons[i].ReturnAllGameObject();
+        for(int i  = 0; i < GameManager.instance.itemButtons.Length; i++)
+        {// get each itembutton to keep all the items
+            GameManager.instance.itemButtons[i].ReturnAllGameObject();
         }
-    }
-
-    private void GetButtons(ItemButton[] obj)
-    {
-        buttons = obj;
-        GameManager.instance.FinishCreatingGearButtonEvent -= GetButtons;
     }
 
 }

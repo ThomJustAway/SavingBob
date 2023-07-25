@@ -180,18 +180,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a33841e99dd3084ba87c3475edea5e1, type: 3}
---- !u!1 &956974759 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7468101299140122557, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+--- !u!114 &956974766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6624130192002844875, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
   m_PrefabInstance: {fileID: 1489564199}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &956974766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956974759}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaa1327c022cac541a187a31f9360554, type: 3}
@@ -208,14 +202,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 956974766}
-    - target: {fileID: 1642913066688392341, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResetLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1642913066688392341, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: RestartButton, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 1956212898184647061, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_Name
       value: GameTools
@@ -314,10 +300,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8369090047461865295, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5587686215637390915, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
 --- !u!20 &1489564200 stripped
 Camera:

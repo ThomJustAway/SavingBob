@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6783111930598389857, guid: eee397519c5e97f4ea90efbfc50f66ae, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1366
+      objectReference: {fileID: 0}
     - target: {fileID: 6783111931319585825, guid: eee397519c5e97f4ea90efbfc50f66ae, type: 3}
       propertyPath: m_Name
       value: Scene transtion

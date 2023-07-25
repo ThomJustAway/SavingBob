@@ -34,7 +34,7 @@ public class ObsticleBehaviour : MonoBehaviour
         float interpolation = 0f;
         while (interpolation < 1)
         {
-            interpolation += 0.4f;
+            interpolation += 0.1f;
             transform.localPosition = Vector2.Lerp(start, end, interpolation);
             CheckSurroundingElement();
             yield return new WaitForSeconds(0.2f); // not that good but it is a okay for a start
@@ -47,8 +47,9 @@ public class ObsticleBehaviour : MonoBehaviour
         float angle = 0f;
         float mindept = transform.position.z - 0.3f;
         float maxdept = transform.position.z + 0.3f;
+        float reductionScale = 0.2f;
         var surroundingElement = Physics2D.OverlapBoxAll(transform.position, 
-            obsticleBoxCollider.size, 
+            obsticleBoxCollider.size * reductionScale, 
             angle ,
             LayerData.InnerGearLayer,
             mindept,
