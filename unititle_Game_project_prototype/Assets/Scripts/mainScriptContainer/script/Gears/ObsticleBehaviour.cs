@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class ObsticleBehaviour : MonoBehaviour
 {
     private BoxCollider2D obsticleBoxCollider;
-    [SerializeField] private Vector2 startingPosition;
-    [SerializeField] private Vector2 endingPosition;
+    [SerializeField] private Vector3 startingPosition;
+    [SerializeField] private Vector3 endingPosition;
 
     private void Start()
     {
@@ -29,16 +30,18 @@ public class ObsticleBehaviour : MonoBehaviour
         StartCoroutine(MoveCoroutine(endingPosition, startingPosition));
     }
 
-    private IEnumerator MoveCoroutine(Vector2 start, Vector2 end)
+    private IEnumerator MoveCoroutine(Vector3 start, Vector3 end)
     {
         float interpolation = 0f;
+        MusicManager.Instance.PlayMusicClip(SoundData.ObsticleMoving);
         while (interpolation < 1)
         {
             interpolation += 0.1f;
-            transform.localPosition = Vector2.Lerp(start, end, interpolation);
+            transform.localPosition = Vector3.Lerp(start, end, interpolation);
             CheckSurroundingElement();
             yield return new WaitForSeconds(0.2f); // not that good but it is a okay for a start
         }
+        transform.localPosition = end;
         yield break;
     }
 

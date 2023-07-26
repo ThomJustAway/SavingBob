@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class SceneButton : MonoBehaviour
 {
 
-    [SerializeField] private float delay = 0.3f;
 
     //Scene button is for button that require to change scene.
     // some rules place so that it is much neater
@@ -34,6 +33,6 @@ public class SceneButton : MonoBehaviour
 
     public void StopGame()
     {
-        Application.Quit();
+        SceneTransitionManager.instance.EndApplication();
     }
 }

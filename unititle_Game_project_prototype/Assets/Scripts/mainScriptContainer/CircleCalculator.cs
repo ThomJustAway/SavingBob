@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using Unity.Mathematics;
-using UnityEditor.U2D.Path;
 using UnityEngine;
 
 namespace Assets.Scripts.mainScriptContainer

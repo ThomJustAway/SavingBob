@@ -42,9 +42,14 @@ public class MoneyManager : MonoBehaviour
         currentMoneyText = GetComponent<TextMeshProUGUI>();
         gameManager = LevelManager.instance;
         currentMoney = gameManager.currentGameData.money;
-
         SetText();
+    }
 
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.M) && Input.GetKeyUp(KeyCode.LeftControl)) {
+            RefundCost(20);
+        }
     }
 
     public bool IfCanSubstractCost(int money)
