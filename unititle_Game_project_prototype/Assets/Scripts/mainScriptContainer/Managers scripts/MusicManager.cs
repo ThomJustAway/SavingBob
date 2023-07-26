@@ -20,13 +20,22 @@ public class MusicManager : MonoBehaviour
     public static MusicManager Instance { get; private set; }
 
     private ClipSetter backgroundMusicClip;
-    public float MasterVolume { get; private set; }
+    public float BackgroundVolume { get; private set; }
+
+    public float SvxVolume { get; private set; }
+
+    public bool CanPlaySvxVolume { get; private set; }
+    public bool CanPlayBackgroundVolume { get; private set; }
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            MasterVolume = 1.0f;
+            BackgroundVolume = 1.0f;
+            SvxVolume = 1.0f;
+            CanPlaySvxVolume = true;
+            CanPlayBackgroundVolume = true;
             DontDestroyOnLoad(Instance);
         }
         else
@@ -54,10 +63,12 @@ public class MusicManager : MonoBehaviour
 
     public void PlayMusicClip(string clipName)
     {
-        var audiosources = gameObject.GetComponents<AudioSource>();
-        var clip = SearchForClip(clipName);    
-        clip.AudioSource.volume = MasterVolume * clip.volume;
-        clip.AudioSource.Play();
+        if (CanPlaySvxVolume)
+        {
+            var clip = SearchForClip(clipName);
+            clip.AudioSource.volume = SvxVolume * clip.volume;
+            clip.AudioSource.Play();
+        }
     }
 
     private ClipSetter SearchForClip(string clipName)
@@ -73,11 +84,37 @@ public class MusicManager : MonoBehaviour
         return audioClips[0];
     }
 
-    public void ChangeSliderVolume(float volume)
+    public void ChangeBackgroundVolume(float volume)
     {
-        MasterVolume = volume;
-        backgroundMusicClip.AudioSource.volume = volume * backgroundMusicClip.volume ;
+        BackgroundVolume = volume; //changing the volume accordingly
+        backgroundMusicClip.AudioSource.volume = volume * backgroundMusicClip.volume;
     }
+
+    public void ChangeSVXVolume(float volume)
+    {
+        SvxVolume = volume; //changing the volume accordingly
+    }
+
+    public void ToggleCanPlayBackgroundMusic()
+    {
+        CanPlayBackgroundVolume = !CanPlayBackgroundVolume;
+        if (!CanPlayBackgroundVolume)
+        {
+            //that mean you cant play the background music
+            backgroundMusicClip.AudioSource.mute = true;
+        }
+        else
+        {
+            //mean that you can play background music
+            backgroundMusicClip.AudioSource.mute = false;
+        }
+    }
+
+    public void ToggleCanPlaySVXMusic()
+    {
+        CanPlaySvxVolume = !CanPlaySvxVolume;
+    }
+
 }
 
 [System.Serializable]

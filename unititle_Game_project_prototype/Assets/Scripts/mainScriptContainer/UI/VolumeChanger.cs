@@ -5,16 +5,25 @@ using UnityEngine.UI;
 
 public class VolumeChanger : MonoBehaviour
 {
-    [SerializeField] private Slider volumeSlider;
+    [SerializeField] private Slider backgroundVolumeSlider;
+    [SerializeField] private Slider SVXVolumeSlider;
 
     private void Start()
     {
-        volumeSlider.onValueChanged.AddListener(delegate { ChangeVolume(); });
-        volumeSlider.value = MusicManager.Instance.MasterVolume;
+        backgroundVolumeSlider.onValueChanged.AddListener(delegate { ChangeBackgroundVolume(); });
+        backgroundVolumeSlider.value = MusicManager.Instance.BackgroundVolume;
+
+        SVXVolumeSlider.onValueChanged.AddListener(delegate { ChangeSVXVolume(); });
+        SVXVolumeSlider.value = MusicManager.Instance.SvxVolume;
     }
 
-    private void ChangeVolume()
+    private void ChangeBackgroundVolume()
     {
-        MusicManager.Instance.ChangeSliderVolume(volumeSlider.value);
+        MusicManager.Instance.ChangeBackgroundVolume(backgroundVolumeSlider.value);
+    }
+
+    private void ChangeSVXVolume()
+    {
+        MusicManager.Instance.ChangeSVXVolume(SVXVolumeSlider.value);
     }
 }

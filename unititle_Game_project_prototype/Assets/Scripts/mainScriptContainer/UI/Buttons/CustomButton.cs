@@ -11,8 +11,6 @@ public abstract class CustomButton : MonoBehaviour , IPointerEnterHandler, IPoin
     [SerializeField] protected Color normalColor;
     [SerializeField] protected Color ActivatedColor;
     protected Image image;
-
-
     protected virtual void Start()
     {
         image = GetComponent<Image>();
