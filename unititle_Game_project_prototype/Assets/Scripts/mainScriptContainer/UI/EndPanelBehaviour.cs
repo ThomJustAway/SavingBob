@@ -20,7 +20,10 @@ public class EndPanelBehaviour : MonoBehaviour
     {
         int isActivatedHash = Animator.StringToHash("IsActivated");
         Animator animator = GetComponent<Animator>();
-        animator.SetBool(isActivatedHash, true); //start playing the animation
+        PlayerPrefs.SetInt(LevelButton.Key, SceneManager.GetActiveScene().buildIndex +1); 
+        //allow player to excess the next level through level scene. look at level button
+
+        animator.SetBool(isActivatedHash, true); 
         MusicManager.Instance.PlayMusicClip(SoundData.WinningSound);
     }
 

@@ -204,12 +204,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2037038383}
+      objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -358,7 +358,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
 --- !u!1001 &433596767
 PrefabInstance:
@@ -510,17 +511,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 823199639}
     m_Modifications:
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: -7788335289141158404, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+    - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1725545754}
+      objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -673,7 +678,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
 --- !u!1 &536708733
 GameObject:
@@ -829,10 +835,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 653236814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 611669bc69e479d4f9d7f141ec67b77d, type: 3}
+  m_Script: {fileID: 11500000, guid: 59168689436d9d74ea0ba5662a0b926c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.3
+  normalSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  hoveredSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  clickSprite: {fileID: -7788335289141158404, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  disabledSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  sceneInCharge: 3
 --- !u!1 &823199638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,10 +1254,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1725545752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 611669bc69e479d4f9d7f141ec67b77d, type: 3}
+  m_Script: {fileID: 11500000, guid: 59168689436d9d74ea0ba5662a0b926c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.3
+  normalSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  hoveredSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  clickSprite: {fileID: -7788335289141158404, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  disabledSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  sceneInCharge: 5
 --- !u!1001 &1761720404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1256,24 +1270,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 823199639}
     m_Modifications:
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: -7788335289141158404, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+    - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2085271723}
+      objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoSpecifiedScene
+      value: GoNextSceneBuild
       objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1419,7 +1437,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
 --- !u!1 &1940622737
 GameObject:
@@ -1547,17 +1566,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 823199639}
     m_Modifications:
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
+      propertyPath: m_SpriteState.m_DisabledSprite
+      value: 
+      objectReference: {fileID: -7788335289141158404, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+    - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 653236816}
+      objectReference: {fileID: 0}
     - target: {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1696,6 +1719,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6940135510103349214, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+    - target: {fileID: 6940135510103349214, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940135510103349214, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940135510103349214, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8324160754942202934, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.28903973
@@ -1712,7 +1751,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 477411051975063275, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
 --- !u!1 &2037038381 stripped
 GameObject:
@@ -1733,10 +1773,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2037038381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 611669bc69e479d4f9d7f141ec67b77d, type: 3}
+  m_Script: {fileID: 11500000, guid: 59168689436d9d74ea0ba5662a0b926c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.3
+  normalSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  hoveredSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  clickSprite: {fileID: -7788335289141158404, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  disabledSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  sceneInCharge: 2
 --- !u!1 &2050433317 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1676810426863724115, guid: c8fcdb537d37ee14c8257ffa2625a06c, type: 3}
@@ -1754,7 +1798,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611669bc69e479d4f9d7f141ec67b77d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.3
 --- !u!1 &2085271721 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2221953267560834577, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
@@ -1774,7 +1817,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2085271721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 611669bc69e479d4f9d7f141ec67b77d, type: 3}
+  m_Script: {fileID: 11500000, guid: 59168689436d9d74ea0ba5662a0b926c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.3
+  normalSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  hoveredSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  clickSprite: {fileID: -7788335289141158404, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  disabledSprite: {fileID: 8144830250928574055, guid: b1e90a4cefc1f2a409ac727d50028c54, type: 3}
+  sceneInCharge: 4

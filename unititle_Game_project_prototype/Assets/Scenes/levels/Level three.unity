@@ -4202,6 +4202,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1869577950, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: sceneToGo
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 19484796752929815, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: currentGameData
       value: 

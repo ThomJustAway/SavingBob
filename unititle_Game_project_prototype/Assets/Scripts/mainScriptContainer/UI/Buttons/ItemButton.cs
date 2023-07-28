@@ -36,10 +36,8 @@ public class ItemButton : MonoBehaviour
     private GameObject gearParent;
     private void Start()
     {
-
-        SettingUpButton();
-
         //GameObject gearImage;
+        SettingUpButton();
         AddingItemToPool();
     }
 
@@ -133,7 +131,6 @@ public class ItemButton : MonoBehaviour
 
     public bool IsGameObjectRelated(GameObject selectedGameobject)
     {
-        print($"this button is for {moveableItem.Getprefab}");
         return existingPool.Contains(selectedGameobject);
     } //this look out is o(1) since it is using hashset
 
