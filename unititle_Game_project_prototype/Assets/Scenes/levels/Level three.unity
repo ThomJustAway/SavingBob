@@ -4234,6 +4234,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 4.3
       objectReference: {fileID: 0}
+    - target: {fileID: 1321435443223983523, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617674888450635602, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617674888450635602, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1956212898184647061, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_Name
       value: GameTools
@@ -4241,6 +4253,18 @@ PrefabInstance:
     - target: {fileID: 1956212898184647061, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858884947938811389, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858884947938811389, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858884947938811389, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3445400725230588035, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_RootOrder
@@ -17798,6 +17822,18 @@ PrefabInstance:
       propertyPath: currentGameData
       value: 
       objectReference: {fileID: 11400000, guid: be130bd54ff25264395823f1379506c6, type: 2}
+    - target: {fileID: 5339534211124403754, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339534211124403754, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339534211124403754, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6780680903586788146, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -17805,6 +17841,18 @@ PrefabInstance:
     - target: {fileID: 6780680904152697494, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841459328536565026, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841459328536565026, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841459328536565026, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6850091494741812710, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_RootOrder
@@ -17848,6 +17896,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6850091494741812710, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921507889818071343, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921507889818071343, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[0].textToShow
+      value: Oh No Tim! There seem to be a gear with special condition. This gear
+        requires you to spin it at a certain direction (look at the arrow signs to
+        determine its direction)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[1].textToShow
+      value: 'Small tip: You can stack different joint together:)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[2].textToShow
+      value: Oh No Tim. I am powering off again. Good luck
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[0].imageToShow
+      value: 
+      objectReference: {fileID: -720956487, guid: 665266fbe361cba4e994e51d23ae4bdb, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[2].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: e7634c4182d5a79459bacb6e9b09ebe1, type: 3}
+    - target: {fileID: 8369090047461865295, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8487631884934587032, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8487631884934587032, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8487631884934587032, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

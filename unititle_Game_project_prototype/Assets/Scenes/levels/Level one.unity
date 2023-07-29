@@ -206,6 +206,10 @@ PrefabInstance:
       propertyPath: sceneToGo
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1321435443223983523, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1617674888450635602, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -218,9 +222,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 956974766}
+    - target: {fileID: 1918416719651372824, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1956212898184647061, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_Name
       value: GameTools
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858884947938811389, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858884947938811389, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858884947938811389, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3445400725230588035, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_RootOrder
@@ -267,6 +287,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3445400726914580038, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339534211124403754, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339534211124403754, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339534211124403754, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -333,6 +365,69 @@ PrefabInstance:
     - target: {fileID: 6921507889818071343, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[0].textToShow
+      value: Hey Bob! Can You Help repair me? I lose a bunch of my gears when I was
+        hit by a Car. Now All my gears are broken.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[1].textToShow
+      value: You see that Green Gear and red gear, You got to help me rotate that
+        red gear using the green gear!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[2].textToShow
+      value: Go to The shop And buy some gears to help connect the green and red
+        gear. (click the yellow button at the side)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[3].textToShow
+      value: You Can always sell the gears using the delete button.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[4].textToShow
+      value: This will show you how much gears you have left
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[5].textToShow
+      value: Becareful to not spend too much as you have a limited amount of money.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[6].textToShow
+      value: OH NO I am running out of battery. Good luck fixing me.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[0].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: e7634c4182d5a79459bacb6e9b09ebe1, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[1].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: bbe2ceb3bf147bb43adbd080f8409165, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[2].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: 57f24bd1c41c7c7438aafeaeca82067b, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[3].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: 128c4cedb7290ba49b88403c29e9c80d, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[4].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: ee30951d92bf0604fbde8ce44ce1ab41, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[5].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: c69760228954a3b459a32ad30c137676, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[6].imageToShow
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8369090047461865295, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_IsActive

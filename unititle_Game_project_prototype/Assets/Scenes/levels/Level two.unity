@@ -263,17 +263,37 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.48
       objectReference: {fileID: 0}
-    - target: {fileID: 1617674888450635602, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 1321435443223983523, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1617674888450635602, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617674888450635602, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918416719651372824, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1956212898184647061, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_Name
       value: GameTools
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858884947938811389, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858884947938811389, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2858884947938811389, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3445400725230588035, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_RootOrder
@@ -6095,17 +6115,29 @@ PrefabInstance:
       propertyPath: currentGameData
       value: 
       objectReference: {fileID: 11400000, guid: 1dd879634c2945344ac92e35941e6c3a, type: 2}
-    - target: {fileID: 6841459328536565026, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6841459328536565026, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+    - target: {fileID: 5339534211124403754, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5339534211124403754, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339534211124403754, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841459328536565026, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841459328536565026, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6841459328536565026, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6850091494741812710, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_RootOrder
@@ -6153,23 +6185,91 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6921507889818071343, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6921507889818071343, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[0].textToShow
+      value: Oh No Tim!. There seem to be a wall blocking the path to fix me.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[1].textToShow
+      value: Why not try to go over it using Joints? Just place the joint to connect
+        the gears from different layers
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[2].textToShow
+      value: To toggle between layers, you can click the blue button. (currently
+        we are at layer 1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[3].textToShow
+      value: You can see the joint appear once you place it at the layer. ( place
+        joint at layer 1 will  be shown in layer 2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[4].textToShow
+      value: Tim I forget to mention but you need to make sure the red gears are
+        rotated at a greater speed limit
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[5].textToShow
+      value: You can check by hovering over the red gears
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[6].textToShow
+      value: Tim I am powering off now. Please help to fix me
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[0].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: 3cb65e992973fac468e5fcd91684cfc8, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[1].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: 5c2725bcdf4202344ba6555b2a95049e, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[2].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: b052f83441bbe7741b9e2aacba7ffbda, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[3].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: cfae24bcb88ec40458bef8a748aea42a, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[4].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: 0e133484e9f8bd941aa5df028254ed72, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[5].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: 0e133484e9f8bd941aa5df028254ed72, type: 3}
+    - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
+      propertyPath: textData.Array.data[6].imageToShow
+      value: 
+      objectReference: {fileID: 21300000, guid: e7634c4182d5a79459bacb6e9b09ebe1, type: 3}
     - target: {fileID: 8487631884934587032, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8487631884934587032, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8487631884934587032, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
