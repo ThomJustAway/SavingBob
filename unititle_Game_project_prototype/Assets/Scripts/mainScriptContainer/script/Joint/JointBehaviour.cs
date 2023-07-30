@@ -25,7 +25,7 @@ public class JointBehaviour : RotatableElement, IMoveable
     [SerializeField] private int cost;
     private float radius;
     public int Cost => cost;
-    private int layer;
+    private int layer; // keep track of where the joint z position is at
 
     private RotatableElement connectedGearLower;
     private RotatableElement connectedGearUpper;
@@ -56,7 +56,7 @@ public class JointBehaviour : RotatableElement, IMoveable
     private RotatableElement[] GetElementsFromJoint(Collider2D joint)
     {
         float minDept = joint.transform.position.z - 0.3f;
-        float maxDept = joint.transform.position.z + 0.3f;
+        float maxDept = joint.transform.position.z + 0.3f; // this range is to make sure the joint check its current layer
         RotatableElement connectedGear = FindRotatableGearFromJoint(minDept, maxDept);
         RotatableElement connectedJoint = FindRotatableJointFromJoint(minDept, maxDept, joint);
 
@@ -108,22 +108,24 @@ public class JointBehaviour : RotatableElement, IMoveable
         float minDept = joint.transform.position.z - 0.3f;
         float maxDept = joint.transform.position.z + 0.3f;
 
-        Collider2D gearSurroundingJoint = Physics2D.OverlapCircle
+        Collider2D getRotatableElementSurroundingJoint = Physics2D.OverlapCircle
             (joint.transform.position,
             radius,
             LayerData.InnerGearLayer,
             minDept
             , maxDept
             );
-        if (gearSurroundingJoint != null)
-        {
+
+        
+        if (getRotatableElementSurroundingJoint != null)
+        { //if have found a rotatable object
             if (isLowerJoint)
             {
-                connectedGearLower = gearSurroundingJoint.GetComponentInParent<RotatableElement>();
+                connectedGearLower = getRotatableElementSurroundingJoint.GetComponentInParent<RotatableElement>();
             }
             else
             {
-                connectedGearUpper = gearSurroundingJoint.GetComponentInParent<RotatableElement>();
+                connectedGearUpper = getRotatableElementSurroundingJoint.GetComponentInParent<RotatableElement>();
             }
 
         }
@@ -144,7 +146,7 @@ public class JointBehaviour : RotatableElement, IMoveable
     public void Move(Vector3 position)
     {
         if (layer == 0)
-        {
+        {//if the joint does not have any value which means that it was just brought
             layer = LayerManager.instance.CurrentLayer;
         }
         transform.position = position;
@@ -152,13 +154,13 @@ public class JointBehaviour : RotatableElement, IMoveable
 
     private void CheckCorrectLayer()
     {
-        int maxLayer = LevelManager.instance.currentGameData.NumberOfLayers;
-        int currentLayer = LayerManager.instance.CurrentLayer;
+        int maxLayer = LevelManager.instance.currentGameData.NumberOfLayers; //check how many layers are there
+        int currentLayer = LayerManager.instance.CurrentLayer; //check the current layer
         if (currentLayer == maxLayer)
         {
             transform.Translate(0, 0, +3); // basically moving one layer down
         }
-        else //this line of code might be problematic since it keeps the layer when deleted...
+        else 
         {
             int difference = currentLayer - layer;
             transform.Translate(0, 0, 3 * difference);

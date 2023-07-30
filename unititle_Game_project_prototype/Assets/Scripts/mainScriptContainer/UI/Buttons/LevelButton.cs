@@ -9,12 +9,8 @@ public class LevelButton : CustomSpriteButton
 {
     private bool disabled = false;
     [SerializeField] private int sceneInCharge = 2;
-    public static string Key { get; private set; }
+    public static string Key { get { return "playerLevel"; } }
 
-    protected override void Start()
-    {
-        Key = "playerLevel";
-    }
 
     private void OnEnable()
     {
@@ -22,18 +18,8 @@ public class LevelButton : CustomSpriteButton
         {
             image = GetComponent<Image>(); 
         }
-
-        int scene;
-        if (PlayerPrefs.HasKey(Key))
-        {
-            scene = PlayerPrefs.GetInt(Key);
-        }
-        else
-        {
-            PlayerPrefs.SetInt(Key, 2); 
-            scene = 2;
-        }
-        checkIfDisabled(scene);
+        
+        checkIfDisabled(PlayerPrefs.GetInt(Key));
 
         if (disabled)
         {
@@ -65,7 +51,6 @@ public class LevelButton : CustomSpriteButton
 
     private void checkIfDisabled(int scene)
     {
-        print(scene);
         disabled = scene < sceneInCharge;
         
     }

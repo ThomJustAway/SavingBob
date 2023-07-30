@@ -68,7 +68,7 @@ public class DragableGear : Gear, IMoveable
             }
             else
             {
-                Debug.LogWarning("Invalid position");
+                TryGoBackLastPosition();
             }
         } //change this
 

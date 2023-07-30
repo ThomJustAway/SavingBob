@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b5772d5f1271444891323376de57c5, type: 3}
   m_Name: Level 4
   m_EditorClassIdentifier: 
-  money: 400
+  money: 440
   items:
   - {fileID: 6780680903311915335, guid: c8add24777d20ab42aa09ca8670772ef, type: 3}
   - {fileID: 6780680903311915335, guid: fa2a62943783b8248a54a8b4630797da, type: 3}

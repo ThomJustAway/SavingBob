@@ -20,7 +20,14 @@ public class EndPanelBehaviour : MonoBehaviour
     {
         int isActivatedHash = Animator.StringToHash("IsActivated");
         Animator animator = GetComponent<Animator>();
-        PlayerPrefs.SetInt(LevelButton.Key, SceneManager.GetActiveScene().buildIndex +1); 
+
+        int playerCurrentLevel = PlayerPrefs.GetInt(LevelButton.Key);
+        int nextLevel = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextLevel > playerCurrentLevel)
+        {
+            PlayerPrefs.SetInt(LevelButton.Key, nextLevel);
+
+        }
         //allow player to excess the next level through level scene. look at level button
 
         animator.SetBool(isActivatedHash, true); 

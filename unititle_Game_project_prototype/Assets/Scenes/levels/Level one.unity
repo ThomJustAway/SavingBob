@@ -372,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: textData.Array.data[0].textToShow
-      value: Hey Bob! Can You Help repair me? I lose a bunch of my gears when I was
+      value: Hey Tim! Can You Help repair me? I lose a bunch of my gears when I was
         hit by a Car. Now All my gears are broken.
       objectReference: {fileID: 0}
     - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
