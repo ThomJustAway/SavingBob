@@ -45,7 +45,7 @@ public class LayerManager : MonoBehaviour
 
     private void Start()
     {
-        int StartingPoint = -1;
+        int StartingPoint = -1; //this make sure that players starts at layer 1
         mainCamera = Camera.main;
         mainCamera.transform.position = new Vector3(0, 0, StartingPoint);
         background.position = new Vector3(0, 0, StartingPoint + 2);

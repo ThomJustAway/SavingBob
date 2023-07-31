@@ -8,6 +8,7 @@ public class ColorData : MonoBehaviour
     //so that gears can differentiate themselves
 
     //This is not a good way since I am coupling color data and the gears together.
+    //this can be seen in the level manager
     public static ColorData Instance { get; private set; }
     [SerializeField] private ColorDataScriptableObject scriptableObject;
     public Color ValidPositionColor { get; private set; }

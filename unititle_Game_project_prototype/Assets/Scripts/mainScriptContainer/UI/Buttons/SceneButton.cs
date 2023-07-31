@@ -17,13 +17,12 @@ public class SceneButton : MonoBehaviour
     NOTE: This is not the same as Level button
     */
  
-
+    //this function are called in unity engine so you cant see any references
     public void GoNextSceneBuild()
     {
         PlayClickButtonSound();
         int currentbuild = SceneManager.GetActiveScene().buildIndex;
         SceneTransitionManager.instance.StartTransition(currentbuild + 1);
-        
     }
 
     public void GoSpecifiedScene(int scene)
@@ -31,7 +30,6 @@ public class SceneButton : MonoBehaviour
         PlayClickButtonSound();
         // 1 is the level menu scene
         SceneTransitionManager.instance.StartTransition(scene);
-
     }
 
     private void PlayClickButtonSound()

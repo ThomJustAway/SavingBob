@@ -41,13 +41,13 @@ public class MoneyManager : MonoBehaviour
     {
         currentMoneyText = GetComponent<TextMeshProUGUI>();
         gameManager = LevelManager.instance;
-        currentMoney = gameManager.currentGameData.money;
+        currentMoney = gameManager.currentGameData.money; //get the amount of money to start of the game
         SetText();
     }
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.M) && Input.GetKeyUp(KeyCode.LeftControl)) {
+        if(Input.GetKeyUp(KeyCode.M) && Input.GetKey(KeyCode.LeftControl)) { //cheat code to add more money to the game
             RefundCost(20);
         }
     }
@@ -62,7 +62,7 @@ public class MoneyManager : MonoBehaviour
         }
         else
         {
-            //if can
+            //if can substract cost, do the following
             currentMoney -= money;
             animationMoneyText.text = $"<color=#ff4d4d>-{money} " + moneyIcon;
             animator.SetTrigger("spend money");

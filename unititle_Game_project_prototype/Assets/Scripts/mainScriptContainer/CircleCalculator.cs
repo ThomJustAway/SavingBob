@@ -27,31 +27,16 @@ namespace Assets.Scripts.mainScriptContainer
             Vector2 pointA = lineConnectingBothGear.GetPointThatIsIntersectCircle(driverCircle, drivenCircle);
             Vector2 pointB = lineConnectingBothGear.GetPointThatIsIntersectCircle(drivenCircle, driverCircle);
 
+            //point A and point B are the shortest point to seperate the two circles
 
-
-            //pointA is the point at the driver circle
-            //pointB is the point at the driven circle
-            Debug.DrawLine(pointA, driverGear.transform.position, Color.red, 5f);
-            Debug.DrawLine(pointB, drivenGear.transform.position, Color.yellow, 5f);
-            Debug.DrawLine(pointA, pointB, Color.blue, 5f);
-            return pointA - pointB;
-
-            //var normalizeVector2 =  pointB - pointA;
-            //normalizeVector2.Normalize();
-            //print($"normalize vector: {normalizeVector2} ");
-            //float distance = Vector2.Distance(pointA, pointB);
-
-
-            //return normalizeVector2 * distance;
-
-            //Debug.Log($"point a: {pointA}, point B: {pointB} difference pointA - pointB: {pointA-pointB}");
-            //return pointA - pointB; 
-
+            return pointA - pointB; 
         }
     }
 
     public struct Line
     {
+
+        //line is just a struct that calculate the line equation y = kx + c
         public float K { get; private set; }
         public float C { get; private set; }
 

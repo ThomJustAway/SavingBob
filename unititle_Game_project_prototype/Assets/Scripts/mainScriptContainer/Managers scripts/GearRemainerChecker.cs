@@ -7,21 +7,20 @@ using UnityEngine.Events;
 
 public class GearRemainerChecker : MonoBehaviour
 {
+    //this script check the remaining gear
     private EndGearClass[] inactivatedGears;
     private bool IsSolve;
     private TextMeshProUGUI gearText;
-    // Start is called before the first frame update
     void Start()
     {
         gearText = GetComponent<TextMeshProUGUI>();
         inactivatedGears = GameObject
             .FindGameObjectsWithTag("InactivedGear") //er ignore the spelling error here...
             .Select(gear => gear.GetComponent<EndGearClass>())
-            .ToArray();
-        SetText(0);
+            .ToArray(); //find all the end gear class
+        SetText(0); 
     }
 
-    // Update is called once per frame
     void Update()
     {
         IsSolve = CheckIfSolve();
@@ -36,7 +35,6 @@ public class GearRemainerChecker : MonoBehaviour
     {
         if (inactivatedGears == null)
         {
-            Debug.LogError("You have not have any inactiavated gears in the scene!");
             return false;
         }
 
@@ -45,10 +43,10 @@ public class GearRemainerChecker : MonoBehaviour
 
         foreach (var gear in inactivatedGears)
         {
-            solve = solve && gear.IsActivated;
+            solve = solve && gear.IsActivated; //go through each end gear and see if they are activated
             if (gear.IsActivated)
             {
-                numberOfGearsSolve++;
+                numberOfGearsSolve++; 
             }
             
         }//check if all the gears are activated;

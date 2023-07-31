@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Debugger : MonoBehaviour
 {
-    // Update is called once per frame
+    /*Debugger is sort of a gameobject that acts
+    as a cheat code. It helps set up the game level
+    if there and help reset the leve. Great to move to 
+    different level.
+     */
 
     private void Start()
     {
-        if (!PlayerPrefs.HasKey(LevelButton.Key))
-        {
+        if (!PlayerPrefs.HasKey(LevelButton.Key)) // set up the game
+        {//if player first start, they wont have the key so it will be set to scene 2 (level 1)
             PlayerPrefs.SetInt(LevelButton.Key, 2);
         }
-        print(PlayerPrefs.GetInt(LevelButton.Key));
     }
 
     void Update()
@@ -21,13 +24,11 @@ public class Debugger : MonoBehaviour
         {
             print("hello");
             PlayerPrefs.DeleteAll();
-        }
+            PlayerPrefs.SetInt(LevelButton.Key, 2);
+        } //if it hears the R key and left control, it will delete all the keys which reset the level
         else if (Input.GetKeyUp(KeyCode.I)){
-            print("increment level");
             int data = PlayerPrefs.GetInt(LevelButton.Key);
-            print($"current layer: {data} new layer {data + 1}");
-            PlayerPrefs.SetInt(LevelButton.Key, data+1);
+            PlayerPrefs.SetInt(LevelButton.Key, data+1); //increment the level
         }
-
     }
 }

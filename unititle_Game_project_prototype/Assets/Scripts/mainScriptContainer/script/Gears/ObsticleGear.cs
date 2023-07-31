@@ -4,6 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(Gear))]
 public class ObsticleGear : Gear
 {
+
+    //readme
+    /*
+        The gear that blocks gear placement
+        simple script
+     */
     [SerializeField] private ObsticleBehaviour obsticle;
     private bool isActivated;
 
@@ -22,7 +28,7 @@ public class ObsticleGear : Gear
 
     private void ToggleBool()
     {
-        bool hasSpeed = this.speed > 0;
+        bool hasSpeed = this.speed > 0;// check if it is rotated
         if (hasSpeed != isActivated)
         {
             if (hasSpeed == true)

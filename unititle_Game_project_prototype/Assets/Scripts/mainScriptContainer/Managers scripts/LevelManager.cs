@@ -53,7 +53,7 @@ public class LevelManager : MonoBehaviour
     private void CreateButtons()
     {
         IMoveable[] dataAboutButtons = currentGameData.moveables;
-        itemButtons = new ItemButton[dataAboutButtons.Length];
+        itemButtons = new ItemButton[dataAboutButtons.Length]; 
         for(int i = 0; i < dataAboutButtons.Length; i++)
         {
             var button = Instantiate(itemButtonPrefab, gearPanel);

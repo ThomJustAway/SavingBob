@@ -123,8 +123,6 @@ public class DragableGear : Gear, IMoveable
         }
     }
 
-   
-
     public void RemoveItem()
     {
         var itemButtons = LevelManager.instance.itemButtons;

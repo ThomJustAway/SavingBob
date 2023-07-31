@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class LayerData 
 {
+    // this is just data to keep the different layermask
+    // very useful to change things on the fly
     private static LayerMask gearAreaLayer = LayerMask.GetMask("GearAreaLayer");
     private static LayerMask innerGearLayer = LayerMask.GetMask("InnerGearAreaLayer");
     private static LayerMask moveableGearLayer = LayerMask.GetMask("MoveableGearLayer");

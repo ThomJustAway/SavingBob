@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class LayerButton : CustomButton
 {
+
+    //button tells the layer manager to change
     [SerializeField] private TextMeshProUGUI buttonText;
     private int controllingLayer;
     private LayerManager layerManager;
@@ -44,10 +46,10 @@ public class LayerButton : CustomButton
 
     public override void OnPointerUp(PointerEventData eventData)
     {
+        //when button is click
         layerManager.ChangeLayer(controllingLayer);
         image.color = HoverColor;
         layerManager.onButtonClick?.Invoke();
     }
-
 
 }

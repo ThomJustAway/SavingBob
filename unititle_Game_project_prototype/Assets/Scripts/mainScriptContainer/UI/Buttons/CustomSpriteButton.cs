@@ -8,6 +8,8 @@ namespace Assets.Scripts.mainScriptContainer.UI.Buttons
 {
     public abstract class CustomSpriteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
+
+        //Customer sprite button is just a class for me to control the behaviour of the buttons.
         [SerializeField] protected Sprite normalSprite;
         [SerializeField] protected Sprite hoveredSprite;
         [SerializeField] protected Sprite clickSprite;

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class TutorialBehaviour : MonoBehaviour
 {
+  
     [SerializeField] private TypeOfTutorial type = TypeOfTutorial.Tutorial;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private Image image;
@@ -14,9 +15,8 @@ public class TutorialBehaviour : MonoBehaviour
     [SerializeField] private Button forwardButton;
     [SerializeField] private Button backwardButton;
 
-    private int messageIndex = 0;
-    // Start is called before the first frame update
 
+    private int messageIndex = 0; // the current tutorial message
     private enum TypeOfTutorial{
         Tutorial,
         Tips
@@ -24,6 +24,7 @@ public class TutorialBehaviour : MonoBehaviour
 
     void Start()
     {
+        //setting up the tutorial
         title.text = type.ToString();
         SlotMessage(messageIndex);
         forwardButton.onClick.AddListener(IncrementMessageIndex);
@@ -43,6 +44,7 @@ public class TutorialBehaviour : MonoBehaviour
         }
         else
         {
+            //remove the image component
             image.gameObject.SetActive(false) ;
         }
         textComponent.text = data.textToShow;
@@ -81,6 +83,7 @@ public class TutorialBehaviour : MonoBehaviour
 
     public void CloseWindow()
     {
+        MusicManager.Instance.PlayMusicClip(SoundData.ClickButton);
         gameObject.SetActive(false);
     }
 }
@@ -90,5 +93,5 @@ public struct TextData
 {
     public Sprite imageToShow;
     [TextArea(3, 10)]
-    public string textToShow;
+    public string textToShow; 
 }

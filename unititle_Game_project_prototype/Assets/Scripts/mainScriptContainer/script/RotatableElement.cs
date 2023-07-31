@@ -145,7 +145,9 @@ namespace Assets.tryoutFolder.script
             driverJammingElement = null;
         }
 
-        protected abstract RotatableElement[] FindingRotatingElement();
+
+        //this code stores the operation to find rotatable elements. different scripts will have different implementation of it
+        protected abstract RotatableElement[] FindingRotatingElement();  
 
         public virtual void AddSpeedAndRotation(float speed, Vector3 rotation, RotatableElement driver = null)
         {
@@ -223,6 +225,5 @@ namespace Assets.tryoutFolder.script
             if (direction == Vector3.forward) return Vector3.back;
             else return Vector3.forward;
         }
-
     }
 }

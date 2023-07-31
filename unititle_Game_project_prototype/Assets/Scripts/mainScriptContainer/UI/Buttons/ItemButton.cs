@@ -74,9 +74,9 @@ public class ItemButton : MonoBehaviour
 
         Destroy(gearComponent);
         Collider2D colliderComponent = imageGearObject.GetComponent<Collider2D>();
-        Destroy(colliderComponent);
+        Destroy(colliderComponent); //destroy component to improve performance
         RectTransform rectTransform = imageGearObject.AddComponent<RectTransform>();
-        rectTransform.localScale = new Vector3(scale, scale, 0);
+        rectTransform.localScale = new Vector3(scale, scale, 0); 
     }
 
     private void MakeImageFromJoint(Transform imageJointObject, JointBehaviour jointComponent)
@@ -86,7 +86,7 @@ public class ItemButton : MonoBehaviour
         RectTransform rectTransform = imageJointObject.AddComponent<RectTransform>();
         rectTransform.localScale = new Vector3(scale, scale, 0);
         Destroy(jointComponent); // destroy the component that makes the joint work
-
+        
     }
     private void AddingItemToPool()
     {
@@ -105,6 +105,7 @@ public class ItemButton : MonoBehaviour
     {
         return MoneyManager.instance.IfCanSubstractCost(moveableItem.Cost);
     }
+
     public GameObject GetItem()
     {
         if (pooledItem.Count > 0)

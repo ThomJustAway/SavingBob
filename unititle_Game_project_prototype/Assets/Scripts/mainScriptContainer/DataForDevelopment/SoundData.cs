@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundData
 {
-    // this stores the magic string when calling out the clips. Much more reliable
+    // this stores the magic string when calling out the clips. Much more reliable than using magic strings
     public static string PlacingSound { get { return "PlacingEffect"; } }
     public static string WinningSound { get { return "winning sound"; } }
     public static string EndGearRotating { get { return "EndGearRotating"; } }

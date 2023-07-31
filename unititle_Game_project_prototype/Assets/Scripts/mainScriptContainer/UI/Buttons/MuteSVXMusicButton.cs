@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Scripts.mainScriptContainer.UI.Buttons
 {
+
     public class MuteSVXMusicButton : CustomSpriteButton
     {
         protected override void Start()

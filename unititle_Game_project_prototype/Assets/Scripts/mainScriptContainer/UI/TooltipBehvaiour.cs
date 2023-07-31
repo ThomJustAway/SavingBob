@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class TooltipBehvaiour : MonoBehaviour
 {
+
+    // Tooltip is just a text that shows up to inform players
     public static TooltipBehvaiour instance; //singleton as I only want to have one tool tip to show the message
     private Animator animator;
     private TextMeshProUGUI textMessage;
@@ -55,7 +57,7 @@ public class TooltipBehvaiour : MonoBehaviour
         textMessage.text = "";
     }
 
-    public void StartShortMessage(string message)
+    public void StartShortMessage(string message) //this is just used for some edge cases
     {
         StartCoroutine(ShortMessage(message));
     }
