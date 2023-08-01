@@ -11,14 +11,18 @@ public class EndGearClass : MonoBehaviour
     public Gear GearHost { get { return gearHost; } }
     [SerializeField] private float speedCondition;
     public bool IsActivated { get { return isActivated; } }
-    private bool IsHovered = false; //to check if the mouse is hovering the gear. The monobehviour on hover sometimes does not work
+    
+    //to check if the mouse is hovering the gear. The monobehviour on hover sometimes does not work with the current game
+    private bool IsHovered = false;
+    
     private bool isActivated;
     private bool hasPlayedMusic;
 
     private void Awake()
     {
-        gameObject.tag = "InactivedGear"; // this is not great idea to find gameobject ....
-        hasPlayedMusic = false;
+        //set the game object as Inactivated gear so that gearremainderChecker can find the inactivated gear through tag
+        gameObject.tag = "InactivedGear"; // this is not great idea to find gameobject due to perfromance issues
+        hasPlayedMusic = false; //plays a music if it is activated, set to false to prevent it from playing the music
     }
 
     private void Start()
@@ -31,17 +35,17 @@ public class EndGearClass : MonoBehaviour
     {
         SpriteRenderer gearhostSpriteRenderer = gearHost.GetComponent<SpriteRenderer>();
         gearhostSpriteRenderer.color = ColorData.Instance.EndingGearColor;
-
+        //change the color to show that it is a inactivated gear (end gear)
     }
 
     private void Update()
     {
-        isActivated = IfConditionMet(gearHost.Speed);
+        isActivated = GetSpeedConditionIsMet(gearHost.Speed);
         //when it is not activated
         if (hasPlayedMusic == false && isActivated == true)
         {
             MusicManager.Instance.PlayMusicClip(SoundData.EndGearRotating);
-            hasPlayedMusic = true;
+            hasPlayedMusic = true; //make sure the musicclip is played once
         }
         if(isActivated == false)
         {
@@ -49,16 +53,9 @@ public class EndGearClass : MonoBehaviour
         }
         CheckMouseHovering();
     }
-    public bool IfConditionMet(float speed)
-    {
-        bool speedConditionMet = GetSpeedConditionIsMet(speed);
-        return speedConditionMet;
-    }
-
-    // the naming conventiion here is confusing
-
     private bool GetSpeedConditionIsMet(float speed)
     {
+        //if the current speed of the gear host is more than speed condition, then it is activated
         if (speed > speedCondition)
         {
             return true;
@@ -71,8 +68,12 @@ public class EndGearClass : MonoBehaviour
 
     private void CheckMouseHovering()
     {
+        //will calculate the mouse position and figure out if that position is around the circle
         Vector3 mousePosition = Input.mousePosition;
+        
+        //get z index  so that it wont trigger with other inactivated gears at different layers
         mousePosition.z = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer();
+        
         Vector3 position = Camera.main.ScreenToWorldPoint(mousePosition);
         if (CheckIfWithinCircle(position))
         {
@@ -105,8 +106,8 @@ public class EndGearClass : MonoBehaviour
         }
         Vector2 mousePosition = new Vector2(positionOfMouse.x, positionOfMouse.y);
         Vector2 gearPosition = new Vector2(transform.position.x, transform.position.y);
-        float distance = Vector2.Distance(mousePosition, gearPosition);
-        return gearHost.GearRadius >= distance;
+        float distance = Vector2.Distance(mousePosition, gearPosition); //calculate the distance the gear and the mouse
+        return gearHost.GearRadius >= distance; //make sure it is within the gear radius
     }
 
     private string CreateMessage()

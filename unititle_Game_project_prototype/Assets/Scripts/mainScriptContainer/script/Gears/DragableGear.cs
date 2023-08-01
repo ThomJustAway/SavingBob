@@ -38,6 +38,7 @@ public class DragableGear : Gear, IMoveable
 
     public void CheckValidPosition()
     {
+        //this is called after moving and draggin
         Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
         Collider2D[] surroundingJoint = GetColliderAroundRadiusBasedOnLayer(LayerData.JointLayer);
         if (surroundInnerGear.Length == 1)
@@ -47,11 +48,17 @@ public class DragableGear : Gear, IMoveable
             var gearComponent = surroundInnerGear[0].GetComponentInParent<Gear>();
             if (gearComponent != null)
             {
+                //calculate the distance using custom made distance calculator
                 Vector2 resolveDistance = CircleCalculator.DistanceToMoveBetweenDriverAndDrivenGear(gearComponent, this);
                 transform.position = transform.position + (Vector3)resolveDistance;
+                /*
+                add the distance to transform.position
+                it appears that transform.resolve cant do this simple operation so :(    
+                 */
             }
             else
-            {// this mean that it is a wall
+            {// this mean that it is a wall as there is no gear component
+             //fun fact: the walls use innergearlayer so that the dragable element can detect
                 TryGoBackLastPosition();
             }
         }
@@ -84,22 +91,20 @@ public class DragableGear : Gear, IMoveable
     }
     public void Move(Vector3 position)
     {
+        //this is called at the mousemove Behaviour and is called when the Dragable gear needs moving
         if (speed > 0)
-        {
+        { //set and make sure the when moving, there is no rotation by the gear
             speed = 0;
         }
-        transform.position = position;
+        transform.position = position;//change the position of the transform.position
         Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
-        if (surroundInnerGear == null)
-        {
-            return;
-        }
         if (surroundInnerGear.Length > 0)
-        {
+        {//if there is a inner gear, then tell the player that is cant be place there by changing the color
             spriteRenderer.color = colorData.InvalidPositionColor;
         }
         else
         {
+            //change the color to green if there is no gear surrounding the gear
             spriteRenderer.color = colorData.ValidPositionColor;
             previousValidPosition = position;
         }
@@ -108,8 +113,8 @@ public class DragableGear : Gear, IMoveable
 
     private void TryGoBackLastPosition()
     {
-        if (previousValidPosition != Vector3.zero) 
-            //i am not sure why but whenever a vector3 is initalise, the inital value is vector.zero
+        // vector3.zero is because that is vector 3 struct initalise value
+        if (previousValidPosition != Vector3.zero) // if have previous valid position
         {
             transform.position = new Vector3(previousValidPosition.x,
                 previousValidPosition.y,
@@ -128,6 +133,7 @@ public class DragableGear : Gear, IMoveable
         var itemButtons = LevelManager.instance.itemButtons;
         for (int i = 0; i < itemButtons.Length; i++)
         {
+            //go through the item buttons and find the item buttons that correspond to the current dragable element
             if (itemButtons[i].IsGameObjectRelated(gameObject))
             {
                 itemButtons[i].RemoveItem(gameObject);

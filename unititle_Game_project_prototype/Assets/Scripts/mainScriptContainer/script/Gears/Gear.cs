@@ -54,36 +54,44 @@ public class Gear : RotatableElement
     protected override void Start()
     {
         base.Start();
-        GearRadius = entireGearArea.radius;
+        GearRadius = entireGearArea.radius; 
         InnerGearRadius = innerGearArea.radius;
+    }
+
+    protected override void RotateElementVisually()
+    {
+        //show the rotation in game
+        transform.Rotate(speed * rotationDirection * Time.deltaTime);
     }
 
     protected override RotatableElement[] FindingRotatingElement()
     {
         var surroundingRotatableComponents = GetColliderAroundRadiusBasedOnLayer(LayerData.GearAreaLayer)
             .Select(collider => collider.GetComponentInParent<RotatableElement>()).ToArray();
+
         var joint = GetJointComponent();
 
+        //getting surrounding rotatable element. Both joint and gears
+
         if (joint != null)
-        {
+        { //if there is a joint component, then make a list to compile all the rotatable elements together using a list
             List<RotatableElement> newElements = new List<RotatableElement>() { joint };
             for (int i = 0; i < surroundingRotatableComponents.Length; i++)
             {
                 newElements.Add(surroundingRotatableComponents[i]);
             }
-            return newElements.ToArray();
+            return newElements.ToArray(); 
         }
+        //this means no joint component so just send out the current surrounding rotatable component
         return surroundingRotatableComponents; 
     }
 
-    protected override void RotateElementVisually()
-    {
-        transform.Rotate(speed * rotationDirection * Time.deltaTime);
-    }
 
     public Collider2D[] GetColliderAroundRadiusBasedOnLayer(LayerMask layer)
     {
         Collider2D selectedCollider = GetRespectiveColliderByLayer(layer);
+        //get respective collider so that when doing ray cast, the surrounding gear will not include selected collider as one of collider
+        //when doing raycasting, there is min and max dept so that gear know to only look at their own area.
         Collider2D[] surroundingGears = Physics2D.OverlapCircleAll(transform.position, GearRadius, layer, MinDept, MaxDept)
             .Where(collider =>
             {
@@ -95,6 +103,8 @@ public class Gear : RotatableElement
 
     public RotatableElement GetJointComponent()
     {
+        //same as GetColliderAroundRadiusBasedOnLayer() but change the layer to jointlayer as the rotatable element have to
+        //find the joint at the jointLayer
         Collider2D childCollider = Physics2D.OverlapCircle(transform.position, GearRadius, LayerData.JointLayer, MinDept, MaxDept);
         if (childCollider != null)
         {
@@ -105,6 +115,7 @@ public class Gear : RotatableElement
 
     protected Collider2D GetRespectiveColliderByLayer(LayerMask layer)
     {
+        //this function just return a collider respective to the layer
         if (layer == LayerData.GearAreaLayer) return entireGearArea;
         else return innerGearArea;
     }

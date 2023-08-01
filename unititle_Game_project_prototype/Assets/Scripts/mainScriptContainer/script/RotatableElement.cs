@@ -63,6 +63,8 @@ namespace Assets.tryoutFolder.script
             {
                 isStartingElement = false;
             }
+            //this check is to make sure that the element is not a starting element. If it is, then there will be 
+            // a different behaviour that it will go
         }
 
         protected virtual void Update()
@@ -70,11 +72,25 @@ namespace Assets.tryoutFolder.script
             surroundingElements = FindingRotatingElement();
             if (driverElement != null && !isStartingElement)
             {
+                /*
+                if there is a driver element stored in the memory
+                and it is not a starting element, then it will make sure
+                if there is the rotatble element is still in the surrounding elements.
+                
+                It is important to get the surrounding element as it make sure that gears
+                know what to get it's speed.
+                 */
                 CheckingDriverElement();
             }
             if (driverJammingElement != null)
             {
-                //check if there is a jamming gear still exist
+                /*
+                check if there is a jamming gear still exist.
+                
+                this is important as the rotatable element needs to know if it has
+                to stop because of a jamming element (like one directional rotational gear)
+                 
+                 */
                 CheckJammingElement();
             }
 
@@ -86,6 +102,8 @@ namespace Assets.tryoutFolder.script
             }
             else
             {
+
+                //normal behaviour to rotate surrounding element
                 RotateOtherElements();
             }
         }
@@ -93,7 +111,7 @@ namespace Assets.tryoutFolder.script
         private void RotateOtherElements()
         {
             // do the standard gear rotation
-            if (speed > 0) //can also be >= 0 to make the gear jam.
+            if (speed > 0) 
             {
                 RotateElementVisually();
                 RotateSurroundingElements();
@@ -110,33 +128,42 @@ namespace Assets.tryoutFolder.script
 
         protected void ApplyFriction()
         {
+            //gradually reduce the speed. this wont be a matter if there is a driver element to supply speed
             speed -= friction * Time.deltaTime;
         }
 
         protected virtual void CheckingDriverElement()
         {
+            //iterate over the array to find the driver element
             for (int i = 0; i < surroundingElements.Length; i++)
             {
                 if (surroundingElements[i] == driverElement)
                 {
                     if (driverElement.Speed > 0)
-                    {
+                    { //check if the driverelement still has speed. if it has then the driver element is still a driver element
                         return;
                     }
                     break;
                 }
             }
+            //this mean that there is no driver element anymore and
+            //that the rotatable element can set this to null to perform
+            //another action
             driverElement = null;
         }
 
         protected virtual void CheckJammingElement()
         {
+
+            //same thing where it iterates over the elements to find 
+            // a jamming gear
             for (int i = 0; i < surroundingElements.Length; i++)
             {
                 if (surroundingElements[i] == driverJammingElement)
                 {
                     if (driverJammingElement.IsJamming)
                     {
+                        // this does a sort of check to see if the driverjamming element itself is jammed
                         return;
                     }
                     break;
@@ -146,7 +173,7 @@ namespace Assets.tryoutFolder.script
         }
 
 
-        //this code stores the operation to find rotatable elements. different scripts will have different implementation of it
+        //this code stores the operation to find rotatable elements. different scripts will have different implementation of it to find
         protected abstract RotatableElement[] FindingRotatingElement();  
 
         public virtual void AddSpeedAndRotation(float speed, Vector3 rotation, RotatableElement driver = null)
@@ -175,21 +202,26 @@ namespace Assets.tryoutFolder.script
             driverJammingElement = jammingElement;
         }
 
-        protected virtual void RotateElementVisually() { }
+        protected virtual void RotateElementVisually() { } //show how the rotatable element is rotated
 
-        protected virtual void RotateSurroundingElements()
+        protected virtual void RotateSurroundingElements() 
         {
             for (int i = 0; i < surroundingElements.Length; i++)
             {
                 RotatableElement selectedRotatableElement = surroundingElements[i];
-                if (selectedRotatableElement == driverElement) continue;
+                if (selectedRotatableElement == driverElement) continue; //ignore the drive element
                 if (selectedRotatableElement.Teeths == 0)
-                {   //this meant that it is a joint
-                    selectedRotatableElement.AddSpeedAndRotation(speed, rotationDirection, this);
+                {   //this meant that it is a joint. Therefore, there will be different behaviour as well
+                    // so rotatable element will give current speed and it current rotatable
+                    // direction to the joint (because that is how it works)
+                    selectedRotatableElement.AddSpeedAndRotation(speed, rotationDirection, this); 
+
                 }
                 else
-                { //for gears
-                    float newSpeed = CalculateSpeed(this, selectedRotatableElement);
+                { //for gears it is more special as the speed differs between two different gear sizes
+                    // there is a special formula to get the speed
+                    float newSpeed = CalculateSpeed(this, selectedRotatableElement); 
+                    //give the rotatable element new speed and give a reverse direction to show that the gear is being rotated
                     selectedRotatableElement.AddSpeedAndRotation(newSpeed, ChangeDirection(rotationDirection), this);
                 }
             }
@@ -199,8 +231,10 @@ namespace Assets.tryoutFolder.script
         {
             for (int i = 0; i < surroundingElements.Length; i++)
             {
+                //iterate and find all element and jam them
                 if (surroundingElements[i] != driverJammingElement)
                 {
+                    //add the jaming element to the other rotatable element so that they know they have to jam
                     surroundingElements[i].AddJamingElement(this);
                 }
             }
@@ -215,6 +249,8 @@ namespace Assets.tryoutFolder.script
 
         private float CalculateSpeed(RotatableElement driver, RotatableElement driven)
         {
+            //formula: gearRatio = driven.teeths / driver teeths
+            // driven speed = driver.speed / gearRatio 
             float gearRatio = (float)driven.Teeths / (float)driver.Teeths;
             float calculatedSpeed = driver.Speed / gearRatio;
             return calculatedSpeed;
