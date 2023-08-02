@@ -14,6 +14,8 @@ public class GearRemainerChecker : MonoBehaviour
     void Start()
     {
         gearText = GetComponent<TextMeshProUGUI>();
+
+        //will find all the inactivated gears using inactivated gear tag
         inactivatedGears = GameObject
             .FindGameObjectsWithTag("InactivedGear") //er ignore the spelling error here...
             .Select(gear => gear.GetComponent<EndGearClass>())
@@ -23,9 +25,10 @@ public class GearRemainerChecker : MonoBehaviour
 
     void Update()
     {
+        //the update function is used to keep track on whether the game is completed using the CHeckIfSolve() function
         IsSolve = CheckIfSolve();
         if (IsSolve)
-        {
+        {//if it is, invoke the solve event to let the other components to run their action when the event is ended
             LevelManager.instance.SolvedEvent?.Invoke();
             LevelManager.instance.SolvedEvent.RemoveAllListeners();
         }
@@ -36,7 +39,7 @@ public class GearRemainerChecker : MonoBehaviour
         if (inactivatedGears == null)
         {
             return false;
-        }
+        } //just a edge case if there is no inactivated gears
 
         bool solve = true;
         int numberOfGearsSolve = 0;
@@ -56,6 +59,7 @@ public class GearRemainerChecker : MonoBehaviour
 
     private void SetText(int number)
     {
+        // will change the of the number of inactivated gear that is activated.
         gearText.text = $"{number} / {inactivatedGears.Length} <sprite name=\"Gear icon\">";
     }
 }

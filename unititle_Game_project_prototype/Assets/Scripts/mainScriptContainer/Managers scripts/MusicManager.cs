@@ -31,6 +31,7 @@ public class MusicManager : MonoBehaviour
     {
         if (Instance == null)
         {
+            //make sure that the backgroundvolume and svxvolume is both at max 
             Instance = this;
             BackgroundVolume = 1.0f;
             SvxVolume = 1.0f;
@@ -48,10 +49,13 @@ public class MusicManager : MonoBehaviour
     {
         for (int i = 0; i < audioClips.Length; i++)
         {
+            //setting an audio source for every music clip that will be played in the game
             var audioInstance = gameObject.AddComponent<AudioSource>();
             audioInstance.clip = audioClips[i].clip;
             audioInstance.volume = audioClips[i].volume;
             audioClips[i].AudioSource = audioInstance;
+
+            //background music is more special since it plays at a loop 
             if (audioClips[i].clip.name == "background Music")
             {
                 audioInstance.loop = true;
@@ -64,7 +68,7 @@ public class MusicManager : MonoBehaviour
     public void PlayMusicClip(string clipName)
     {
         if (CanPlaySvxVolume)
-        {
+        { //will play the clip only if it is enabled on the menu settings 
             var clip = SearchForClip(clipName);
             clip.AudioSource.volume = SvxVolume * clip.volume;
             clip.AudioSource.Play();
@@ -120,6 +124,8 @@ public class MusicManager : MonoBehaviour
 [System.Serializable]
 public struct ClipSetter
 {
+
+    //this Clip setter is just to store data about the audio clip for the music manager to use
     public AudioClip clip;
     [Range(0, 1)]
     public float volume;

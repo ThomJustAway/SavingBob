@@ -35,6 +35,7 @@ public class MouseBehaviour : MonoBehaviour
     {
         LevelManager.instance.SolvedEvent.AddListener(() =>
         {
+            //making sure that players cant interact with the game once the game is over
             gameObject.SetActive(false);
         });
     }
@@ -48,19 +49,28 @@ public class MouseBehaviour : MonoBehaviour
     {
         currentState = currentState.DoState(this);
     }
+
+
+    //this function is so for the states to use. Because I find it efficient to have the code share so if I wanted to change something, 
+    //the rest of the states will change as well
     public IMoveable GetImoveableComponent(Collider2D collider)
     {
+        //this function simplify the process getting the Imoveable component from both normal and edge cases.
+
+
         Transform hitGameObject = collider.transform;
         //mouseBehaviour.selectedObject = hitGameObject.GetComponent<IMoveable>();
         if (hitGameObject.TryGetComponent<IMoveable>(out IMoveable selectedObject))
         {
+            //sometimes, the IMoveable component is together with collider component
            return selectedObject;
         }
         else
         {
-            //the joint
+            //the joint (which has the IMoveable component at the parent component)
            return hitGameObject.GetComponentInParent<IMoveable>();
         }
+        //either way, it is easier to know I just getting the Imoveable component from the rotatable element
     }
 
     public void ToggleDeletedActiavted()
@@ -74,7 +84,7 @@ public class MouseBehaviour : MonoBehaviour
         {
             TooltipBehvaiour.instance.EndMessage();
         }
-    
+        //this is to show that the player is on delete mode.
     }
 
     public Vector3 GetVector3FromMousePosition()

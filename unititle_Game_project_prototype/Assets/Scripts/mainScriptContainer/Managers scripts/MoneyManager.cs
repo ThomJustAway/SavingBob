@@ -26,7 +26,7 @@ public class MoneyManager : MonoBehaviour
 
 
     private void Awake()
-    {
+    {// setting up singleton instance
         if (instance == null)
         {
             instance = this;
@@ -65,7 +65,7 @@ public class MoneyManager : MonoBehaviour
             //if can substract cost, do the following
             currentMoney -= money;
             animationMoneyText.text = $"<color=#ff4d4d>-{money} " + moneyIcon;
-            animator.SetTrigger("spend money");
+            animator.SetTrigger("spend money"); //show the animation that spend money
             MusicManager.Instance.PlayMusicClip(SoundData.BuyingGear);
             SetText();
             return true;
@@ -74,6 +74,7 @@ public class MoneyManager : MonoBehaviour
 
     public void RefundCost(int money)
     {
+        //this will show a add money animation that will play 
         currentMoney += money;
         animationMoneyText.text = $"<color=\"green\">+{money}" + moneyIcon; // this code is quite bad since it is repetitive
         animator.SetTrigger("refund money");
@@ -83,11 +84,13 @@ public class MoneyManager : MonoBehaviour
 
     private void SetText()
     {
+        //this function just change the display on the text mesh pro component
         currentMoneyText.text = currentMoney.ToString() + moneyIcon;
     }
 
     public void ResetMoney()
     {
+        // this just show the animation to getting back the difference of money (this just mean they will get back all the money they lost)
         int differenceInMoney = LevelManager.instance.currentGameData.money - currentMoney;
         RefundCost(differenceInMoney);
     }

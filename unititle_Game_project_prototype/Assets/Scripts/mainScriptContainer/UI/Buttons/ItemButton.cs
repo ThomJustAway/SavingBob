@@ -103,6 +103,7 @@ public class ItemButton : MonoBehaviour
 
     public bool CanBuyItem()
     {
+        //Will check with the money manger if the player has enough money to buy the dragable component
         return MoneyManager.instance.IfCanSubstractCost(moveableItem.Cost);
     }
 

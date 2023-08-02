@@ -59,6 +59,7 @@ public class DragableGear : Gear, IMoveable
             else
             {// this mean that it is a wall as there is no gear component
              //fun fact: the walls use innergearlayer so that the dragable element can detect
+             //if the dragable gear cant collect and Gear component, it means it has to be a wall
                 TryGoBackLastPosition();
             }
         }
@@ -79,6 +80,7 @@ public class DragableGear : Gear, IMoveable
             }
         } //change this
 
+        //do another check just in case the moving of valid position is compromise by another rotatable element
         surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
 
         if (surroundInnerGear.Length > 0)
@@ -113,6 +115,7 @@ public class DragableGear : Gear, IMoveable
 
     private void TryGoBackLastPosition()
     {
+        //this will be called to return back to original position as it cannot find a suitable area
         // vector3.zero is because that is vector 3 struct initalise value
         if (previousValidPosition != Vector3.zero) // if have previous valid position
         {

@@ -19,16 +19,18 @@ public class MouseIdle : IMouseStates
     {
         if (Input.GetMouseButtonDown(0))
         {
+            // will always see a mouse click. it is, it will
+            //do a ray cast to see what it hit.
             RayCastUI(mouseBehaviour);
             RayCastGameObject(mouseBehaviour);
             if (mouseBehaviour.selectedObject != null)
             {
-                //Debug.Log(mouseBehaviour.selectedObject);
+                //if there is selected object, the state switches to move the selected object
                 return mouseBehaviour.mouseMoveSelectedObject;
             }
             else return mouseBehaviour.mouseIdle;
         }
-        else if (mouseBehaviour.deleteActivated)
+        else if (mouseBehaviour.deleteActivated) //if nothing happen and suddenly the delete activated bool is true, switch to delete mode
         {
             return mouseBehaviour.deleteItems;
         }
@@ -40,6 +42,7 @@ public class MouseIdle : IMouseStates
         Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float minDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() - 0.5f;
         float maxDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() + 0.5f;
+
         var collidedObject = Physics2D.Raycast(positionOfMouse, 
             Vector2.zero,
             float.PositiveInfinity,
@@ -50,13 +53,11 @@ public class MouseIdle : IMouseStates
 
         //getting the objects that are colliding with the raycast. this is from the moveable gear layer.
         //The z index restriction is to prevent gears from top or bottom from mixing together
-        //need to add code to get different things
+    
 
-
-        //problem now is that only the bottom part of the joint can be move.
-        // the top part of the joint cant be move.
         if (collidedObject.collider != null)
-        {
+        { //if it has a collider, it means the raycast hits a moveablecomponet and that the mouse idle can extract out the 
+            //Imoveable component from it so that it can move it
             mouseBehaviour.selectedObject = mouseBehaviour.GetImoveableComponent(collidedObject.collider);
         }
     }
@@ -68,23 +69,25 @@ public class MouseIdle : IMouseStates
         List<RaycastResult> raysastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, raysastResults);
 
-        //this code only works for making Gear
+        /*Use event system component to raycast the UI component 
+          to find if the player hits a Itembutton. 
+        */
         foreach (var raycastResult in raysastResults)
         {
-           
             if (raycastResult.gameObject.TryGetComponent<ItemButton>(out ItemButton manager))
-            {
+            {//will scan through each result and find if the component is an ItemButton
                 if (manager.CanBuyItem())
                 {
                     GameObject gear = manager.GetItem(); //get Item from pool
                     mouseBehaviour.selectedObject = gear.GetComponent<IMoveable>(); //make it the selected object               
 
-                    var newPosition = mouseBehaviour.GetVector3FromMousePosition();
-                    mouseBehaviour.selectedObject.Move(newPosition);
+                    var newPosition = mouseBehaviour.GetVector3FromMousePosition(); 
+                    mouseBehaviour.selectedObject.Move(newPosition); 
+                    //the selectedobject have to move at the place where the mouse is at 
+                    //as when activated, it can be at a random position. 
+                    //doing this will make sure it will move to the mouse position.
                 }
             }
-
-
         }
     }
 
