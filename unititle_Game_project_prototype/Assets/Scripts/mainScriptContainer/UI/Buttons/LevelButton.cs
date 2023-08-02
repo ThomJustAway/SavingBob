@@ -43,8 +43,9 @@ public class LevelButton : CustomSpriteButton
 
     public override void OnPointerDown(PointerEventData eventData)
     {
+
         if (!disabled)
-        {
+        {//show animation to show that it is click when press down
             image.sprite = clickSprite;
         }
     }
@@ -53,6 +54,7 @@ public class LevelButton : CustomSpriteButton
     {
         if (!disabled)
         {
+            //show animation to show that it is click when press down
             image.sprite = normalSprite;
             MusicManager.Instance.PlayMusicClip(SoundData.ClickButton);
             SceneTransitionManager.instance.StartTransition(levelInCharge); 
