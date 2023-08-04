@@ -16,9 +16,10 @@ public class PauseMenuBehaviour : MonoBehaviour
 
     void Update()
     {
+        //if it hears a escape key
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            isActive = !isActive;
+            isActive = !isActive; //toggle the isactive of the menu
             PauseMenu.SetActive(isActive);
         }
     }

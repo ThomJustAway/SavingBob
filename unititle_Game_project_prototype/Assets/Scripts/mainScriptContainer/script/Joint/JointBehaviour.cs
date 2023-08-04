@@ -36,6 +36,9 @@ public class JointBehaviour : RotatableElement, IMoveable
 
     protected override RotatableElement[] FindingRotatingElement()
     {
+
+        //basically find elements from both the lower and upper joint
+        //afterwards, combine together to get all the rotatable element near the joint
         RotatableElement[] lowerJointElements = GetElementsFromJoint(lowerJoint);
         RotatableElement[] upperJointElements = GetElementsFromJoint(upperJoint);
         return lowerJointElements.Concat(upperJointElements).ToArray();
@@ -44,7 +47,7 @@ public class JointBehaviour : RotatableElement, IMoveable
     protected override void RotateSurroundingElements()
     {
         if (speed > 0)
-        {
+        { //if the speed of the joint is not zero, rotate all the other element surrounding the joint(which are connected to the joint)
             for (int i = 0; i < surroundingElements.Length; i++)
             {
                 if (surroundingElements[i] != driverElement) 
@@ -55,20 +58,20 @@ public class JointBehaviour : RotatableElement, IMoveable
 
     private RotatableElement[] GetElementsFromJoint(Collider2D joint)
     {
-        float minDept = joint.transform.position.z - 0.3f;
+        float minDept = joint.transform.position.z - 0.3f; 
         float maxDept = joint.transform.position.z + 0.3f; // this range is to make sure the joint check its current layer
-        RotatableElement connectedGear = FindRotatableGearFromJoint(minDept, maxDept);
+        RotatableElement connectedGear = FindRotatableGearFromJoint(minDept, maxDept); //get both joint and gear near the joint
         RotatableElement connectedJoint = FindRotatableJointFromJoint(minDept, maxDept, joint);
 
         List<RotatableElement> elements = new List<RotatableElement>();
-        if (connectedGear != null )
+        if (connectedGear != null ) 
         {
             elements.Add(connectedGear); 
         }
         if(connectedJoint != null )
         {
             elements.Add(connectedJoint);
-        }
+        } //add the gear and joint if it exist
 
         return elements.ToArray();
 
@@ -76,9 +79,10 @@ public class JointBehaviour : RotatableElement, IMoveable
 
     private RotatableElement FindRotatableGearFromJoint(float minDept, float maxDept)
     {
+        //function to find out if there is a rotatable gear near the joint
         var collider = Physics2D.OverlapCircle(transform.position, radius, LayerData.GearAreaLayer, minDept, maxDept);
         if (collider != null)
-        {
+        {//if there is a gear, get the rotatable element
             return collider.GetComponentInParent<RotatableElement>();
         }
         return null;
@@ -86,11 +90,13 @@ public class JointBehaviour : RotatableElement, IMoveable
 
     private RotatableElement FindRotatableJointFromJoint(float minDept, float maxDept, Collider2D joint)
     {
+        //function to find the surrounding joint (the joint has many collider, so have to use overlap circle all)
         var colliders = Physics2D.OverlapCircleAll(transform.position, radius, LayerData.JointLayer, minDept, maxDept);
         foreach (Collider2D collider in colliders)
         {
             if (collider != joint)
             {
+                //if there is a collider it mean it found a joint, return that joint rotatable element component)
                 return collider.GetComponentInParent<RotatableElement>();
             }
         }
@@ -106,7 +112,7 @@ public class JointBehaviour : RotatableElement, IMoveable
     private void CheckJoint(Collider2D joint, bool isLowerJoint)
     {
         float minDept = joint.transform.position.z - 0.3f;
-        float maxDept = joint.transform.position.z + 0.3f;
+        float maxDept = joint.transform.position.z + 0.3f; //restrict the layer it can check
 
         Collider2D getRotatableElementSurroundingJoint = Physics2D.OverlapCircle
             (joint.transform.position,
@@ -114,11 +120,12 @@ public class JointBehaviour : RotatableElement, IMoveable
             LayerData.InnerGearLayer,
             minDept
             , maxDept
-            );
+            ); //get the rotatable gear near the joint
 
         
         if (getRotatableElementSurroundingJoint != null)
         { //if have found a rotatable object
+            //assign it to the different variables that is related to the position of the joint
             if (isLowerJoint)
             {
                 connectedGearLower = getRotatableElementSurroundingJoint.GetComponentInParent<RotatableElement>();
@@ -130,7 +137,7 @@ public class JointBehaviour : RotatableElement, IMoveable
 
         }
         else
-        {
+        { //if it does not, make the value of connectedGearLower and upper to be null based on the where the value is at
             if (isLowerJoint)
             {
                 connectedGearLower = null;
@@ -140,7 +147,7 @@ public class JointBehaviour : RotatableElement, IMoveable
                 connectedGearUpper = null;
             }
         }
-        //change this if else statement
+ 
     }
 
     public void Move(Vector3 position)
@@ -171,15 +178,20 @@ public class JointBehaviour : RotatableElement, IMoveable
     {
         CheckCorrectLayer();
         CheckBothJoint();
+
+        //this will make the joint auto stick to different gear if it sense a lower or upper gear
         if (connectedGearLower != null)
         {
             transform.position = connectedGearLower.transform.position;
         }
         else if (connectedGearUpper != null)
         {
+            //if it is upper gear go to the position of it. but this will cause a problem where the lower joint will 
+            //go to the connected gear upper. So we need to fix that
             Vector3 newPosition = connectedGearUpper.transform.position;
-            newPosition.z = newPosition.z + 3; // this makes the joint remain at the same position
-            transform.position = newPosition;
+            newPosition.z = newPosition.z + 3; // this makes the joint remain at the same position as it pushes the 
+            //joint down by one layer
+            transform.position = newPosition; 
         }
         MusicManager.Instance.PlayMusicClip(SoundData.PlacingSound);
     }

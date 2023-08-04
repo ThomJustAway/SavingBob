@@ -30,6 +30,7 @@ public class ColorData : MonoBehaviour
 
     private void Init()
     {
+        //set all the colors from the colordata scriptableobject
         ValidPositionColor = scriptableObject.validPositionColor;
         InvalidPositionColor = scriptableObject.invalidPositionColor;
         NormalColor = scriptableObject.normalColor;

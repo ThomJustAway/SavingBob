@@ -20,6 +20,7 @@ public class MenuBehvaiour : MonoBehaviour
 
     public void OnClick()
     {
+        //toggle the animation when it is click. This can be found in the unity editor
         animator.SetBool(isActivatedHash, !animator.GetBool(isActivatedHash));
     }
 }

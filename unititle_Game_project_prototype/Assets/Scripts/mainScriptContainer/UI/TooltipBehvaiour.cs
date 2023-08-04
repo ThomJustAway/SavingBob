@@ -16,12 +16,14 @@ public class TooltipBehvaiour : MonoBehaviour
 
     private void Awake()
     {
+        //set up instance
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
 
     void Start()
     {
+        //setting up the values
         animator = GetComponent<Animator>();
         textMessage = GetComponent<TextMeshProUGUI>();
         IsActivated = false;
@@ -30,7 +32,7 @@ public class TooltipBehvaiour : MonoBehaviour
     public void StartMessage(string message)
     {
         if (!IsActivated)
-        {
+        { //check if the tool tip is being used. if it is not then tooltip will be used to show the message
             IsActivated = !IsActivated;
             SetText(message);
             animator.SetBool(isActivatedHash, IsActivated);
@@ -40,7 +42,7 @@ public class TooltipBehvaiour : MonoBehaviour
     public void EndMessage()
     {
         if (IsActivated)
-        {
+        {//if the tool tip is used, close the tooltip
             IsActivated = !IsActivated;
             animator.SetBool(isActivatedHash, IsActivated);
         }
@@ -48,17 +50,19 @@ public class TooltipBehvaiour : MonoBehaviour
 
     public void SetText(string message)
     {
+        //just change the text of the tool tip in some cases (like endgear script)
         textMessage.text = message;
     }
 
     public void ResetText()
     {
-        //this is called in some other script so you wont see the references
+        //this is called in unity editor so you wont see the references
         textMessage.text = "";
     }
 
     public void StartShortMessage(string message) //this is just used for some edge cases
     {
+        //this will help show a short message without using the start and stop message
         StartCoroutine(ShortMessage(message));
     }
 

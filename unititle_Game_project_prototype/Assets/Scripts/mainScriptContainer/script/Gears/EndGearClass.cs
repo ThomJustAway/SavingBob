@@ -27,6 +27,7 @@ public class EndGearClass : MonoBehaviour
 
     private void Start()
     {
+        //seting up the gear
         gearHost = GetComponent<Gear>();
         SetGearVisual();
     }

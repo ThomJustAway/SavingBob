@@ -23,30 +23,34 @@ public class MouseMoveSelectedObject : IMouseStates
     {
         if (Input.GetMouseButton(0))
         {
+            //check if the mouse is being hold. keep updating the select object during this period
             MoveSelectedObject(mouseBehaviour);
             return mouseBehaviour.mouseMoveSelectedObject;
         }
         else
         {
-            //put code here to prevent gears from overlapping one another
+            //if the mouse button has stop moving, then it means that player has stop moving the selected object
             CheckIfValidPosition(mouseBehaviour);
-            mouseBehaviour.selectedObject = null;
-            return mouseBehaviour.mouseIdle;
+            mouseBehaviour.selectedObject = null; //set this to null for other selectedobject to be selected
+            return mouseBehaviour.mouseIdle; //change back to mouse Idle for next call
         }   
     }
 
     private void CheckIfValidPosition(MouseBehaviour mouseBehaviour)
     {
+        
         Vector3 Position = mouseBehaviour.GetVector3FromMousePosition();
-        mouseBehaviour.selectedObject.Move(Position);
-        mouseBehaviour.selectedObject.CheckValidPosition();
+        mouseBehaviour.selectedObject.Move(Position); //this time make the imoveable to go back to current position 
+        //without any offset (so that it does not look weird if the gear menu is were to overlap it
+        mouseBehaviour.selectedObject.CheckValidPosition(); //ask the selectedobject to check if it is a valid position
     } 
 
     private void MoveSelectedObject(MouseBehaviour mouseBehaviour)
     {
         Vector3 newPosition = mouseBehaviour.GetVector3FromMousePosition();
-        newPosition.z += offsetFromCamera;
-        mouseBehaviour.selectedObject.Move(newPosition);
+        //get new position based on mouse behaviour
+        newPosition.z += offsetFromCamera; //this offset is to show selected object to be above the gear menu
+        mouseBehaviour.selectedObject.Move(newPosition); //ask the selectobject to move 
     }
 
 }

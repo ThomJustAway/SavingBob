@@ -23,7 +23,7 @@ public class EndPanelBehaviour : MonoBehaviour
     private void ActivatePanel()
     {
         
-        int isActivatedHash = Animator.StringToHash("IsActivated");
+        int isActivatedHash = Animator.StringToHash("IsActivated"); //the value to activate the animation
         Animator animator = GetComponent<Animator>();
 
         int playerCurrentLevel = PlayerPrefs.GetInt(LevelButton.Key);

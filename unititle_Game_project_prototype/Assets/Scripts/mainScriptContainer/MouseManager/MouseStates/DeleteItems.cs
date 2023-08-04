@@ -22,11 +22,11 @@ public class DeleteItems : IMouseStates
     {
         ListenAndDeleteSelectedItem(mouseBehaviour);
         if (mouseBehaviour.deleteActivated)
-        {
+        {//if the delete activated is still active, then continue with the delete state
             return mouseBehaviour.deleteItems;
         }
         else
-        {
+        { //else reuturn back to the mouse idel state
             return mouseBehaviour.mouseIdle;
         }
     }
@@ -38,7 +38,9 @@ public class DeleteItems : IMouseStates
             Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             //mb magic int this is the range for detecting the layer
             float minDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() - 0.5f;
-            float maxDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() + 0.5f;
+            float maxDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() + 0.5f; 
+            //restrict the raycast to only the current layer
+
             var collidedObject = Physics2D.Raycast(positionOfMouse,
                 Vector2.zero,
                 float.PositiveInfinity,
@@ -48,10 +50,10 @@ public class DeleteItems : IMouseStates
             );
 
             if(collidedObject.collider != null)
-            {
+            { //if it found a collider, it mean it is a IMoveable. Therefore delete the Imoveabl component
                 IMoveable ImoveableComponent = mouseBehaviour.GetImoveableComponent(collidedObject.collider);
                 foreach (ItemButton itemButton in LevelManager.instance.itemButtons)
-                {
+                {//find the itembutton and then remove the selected Imoveable component
                     if (itemButton.IsGameObjectRelated(ImoveableComponent.Getprefab))
                     {
                         itemButton.RemoveItem(ImoveableComponent.Getprefab);
@@ -62,6 +64,6 @@ public class DeleteItems : IMouseStates
         }
     }
 
-    //probably a o(n) operation 
+    //it is an o(n) operation which I am not too happy about
 
 }

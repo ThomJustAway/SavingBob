@@ -47,6 +47,7 @@ public class MouseBehaviour : MonoBehaviour
 
     private void Update()
     {
+        //will always do a state that best fit the scenario
         currentState = currentState.DoState(this);
     }
 

@@ -32,6 +32,7 @@ public class MouseIdle : IMouseStates
         }
         else if (mouseBehaviour.deleteActivated) //if nothing happen and suddenly the delete activated bool is true, switch to delete mode
         {
+            //the deleteactivated is toggled at the delete button 
             return mouseBehaviour.deleteItems;
         }
         else return mouseBehaviour.mouseIdle;
@@ -42,6 +43,7 @@ public class MouseIdle : IMouseStates
         Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float minDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() - 0.5f;
         float maxDept = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() + 0.5f;
+        //The z index restriction is to restrict the raycast to search the current layer
 
         var collidedObject = Physics2D.Raycast(positionOfMouse, 
             Vector2.zero,
@@ -52,7 +54,6 @@ public class MouseIdle : IMouseStates
             ); 
 
         //getting the objects that are colliding with the raycast. this is from the moveable gear layer.
-        //The z index restriction is to prevent gears from top or bottom from mixing together
     
 
         if (collidedObject.collider != null)
