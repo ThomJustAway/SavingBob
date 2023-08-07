@@ -20,17 +20,18 @@ public class DragableGear : Gear, IMoveable
     under the Move and CheckValidPostion function
     */
 
-    [SerializeField] private string nameOfElement;
-    [SerializeField] private int cost;
+    [SerializeField] private string nameOfElement; //setting this private to prevent accidentally changing the moveable element
+    [SerializeField] private int cost;//same here
 
-    private SpriteRenderer spriteRenderer;
-    public int Cost => cost;
-    public string Name => nameOfElement;
+    private SpriteRenderer spriteRenderer; //will require to change the color of the gear to indicate movement
+    public int Cost => cost; //this is implement the Imoveable interface
+    public string Name => nameOfElement; 
     public GameObject Getprefab => gameObject;
 
     private ColorData colorData = ColorData.Instance;
 
-    private Vector3 previousValidPosition;
+    private Vector3 previousValidPosition; // this is important as it keeps memory of the previous valid position the gear is in before moving
+    //if there is no valid position when move, this will be used in order to resolve the invalid position.
     private void Awake()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -38,8 +39,17 @@ public class DragableGear : Gear, IMoveable
 
     public void CheckValidPosition()
     {
+        /* this will check if the gear is at a valid posititon 
+            A valid position is define as a area where the
+            Gear has no collision at its surrounding area.
+
+            If there is valid position, it will remain at that position.
+            However, if there is no valid position, it will try to do some 
+            operation to figure out how resolve this issue.
+         */
+
         //this is called after moving and draggin
-        Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
+        Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerAreaLayer);
         Collider2D[] surroundingJoint = GetColliderAroundRadiusBasedOnLayer(LayerData.JointLayer);
         if (surroundInnerGear.Length == 1)
         {
@@ -65,41 +75,50 @@ public class DragableGear : Gear, IMoveable
         }
         else if(surroundInnerGear.Length > 1)
         {
+            // if there is more than one around the gear, then give up resolving and go back to last position
             TryGoBackLastPosition();
         }
         else if (surroundingJoint.Length > 0)
         {
+            // if there is no gear surrounding the area and the joint. 
             if (surroundingJoint.Length == 1)
             {
+                //if it is only one, then just go to that joint position. (this will look like the gears locks to the joint)
                 Collider2D joint = surroundingJoint[0];
                 transform.position = joint.gameObject.transform.position;
             }
             else
             {
+                //this means there is more than more joint.
+                //It is harder to figure out what to do this so just return to last position
                 TryGoBackLastPosition();
             }
         } //change this
 
         //do another check just in case the moving of valid position is compromise by another rotatable element
-        surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
+        surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerAreaLayer);
 
         if (surroundInnerGear.Length > 0)
         { 
             //that means that the moving of gear is still within a invalid spot
             TryGoBackLastPosition();
         }
+        // at the end of all, the position of the gear is resolve. So return to normal color and play the placing sound
         spriteRenderer.color = colorData.NormalColor;
         MusicManager.Instance.PlayMusicClip(SoundData.PlacingSound);
     }
     public void Move(Vector3 position)
     {
         //this is called at the mousemove Behaviour and is called when the Dragable gear needs moving
+        //it will take a specified amount position to move to (world position) and would move to that
+        //area. 
+
         if (speed > 0)
         { //set and make sure the when moving, there is no rotation by the gear
             speed = 0;
         }
         transform.position = position;//change the position of the transform.position
-        Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerGearLayer);
+        Collider2D[] surroundInnerGear = GetColliderAroundRadiusBasedOnLayer(LayerData.InnerAreaLayer);
         if (surroundInnerGear.Length > 0)
         {//if there is a inner gear, then tell the player that is cant be place there by changing the color
             spriteRenderer.color = colorData.InvalidPositionColor;
@@ -133,8 +152,14 @@ public class DragableGear : Gear, IMoveable
 
     public void RemoveItem()
     {
+        //this is to remove the game object.
         var itemButtons = LevelManager.instance.itemButtons;
-        for (int i = 0; i < itemButtons.Length; i++)
+        for (int i = 0; i < itemButtons.Length; i++) 
+        /*
+         What this does is just loop through all the item buttons so that it can 
+        find the item button that is related to the dragable gear. Once found, it 
+        will return to that specific item button pool
+         */
         {
             //go through the item buttons and find the item buttons that correspond to the current dragable element
             if (itemButtons[i].IsGameObjectRelated(gameObject))

@@ -372,12 +372,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: textData.Array.data[0].textToShow
-      value: Hey Tim! Can You Help repair me? I lose a bunch of my gears when I was
-        hit by a Car. Now All my gears are broken.
+      value: Hey Tim! Can you Help repair me? I lost a bunch of my gears when I was
+        hit by a car. Now All my gears are broken.
       objectReference: {fileID: 0}
     - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: textData.Array.data[1].textToShow
-      value: You see that Green Gear and red gear, You got to help me rotate that
+      value: You see that Green Gear and red gear? You got to help me rotate that
         red gear using the green gear!
       objectReference: {fileID: 0}
     - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
@@ -391,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: textData.Array.data[4].textToShow
-      value: This will show you how much gears you have left
+      value: This will show you how many gears you have left
       objectReference: {fileID: 0}
     - target: {fileID: 7133607686553993984, guid: 0e3989dda5b7b2a4380e1ad442f26c88, type: 3}
       propertyPath: textData.Array.data[5].textToShow

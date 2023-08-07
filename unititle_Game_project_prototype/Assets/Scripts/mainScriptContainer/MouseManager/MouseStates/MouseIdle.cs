@@ -48,7 +48,7 @@ public class MouseIdle : IMouseStates
         var collidedObject = Physics2D.Raycast(positionOfMouse, 
             Vector2.zero,
             float.PositiveInfinity,
-            LayerData.MoveableGearLayer,
+            LayerData.MoveableItemLayer,
             minDept,
             maxDept
             ); 

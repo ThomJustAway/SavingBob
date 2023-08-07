@@ -80,7 +80,7 @@ public class JointBehaviour : RotatableElement, IMoveable
     private RotatableElement FindRotatableGearFromJoint(float minDept, float maxDept)
     {
         //function to find out if there is a rotatable gear near the joint
-        var collider = Physics2D.OverlapCircle(transform.position, radius, LayerData.GearAreaLayer, minDept, maxDept);
+        var collider = Physics2D.OverlapCircle(transform.position, radius, LayerData.EntireAreaLayer, minDept, maxDept);
         if (collider != null)
         {//if there is a gear, get the rotatable element
             return collider.GetComponentInParent<RotatableElement>();
@@ -117,7 +117,7 @@ public class JointBehaviour : RotatableElement, IMoveable
         Collider2D getRotatableElementSurroundingJoint = Physics2D.OverlapCircle
             (joint.transform.position,
             radius,
-            LayerData.InnerGearLayer,
+            LayerData.InnerAreaLayer,
             minDept
             , maxDept
             ); //get the rotatable gear near the joint

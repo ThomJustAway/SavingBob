@@ -66,7 +66,7 @@ public class Gear : RotatableElement
 
     protected override RotatableElement[] FindingRotatingElement()
     {
-        var surroundingRotatableComponents = GetColliderAroundRadiusBasedOnLayer(LayerData.GearAreaLayer)
+        var surroundingRotatableComponents = GetColliderAroundRadiusBasedOnLayer(LayerData.EntireAreaLayer)
             .Select(collider => collider.GetComponentInParent<RotatableElement>()).ToArray();
 
         var joint = GetJointComponent();
@@ -116,7 +116,7 @@ public class Gear : RotatableElement
     protected Collider2D GetRespectiveColliderByLayer(LayerMask layer)
     {
         //this function just return a collider respective to the layer
-        if (layer == LayerData.GearAreaLayer) return entireGearArea;
+        if (layer == LayerData.EntireAreaLayer) return entireGearArea;
         else return innerGearArea;
     }
 }
