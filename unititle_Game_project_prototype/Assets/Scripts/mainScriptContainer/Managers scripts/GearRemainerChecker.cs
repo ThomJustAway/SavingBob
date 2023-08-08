@@ -7,14 +7,21 @@ using UnityEngine.Events;
 
 public class GearRemainerChecker : MonoBehaviour
 {
-    //this script check the remaining gear
-    private EndGearClass[] inactivatedGears;
-    private bool IsSolve;
-    private TextMeshProUGUI gearText;
+    /// <summary>
+    /// Gear remainer checker script check if all the inactivated gears are 
+    /// activated. It will search through all the gears using Tag to find all
+    /// the inactiavted gear. Afterwhich, it will do a constant check to see if they are activated.
+    /// If they are all activated, then it will send an event saying that the puzzle is solve.
+    /// </summary>
+
+    //this script check for the remaining gears
+    private EndGearClass[] inactivatedGears; //use to store reference to the inactivated gears
+    private bool IsSolve; //a bool to check if the puzzle is solve
+    private TextMeshProUGUI gearText; //will change the text to indicated how many inactivated gears are left
+
     void Start()
     {
         gearText = GetComponent<TextMeshProUGUI>();
-
         //will find all the inactivated gears using inactivated gear tag
         inactivatedGears = GameObject
             .FindGameObjectsWithTag("InactivedGear") //er ignore the spelling error here...
@@ -28,9 +35,9 @@ public class GearRemainerChecker : MonoBehaviour
         //the update function is used to keep track on whether the game is completed using the CHeckIfSolve() function
         IsSolve = CheckIfSolve();
         if (IsSolve)
-        {//if it is, invoke the solve event to let the other components to run their action when the event is ended
+        {//if it is, invoke the solve event to let the other components to run their action when the puzzle is ended
             LevelManager.instance.SolvedEvent?.Invoke();
-            LevelManager.instance.SolvedEvent.RemoveAllListeners();
+            LevelManager.instance.SolvedEvent.RemoveAllListeners(); //just to prevent any memory leakage
         }
     }
 
