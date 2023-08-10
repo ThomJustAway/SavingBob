@@ -19,18 +19,18 @@ public class JointBehaviour : RotatableElement, IMoveable
         FindingRotatingElement() to find out how it detect the surrounding joints.
     */
 
-    [SerializeField] private CircleCollider2D lowerJoint;
+    [SerializeField] private CircleCollider2D lowerJoint;// upper and lower joints are to check for gears/joints 
     [SerializeField] private CircleCollider2D upperJoint;
-    [SerializeField] private string nameOfElement;
+    [SerializeField] private string nameOfElement; //Joint in this case are dragable object as they implement the imoveable interface
     [SerializeField] private int cost;
-    private float radius;
+    private float radius; //have radius to do physic raycasting
     public int Cost => cost;
     private int layer; // keep track of where the joint z position is at
 
-    private RotatableElement connectedGearLower;
+    private RotatableElement connectedGearLower; //this is used to auto automatically stick to the gear at the bottom and top
     private RotatableElement connectedGearUpper;
 
-    public GameObject Getprefab => gameObject;
+    public GameObject Getprefab => gameObject; //look at imoveable. All imoveable requires this
 
     public string Name => name;
 
@@ -46,6 +46,7 @@ public class JointBehaviour : RotatableElement, IMoveable
 
     protected override void RotateSurroundingElements()
     {
+        //the different gears will give speed to the joint, so all it has to do is just give rotation to the surrounding gears and joints
         if (speed > 0)
         { //if the speed of the joint is not zero, rotate all the other element surrounding the joint(which are connected to the joint)
             for (int i = 0; i < surroundingElements.Length; i++)
@@ -63,7 +64,7 @@ public class JointBehaviour : RotatableElement, IMoveable
         RotatableElement connectedGear = FindRotatableGearFromJoint(minDept, maxDept); //get both joint and gear near the joint
         RotatableElement connectedJoint = FindRotatableJointFromJoint(minDept, maxDept, joint);
 
-        List<RotatableElement> elements = new List<RotatableElement>();
+        List<RotatableElement> elements = new List<RotatableElement>(); //will have a list to add gear and joint that the joint found
         if (connectedGear != null ) 
         {
             elements.Add(connectedGear); 
@@ -80,7 +81,7 @@ public class JointBehaviour : RotatableElement, IMoveable
     private RotatableElement FindRotatableGearFromJoint(float minDept, float maxDept)
     {
         //function to find out if there is a rotatable gear near the joint
-        var collider = Physics2D.OverlapCircle(transform.position, radius, LayerData.GearAreaLayer, minDept, maxDept);
+        var collider = Physics2D.OverlapCircle(transform.position, radius, LayerData.EntireAreaLayer, minDept, maxDept);
         if (collider != null)
         {//if there is a gear, get the rotatable element
             return collider.GetComponentInParent<RotatableElement>();
@@ -92,8 +93,10 @@ public class JointBehaviour : RotatableElement, IMoveable
     {
         //function to find the surrounding joint (the joint has many collider, so have to use overlap circle all)
         var colliders = Physics2D.OverlapCircleAll(transform.position, radius, LayerData.JointLayer, minDept, maxDept);
+        //this physic.overlapcircleall basically finds all the collider in a joint layer. it will only detect joints 
         foreach (Collider2D collider in colliders)
         {
+            //the function will go through the different collider to find a joint that is not theirs
             if (collider != joint)
             {
                 //if there is a collider it mean it found a joint, return that joint rotatable element component)
@@ -105,6 +108,7 @@ public class JointBehaviour : RotatableElement, IMoveable
 
     private void CheckBothJoint()
     {
+        //will check if there is a gear at the bottom and top joint and store it as reference
         CheckJoint(lowerJoint, true);
         CheckJoint(upperJoint, false);   //look at both joint
     }
@@ -117,7 +121,7 @@ public class JointBehaviour : RotatableElement, IMoveable
         Collider2D getRotatableElementSurroundingJoint = Physics2D.OverlapCircle
             (joint.transform.position,
             radius,
-            LayerData.InnerGearLayer,
+            LayerData.InnerAreaLayer,
             minDept
             , maxDept
             ); //get the rotatable gear near the joint
@@ -161,22 +165,38 @@ public class JointBehaviour : RotatableElement, IMoveable
 
     private void CheckCorrectLayer()
     {
+        //check correct layer is important to make sure that the joint stay put in the current layer it is in
         int maxLayer = LevelManager.instance.currentGameData.NumberOfLayers; //check how many layers are there
         int currentLayer = LayerManager.instance.CurrentLayer; //check the current layer
         if (currentLayer == maxLayer)
-        {
+        { 
+            //as there is a top joint and bottom joint. this calculation is done at the bottom joint.
+            //as a result if this code is not here, the joint below the maximum layer will not be shown 
+            //as the top joint is above the next layer (which does not exist). As a result, it
+            //is important to push the bottom joint by one layer down so that the top joint can be shown at the max layer.
+            //it is a bit hard to understand this concept so you should see the joint prefab.
             transform.Translate(0, 0, +3); // basically moving one layer down
         }
         else 
         {
-            int difference = currentLayer - layer;
+
+            //another important code to tell the joint to stay put in their current layer
+            //the global variable layer is to keep track of the joint current layer.
+            /*
+                When the joint is move at the top joint, it will force the bottom joint to 
+                go the the top joint position. as a result, this will make the bottom joint disappear
+                if the top joint is being moved
+                This difference is basically making sure it moves one layer down so that the bottom joint
+                will remain at the bottom
+             */
+            int difference = currentLayer - layer; 
             transform.Translate(0, 0, 3 * difference);
         }
     } //does the checking and making sure the joint is under the same layer
 
     public void CheckValidPosition() //fix this later
     {
-        CheckCorrectLayer();
+        CheckCorrectLayer(); 
         CheckBothJoint();
 
         //this will make the joint auto stick to different gear if it sense a lower or upper gear
@@ -200,9 +220,9 @@ public class JointBehaviour : RotatableElement, IMoveable
     {
         var itemButtons = LevelManager.instance.itemButtons;
         for (int i = 0; i < itemButtons.Length; i++)
-        {
+        {//the function will find the item button relating to the joint.
             if (itemButtons[i].IsGameObjectRelated(gameObject))
-            {
+            {//if found, then remove the item.
                 itemButtons[i].RemoveItem(gameObject);
                 break;
             }

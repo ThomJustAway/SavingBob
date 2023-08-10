@@ -35,21 +35,24 @@ public class LayerManager : MonoBehaviour
      */
 
     public static LayerManager instance; //singleton because I want to have an object that stores the current layer of the game.
-    private Camera mainCamera;
-    public Transform background;
+    private Camera mainCamera; //this is to move the camera to the z-index position. This will give the illusion that there is a lot of layers in the game
+    public Transform background; //this is important as the background prevents players from seeing what is happening below the other layers
 
-    private int currentLayer = 1;
+    private int currentLayer = 1; //all layers will start at layer 1
 
     public int CurrentLayer { get { return currentLayer; } }
+
     [HideInInspector] public UnityEvent onButtonClick = new UnityEvent();
+    //this event is for the layerbutton to tell the player which layer they are in.
+    //so if layerbutton 1 is click, it will deactivate the previous layerbutton to show that the player is at layer 1. look at layerbutton to understanding what I mean
 
     private void Start()
     {
         int StartingPoint = -1; //this make sure that players starts at layer 1
         mainCamera = Camera.main;
-        mainCamera.transform.position = new Vector3(0, 0, StartingPoint);
+        mainCamera.transform.position = new Vector3(0, 0, StartingPoint);//you can look on the top again if you are confuse. layer 1 camera position is -1;
         background.position = new Vector3(0, 0, StartingPoint + 2);
-        instance = this;
+        instance = this; //seting up the instance
     }
 
     public int GetGearZIndexBasedOnCurrentLayer()
@@ -61,12 +64,22 @@ public class LayerManager : MonoBehaviour
 
     public void ChangeLayer(int layer)
     {
+        /*this is the formula to calculate the z-index difference between the two layers
+        this difference is used to tell the background, camera to move to a new z-position.
+        for example currentlyaer = 1 and layer = 2
+        difference would be -3, in layer 1 camera position = -1 and background positiion = 1
+        looking back camera position in layer 2 = -4 and background position = -2, both of which have to -3. 
+        That is what the difference calculate. This calculation still applies if players
+        want to go from a higher layer (like layer 3) to lower layer (layer 1)
+        */
         int difference = (currentLayer - layer) * 3;
-        currentLayer = layer;
-        int newZPosition = (int)mainCamera.transform.position.z + difference;
-        //just know the two line belows just change the z position according. look at readme to understand the number
-        background.position = new Vector3(0, 0,newZPosition+2);
-        mainCamera.transform.position = new Vector3(0, 0, newZPosition);
+        currentLayer = layer; //set the current layer to the specified layer
+        
+        //doing this to get the the new position of the camera.
+        int newZPosition = (int)mainCamera.transform.position.z + difference; //change the camera z-position based on layer
+
+        background.position = new Vector3(0, 0,newZPosition+2); //change the background to new z position. The +2 is because the background and camera have a +2 distance apart in z index
+        mainCamera.transform.position = new Vector3(0, 0, newZPosition); //change the z index of the position.
     }
 
 }

@@ -58,7 +58,7 @@ public class ObsticleBehaviour : MonoBehaviour
         var surroundingElement = Physics2D.OverlapBoxAll(transform.position, 
             obsticleBoxCollider.size * reductionScale, 
             angle ,
-            LayerData.InnerGearLayer,
+            LayerData.InnerAreaLayer,
             mindept,
             maxdept
             );

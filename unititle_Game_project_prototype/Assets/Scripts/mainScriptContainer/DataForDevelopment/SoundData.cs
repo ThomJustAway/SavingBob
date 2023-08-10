@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class SoundData
 {
-    // this stores the magic string when calling out the clips. Much more reliable than using magic strings
+    /*
+        Sound data is a class that purpose is to store this magic strings in memory
+        this is espically useful as I dont have to keep on using magic string to tell
+        the music manager to play a clip. I can just use this to store magic string so
+        that I can use it when I require to play the music clip.
+
+        This script is only meant for development and makes code much more readable and
+        makes debugging more easy.
+     */
+
     public static string PlacingSound { get { return "PlacingEffect"; } }
     public static string WinningSound { get { return "winning sound"; } }
     public static string EndGearRotating { get { return "EndGearRotating"; } }

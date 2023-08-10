@@ -25,7 +25,7 @@ public class StartingGearClass : MonoBehaviour
     }
 
     private void Update()
-    { //in the update call, add speed and rotation
+    { //in the update call, add speed and rotation to the gear host.
         Vector3 direction = RotationDirectionClass.GetVector3FromDirection(rotationDirection);
         gearHost.AddSpeedAndRotation(speed, direction);
     }

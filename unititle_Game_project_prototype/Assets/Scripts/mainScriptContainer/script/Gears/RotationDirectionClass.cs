@@ -7,7 +7,7 @@ public struct RotationDirectionClass
     //this struct is so that it is much easier to 
     // So that I dont have to remember which direction is which and can just use
     //this to get vector 3 direction
-    public enum RotationDirection
+    public enum RotationDirection //only two direction
     {
         clockWise,
         antiClockWise

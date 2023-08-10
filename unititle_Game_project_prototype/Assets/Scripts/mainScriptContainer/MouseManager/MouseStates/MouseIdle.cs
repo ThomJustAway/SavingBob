@@ -48,10 +48,10 @@ public class MouseIdle : IMouseStates
         var collidedObject = Physics2D.Raycast(positionOfMouse, 
             Vector2.zero,
             float.PositiveInfinity,
-            LayerData.MoveableGearLayer,
+            LayerData.MoveableItemLayer,
             minDept,
             maxDept
-            ); 
+            ); //get the collided raycast from the area
 
         //getting the objects that are colliding with the raycast. this is from the moveable gear layer.
     

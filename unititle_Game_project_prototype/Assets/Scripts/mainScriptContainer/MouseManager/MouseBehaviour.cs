@@ -26,13 +26,14 @@ public class MouseBehaviour : MonoBehaviour
     [HideInInspector] public bool deleteActivated = false; // used only on the delete state. This is toggled by a delete button
 
     //States
-    [HideInInspector] public IMouseStates currentState;
+    [HideInInspector] public IMouseStates currentState; //having the scripts for all the Imousestate
     [HideInInspector] public MouseMoveSelectedObject mouseMoveSelectedObject = new MouseMoveSelectedObject();
     [HideInInspector] public MouseIdle mouseIdle = new MouseIdle();
     [HideInInspector] public DeleteItems deleteItems = new DeleteItems();
 
     private void Awake()
     {
+        //subscribe to the solvedEvent event
         LevelManager.instance.SolvedEvent.AddListener(() =>
         {
             //making sure that players cant interact with the game once the game is over
@@ -42,6 +43,7 @@ public class MouseBehaviour : MonoBehaviour
 
     private void Start()
     {
+        //when the game starts, mouse will do the idle behaviour
         currentState = mouseIdle;
     }
 
@@ -63,12 +65,12 @@ public class MouseBehaviour : MonoBehaviour
         //mouseBehaviour.selectedObject = hitGameObject.GetComponent<IMoveable>();
         if (hitGameObject.TryGetComponent<IMoveable>(out IMoveable selectedObject))
         {
-            //sometimes, the IMoveable component is together with collider component
+            //sometimes, the IMoveable component is together with collider component (which are the gears)
            return selectedObject;
         }
         else
         {
-            //the joint (which has the IMoveable component at the parent component)
+            //this else statement is for the joint (which has the IMoveable component at the parent component)
            return hitGameObject.GetComponentInParent<IMoveable>();
         }
         //either way, it is easier to know I just getting the Imoveable component from the rotatable element
@@ -76,13 +78,16 @@ public class MouseBehaviour : MonoBehaviour
 
     public void ToggleDeletedActiavted()
     {
+        //this is called in the delete button to toggle the delete boolen
         deleteActivated = !deleteActivated;
         if(deleteActivated)
         {
+            //show a tool tip to tell players that they are on delete mode
             TooltipBehvaiour.instance.StartMessage("\n<color=yellow>You are now on delete mode! \r\nTo stop, press the button again");
         }
         else
         {
+            //kill the tooltip if the bool is false
             TooltipBehvaiour.instance.EndMessage();
         }
         //this is to show that the player is on delete mode.
@@ -90,13 +95,9 @@ public class MouseBehaviour : MonoBehaviour
 
     public Vector3 GetVector3FromMousePosition()
     {
-        Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Vector3Int cellPosition = mouseBehaviour.grid.WorldToCell(positionOfMouse);
-        //make the gear follow the mouse while snaping to the grid
-        //Vector3 newPosition = mouseBehaviour.grid.GetCellCenterLocal(cellPosition);
+        Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);// will get the mouse position
         var newPosition = new Vector3(positionOfMouse.x, positionOfMouse.y, LayerManager.instance.GetGearZIndexBasedOnCurrentLayer());
-        // make sure that the gear is place on top of the UI component
-        //newPosition.z = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer() ;
+        //this newposition takes into account the current layer the player mouse is on using the z index of the current index.
         return newPosition;
     }
 
