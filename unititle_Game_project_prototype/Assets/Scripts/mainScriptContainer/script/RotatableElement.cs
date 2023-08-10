@@ -53,6 +53,8 @@ namespace Assets.tryoutFolder.script
 
         public bool IsJamming => driverJammingElement != null;
 
+        public bool HasDriver => driverElement != null;
+
         protected bool isStartingElement;
 
         protected virtual void Start()
@@ -102,7 +104,6 @@ namespace Assets.tryoutFolder.script
             }
             else
             {
-
                 //normal behaviour to rotate surrounding element
                 RotateOtherElements();
             }

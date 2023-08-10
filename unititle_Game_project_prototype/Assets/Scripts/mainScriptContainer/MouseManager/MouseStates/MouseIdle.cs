@@ -51,7 +51,7 @@ public class MouseIdle : IMouseStates
             LayerData.MoveableItemLayer,
             minDept,
             maxDept
-            ); 
+            ); //get the collided raycast from the area
 
         //getting the objects that are colliding with the raycast. this is from the moveable gear layer.
     

@@ -5,8 +5,9 @@ using UnityEngine;
 public interface IMouseStates
 {
     //readme
-    /*you get the idea, this is done in 
-        the update call.
+    /*
+    this interface gives the classes implementing the 
+    interface to have a method to transition to different states
 
     states can transition to different state during
     each update. etc mouseIdle --> mouseMoveSelectedObject

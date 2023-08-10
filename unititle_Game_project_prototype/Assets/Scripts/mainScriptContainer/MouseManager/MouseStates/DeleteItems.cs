@@ -33,6 +33,7 @@ public class DeleteItems : IMouseStates
 
     private void ListenAndDeleteSelectedItem(MouseBehaviour mouseBehaviour)
     {
+        // this function will listen if the mouse is click. if it is then it would do the following
         if(Input.GetMouseButtonDown(0))
         {
             Vector2 positionOfMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -43,17 +44,17 @@ public class DeleteItems : IMouseStates
 
             var collidedObject = Physics2D.Raycast(positionOfMouse,
                 Vector2.zero,
-                float.PositiveInfinity,
+                float.PositiveInfinity, //it tells the raycast to search all the down vector2.zero
                 LayerData.MoveableItemLayer,
                 minDept,
                 maxDept
-            );
+            );//cast a raycast at the player mouse to see if there is anything the raycast hit
 
             if(collidedObject.collider != null)
             { //if it found a collider, it mean it is a IMoveable. Therefore delete the Imoveabl component
                 IMoveable ImoveableComponent = mouseBehaviour.GetImoveableComponent(collidedObject.collider);
                 foreach (ItemButton itemButton in LevelManager.instance.itemButtons)
-                {//find the itembutton and then remove the selected Imoveable component
+                {//find the itembutton related to the Imoveable and then remove the selected Imoveable component
                     if (itemButton.IsGameObjectRelated(ImoveableComponent.Getprefab))
                     {
                         itemButton.RemoveItem(ImoveableComponent.Getprefab);

@@ -7,16 +7,23 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Gear))]
 public class EndGearClass : MonoBehaviour
 {
-    private Gear gearHost;
+    /*end gear class uses of a programming concept called composition. All  
+     I have to do is include this to any gear I want and it will automatically converts it to an end gear 
+
+    When I say end gear I would refer it in inactivated gear. end gear and inactivated gear are both use interchangeably.
+    This script will check whether the gear is activated or not. There will be rules set to increase or decrease the difficulty
+     */
+    private Gear gearHost; //will take reference of the gear script it is using
     public Gear GearHost { get { return gearHost; } }
-    [SerializeField] private float speedCondition;
-    public bool IsActivated { get { return isActivated; } }
+
+    [SerializeField] private float speedCondition; //speed condition tells the end gear script of how much speed is required to activate the gear
+    public bool IsActivated { get { return isActivated; } } //bool to tell scripts that the gear is activated
     
     //to check if the mouse is hovering the gear. The monobehviour on hover sometimes does not work with the current game
-    private bool IsHovered = false;
+    private bool IsHovered = false; 
     
-    private bool isActivated;
-    private bool hasPlayedMusic;
+    private bool isActivated; 
+    private bool hasPlayedMusic; //minor bool value to play music when the end gear is activated
 
     private void Awake()
     {
@@ -41,6 +48,7 @@ public class EndGearClass : MonoBehaviour
 
     private void Update()
     {
+        //in every update call, it will check whether the gear is actiavated or not
         isActivated = GetSpeedConditionIsMet(gearHost.Speed);
         //when it is not activated
         if (hasPlayedMusic == false && isActivated == true)
@@ -75,10 +83,11 @@ public class EndGearClass : MonoBehaviour
         //get z index  so that it wont trigger with other inactivated gears at different layers
         mousePosition.z = LayerManager.instance.GetGearZIndexBasedOnCurrentLayer();
         
-        Vector3 position = Camera.main.ScreenToWorldPoint(mousePosition);
-        if (CheckIfWithinCircle(position))
+        Vector3 position = Camera.main.ScreenToWorldPoint(mousePosition); //get the mosue position in world coordinates
+        if (CheckIfWithinCircle(position)) //will check if the mouse position is within the gear
         {
-            if (TooltipBehvaiour.instance.IsActivated)
+            if (TooltipBehvaiour.instance.IsActivated) //if the tooltip is used, it is most likely used by the end gear script.
+                                                       //therefore just change the text 
             {
                 TooltipBehvaiour.instance.SetText(CreateMessage()); //changing the message on the file
             }
@@ -105,10 +114,13 @@ public class EndGearClass : MonoBehaviour
         {//if the mosue is not at the layer of the end gear
             return false;
         }
+
         Vector2 mousePosition = new Vector2(positionOfMouse.x, positionOfMouse.y);
         Vector2 gearPosition = new Vector2(transform.position.x, transform.position.y);
         float distance = Vector2.Distance(mousePosition, gearPosition); //calculate the distance the gear and the mouse
-        return gearHost.GearRadius >= distance; //make sure it is within the gear radius
+        return gearHost.GearRadius >= distance; 
+        //make sure it is within the gear radius.
+        //the mouse is within the gear if the gear radius is more than or equal to the distance between the mouse and the center of the circle
     }
 
     private string CreateMessage()

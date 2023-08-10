@@ -30,10 +30,11 @@ public class Gear : RotatableElement
 
     */
 
-    [SerializeField] protected CircleCollider2D entireGearArea;
-    [SerializeField] protected CircleCollider2D innerGearArea;
-    public float GearRadius { get; private set; }
-    public float InnerGearRadius { get; private set; }
+    [SerializeField] protected CircleCollider2D entireGearArea;//a collider that cover the entire area of the gear
+    [SerializeField] protected CircleCollider2D innerGearArea; //collider that will cover the inner area of the gear (a circle that the gear tooth does not touch)
+    //you can look at gear prefab to better understand this concept
+    public float GearRadius { get; private set; } //gear radius for raycasting 
+    public float InnerGearRadius { get; private set; } //this raidus is used for circle calculator to calculate seperation between two gears
     protected float MinDept
     {
         get
@@ -49,10 +50,11 @@ public class Gear : RotatableElement
             return transform.position.z + 0.7f;
         }
     }
-
+    //this min and max dept is for restricting the ray casting to its only dept.
 
     protected override void Start()
     {
+        //setting up the class
         base.Start();
         GearRadius = entireGearArea.radius; 
         InnerGearRadius = innerGearArea.radius;
@@ -66,8 +68,9 @@ public class Gear : RotatableElement
 
     protected override RotatableElement[] FindingRotatingElement()
     {
+        //this is how a gear would search the surrounding gear area
         var surroundingRotatableComponents = GetColliderAroundRadiusBasedOnLayer(LayerData.EntireAreaLayer)
-            .Select(collider => collider.GetComponentInParent<RotatableElement>()).ToArray();
+            .Select(collider => collider.GetComponentInParent<RotatableElement>()).ToArray(); //this is to search for gear around the area
 
         var joint = GetJointComponent();
 
@@ -106,6 +109,7 @@ public class Gear : RotatableElement
         //same as GetColliderAroundRadiusBasedOnLayer() but change the layer to jointlayer as the rotatable element have to
         //find the joint at the jointLayer
         Collider2D childCollider = Physics2D.OverlapCircle(transform.position, GearRadius, LayerData.JointLayer, MinDept, MaxDept);
+        //this variable is called child collider as the rotatable element is in the parent container. Thus, I have to get the parent component of the child container
         if (childCollider != null)
         {
             return childCollider.GetComponentInParent<RotatableElement>();

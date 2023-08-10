@@ -6,6 +6,14 @@ using UnityEngine;
 
 public interface IMoveable
 {
+    /*
+        Imoveable is a interface that gives scripts that implement it to be move by players.
+        This gives a "has a " relationship in the script. All this method is what is required
+        in order to move a item
+
+        When a script implements the Imoveable, I would refer it as dragable object as its 
+        has a function to move based on mouse movement
+     */
     public int Cost { get; }
     // every moveable object will need a cost in order to buy and move it.
 
@@ -22,4 +30,5 @@ public interface IMoveable
     // show the name of the object
 
     public void RemoveItem();
+    // how the item is suppose to be moved
 }
